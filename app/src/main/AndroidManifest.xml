@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_CAMERA" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MICROPHONE" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+    <uses-feature android:name="android.hardware.camera" android:required="false" />
+    <uses-feature android:name="android.hardware.microphone" android:required="false" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.ParentalControl"
+        android:networkSecurityConfig="@xml/network_security_config">
+
+        <activity
+            android:name=".ui.warning.WarningActivity"
+            android:exported="true"
+            android:theme="@style/Theme.ParentalControl">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".ui.auth.AuthActivity"
+            android:exported="false"
+            android:theme="@style/Theme.ParentalControl.WithActionBar" />
+
+        <activity
+            android:name=".ui.auth.SetPasswordActivity"
+            android:exported="false"
+            android:theme="@style/Theme.ParentalControl.WithActionBar" />
+
+        <activity
+            android:name=".ui.main.MainActivity"
+            android:exported="false"
+            android:theme="@style/Theme.ParentalControl.WithActionBar" />
+
+        <activity
+            android:name=".ui.camera.CameraActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.ParentalControl.WithActionBar" />
+
+        <activity
+            android:name=".ui.audio.AudioActivity"
+            android:exported="false"
+            android:theme="@style/Theme.ParentalControl.WithActionBar" />
+
+        <activity
+            android:name=".ui.settings.SettingsActivity"
+            android:exported="false"
+            android:theme="@style/Theme.ParentalControl.WithActionBar" />
+
+        <activity
+            android:name=".ui.logs.ActivityLogActivity"
+            android:exported="false"
+            android:theme="@style/Theme.ParentalControl.WithActionBar" />
+
+        <service
+            android:name=".service.MonitoringService"
+            android:foregroundServiceType="camera|microphone"
+            android:exported="false" />
+
+    </application>
+
+</manifest>
