@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Text styles -->
+    <style name="TextAppearance.ParentalControl.Title" parent="TextAppearance.Material3.HeadlineMedium">
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextAppearance.ParentalControl.Body" parent="TextAppearance.Material3.BodyMedium">
+        <item name="android:textColor">@color/text_secondary</item>
+    </style>
+
+    <!-- Section header style -->
+    <style name="TextAppearance.ParentalControl.SectionHeader" parent="TextAppearance.Material3.LabelMedium">
+        <item name="android:textColor">@color/primary</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+
+    <!-- Status indicator styles -->
+    <style name="TextAppearance.ParentalControl.StatusActive" parent="TextAppearance.Material3.BodyLarge">
+        <item name="android:textColor">@color/status_active</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextAppearance.ParentalControl.Warning" parent="TextAppearance.Material3.BodyMedium">
+        <item name="android:textColor">@color/warning_color</item>
+    </style>
+</resources>

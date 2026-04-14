@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.parentalcontrol.app.data.repository.ActivityLogRepository
+import com.parentalcontrol.app.utils.Constants
 import kotlinx.coroutines.launch
 
 class CameraViewModel(application: Application) : AndroidViewModel(application) {
@@ -18,7 +19,7 @@ class CameraViewModel(application: Application) : AndroidViewModel(application) 
     fun onCameraStarted() {
         _isStreaming.value = true
         viewModelScope.launch {
-            logRepository.addLog("CAMERA_START", "Camera monitoring started")
+            logRepository.addLog(Constants.LOG_CAMERA_START, "Camera monitoring started")
         }
     }
 
@@ -26,7 +27,7 @@ class CameraViewModel(application: Application) : AndroidViewModel(application) 
         if (_isStreaming.value == true) {
             _isStreaming.value = false
             viewModelScope.launch {
-                logRepository.addLog("CAMERA_STOP", "Camera monitoring stopped")
+                logRepository.addLog(Constants.LOG_CAMERA_STOP, "Camera monitoring stopped")
             }
         }
     }
