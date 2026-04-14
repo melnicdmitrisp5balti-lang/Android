@@ -85,6 +85,9 @@ class MonitoringService : Service() {
             }
         } catch (e: SecurityException) {
             Log.e(TAG, "No audio permission: ${e.message}")
+            isAudioActive = false
+            stopForeground(STOP_FOREGROUND_REMOVE)
+            stopSelf()
         }
     }
 

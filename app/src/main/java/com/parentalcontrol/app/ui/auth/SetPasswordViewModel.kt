@@ -18,7 +18,7 @@ class SetPasswordViewModel(
 
     fun setPassword(password: String, confirm: String) {
         when {
-            password.length < 4 -> _result.value = context.getString(R.string.password_too_short)
+            password.length < 8 -> _result.value = context.getString(R.string.password_too_short)
             password != confirm -> _result.value = context.getString(R.string.passwords_dont_match)
             else -> {
                 authRepository.setPassword(password)

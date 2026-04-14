@@ -26,7 +26,7 @@
     <string name="wrong_password">Неверный пароль</string>
     <string name="no_password_hint">Сначала установите пароль в настройках</string>
     <string name="password_saved">Пароль сохранён</string>
-    <string name="password_too_short">Пароль должен содержать не менее 4 символов</string>
+    <string name="password_too_short">Пароль должен содержать не менее 8 символов</string>
     <string name="passwords_dont_match">Пароли не совпадают</string>
 
     <!-- Main -->

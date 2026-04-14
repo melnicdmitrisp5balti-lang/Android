@@ -16,7 +16,9 @@ import java.util.concurrent.TimeUnit
  */
 class WebRtcClient(private val context: Context) {
 
-    private val TAG = "WebRtcClient"
+    companion object {
+        private const val TAG = "WebRtcClient"
+    }
 
     private var webSocket: WebSocket? = null
     private var isConnected = false
