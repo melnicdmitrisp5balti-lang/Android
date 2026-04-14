@@ -40,9 +40,13 @@ class AudioActivity : AppCompatActivity() {
         }
 
         binding.btnStopAudio.setOnClickListener {
-            viewModel.stopAudio()
-            stopMonitoringService()
+            stopAudioMonitoring()
         }
+    }
+
+    private fun stopAudioMonitoring() {
+        viewModel.stopAudio()
+        stopMonitoringService()
     }
 
     private fun startMonitoringService() {
@@ -73,8 +77,7 @@ class AudioActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        viewModel.stopAudio()
-        stopMonitoringService()
+        stopAudioMonitoring()
     }
 
     override fun onSupportNavigateUp(): Boolean {

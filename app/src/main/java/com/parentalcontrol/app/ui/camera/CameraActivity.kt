@@ -43,10 +43,14 @@ class CameraActivity : AppCompatActivity() {
         observeViewModel()
 
         binding.btnStopCamera.setOnClickListener {
-            viewModel.onCameraStopped()
-            stopMonitoringService()
+            stopCameraMonitoring()
             finish()
         }
+    }
+
+    private fun stopCameraMonitoring() {
+        viewModel.onCameraStopped()
+        stopMonitoringService()
     }
 
     private fun startCamera() {
@@ -93,8 +97,7 @@ class CameraActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         cameraExecutor.shutdown()
-        viewModel.onCameraStopped()
-        stopMonitoringService()
+        stopCameraMonitoring()
     }
 
     override fun onSupportNavigateUp(): Boolean {
