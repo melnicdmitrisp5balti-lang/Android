@@ -7,6 +7,7 @@ import android.media.AudioRecord
 import android.media.MediaRecorder
 import android.os.IBinder
 import android.util.Log
+import com.parentalcontrol.app.utils.Constants
 import com.parentalcontrol.app.utils.NotificationHelper
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -17,9 +18,9 @@ import kotlinx.coroutines.yield
 class MonitoringService : Service() {
 
     companion object {
-        const val ACTION_START_CAMERA = "action_start_camera"
-        const val ACTION_START_AUDIO = "action_start_audio"
-        const val ACTION_STOP = "action_stop"
+        const val ACTION_START_CAMERA = Constants.ACTION_START_CAMERA
+        const val ACTION_START_AUDIO = Constants.ACTION_START_AUDIO
+        const val ACTION_STOP = Constants.ACTION_STOP
         private const val TAG = "MonitoringService"
     }
 

@@ -5,6 +5,7 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.parentalcontrol.app.data.model.ActivityLog
+import com.parentalcontrol.app.utils.Constants
 
 @Database(entities = [ActivityLog::class], version = 1, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
@@ -20,7 +21,7 @@ abstract class AppDatabase : RoomDatabase() {
                 Room.databaseBuilder(
                     context.applicationContext,
                     AppDatabase::class.java,
-                    "parental_control_db"
+                    Constants.DB_NAME
                 ).build().also { INSTANCE = it }
             }
         }

@@ -2,28 +2,39 @@ package com.parentalcontrol.app.utils
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.util.Log
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKey
 
 class PreferenceManager(context: Context) {
 
     private val prefs: SharedPreferences by lazy {
-        val masterKey = MasterKey.Builder(context)
-            .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
-            .build()
-        EncryptedSharedPreferences.create(
-            context,
-            "secure_prefs",
-            masterKey,
-            EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
-            EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
-        )
+        createSecurePreferences(context)
+    }
+
+    private fun createSecurePreferences(context: Context): SharedPreferences {
+        return try {
+            val masterKey = MasterKey.Builder(context)
+                .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
+                .build()
+            EncryptedSharedPreferences.create(
+                context,
+                Constants.PREFS_SECURE,
+                masterKey,
+                EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
+                EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
+            )
+        } catch (e: Exception) {
+            Log.e(TAG, "EncryptedSharedPreferences unavailable, using fallback: ${e.message}")
+            context.getSharedPreferences(Constants.PREFS_SECURE_FALLBACK, Context.MODE_PRIVATE)
+        }
     }
 
     private val regularPrefs: SharedPreferences =
-        context.getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
+        context.getSharedPreferences(Constants.PREFS_REGULAR, Context.MODE_PRIVATE)
 
     companion object {
+        private const val TAG = "PreferenceManager"
         private const val KEY_PASSWORD = "parent_password"
         private const val KEY_WARNING_ACCEPTED = "warning_accepted"
         private const val KEY_IS_AUTHENTICATED = "is_authenticated"

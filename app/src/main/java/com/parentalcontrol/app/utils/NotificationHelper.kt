@@ -12,8 +12,8 @@ import com.parentalcontrol.app.ui.main.MainActivity
 
 object NotificationHelper {
 
-    const val MONITORING_CHANNEL_ID = "monitoring_channel"
-    const val MONITORING_NOTIFICATION_ID = 1001
+    const val MONITORING_CHANNEL_ID = Constants.MONITORING_CHANNEL_ID
+    const val MONITORING_NOTIFICATION_ID = Constants.MONITORING_NOTIFICATION_ID
 
     fun createNotificationChannels(context: Context) {
         val manager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager

@@ -2,6 +2,7 @@ package com.parentalcontrol.app.data.repository
 
 import android.content.Context
 import android.util.Base64
+import com.parentalcontrol.app.utils.Constants
 import com.parentalcontrol.app.utils.PreferenceManager
 import java.security.SecureRandom
 import javax.crypto.SecretKeyFactory
@@ -12,8 +13,8 @@ class AuthRepository(context: Context) {
     private val prefs = PreferenceManager(context)
 
     companion object {
-        private const val PBKDF2_ITERATIONS = 120_000
-        private const val KEY_LENGTH = 256
+        private const val PBKDF2_ITERATIONS = Constants.PBKDF2_ITERATIONS
+        private const val KEY_LENGTH = Constants.KEY_LENGTH
         private const val ALGORITHM = "PBKDF2WithHmacSHA256"
         private const val SALT_LENGTH = 16
         private const val SEPARATOR = ":"

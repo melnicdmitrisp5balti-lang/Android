@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.parentalcontrol.app.data.repository.ActivityLogRepository
+import com.parentalcontrol.app.utils.Constants
 import kotlinx.coroutines.launch
 
 class AudioViewModel(application: Application) : AndroidViewModel(application) {
@@ -18,7 +19,7 @@ class AudioViewModel(application: Application) : AndroidViewModel(application) {
     fun startAudio() {
         _isRecording.value = true
         viewModelScope.launch {
-            logRepository.addLog("AUDIO_START", "Audio monitoring started")
+            logRepository.addLog(Constants.LOG_AUDIO_START, "Audio monitoring started")
         }
     }
 
@@ -26,7 +27,7 @@ class AudioViewModel(application: Application) : AndroidViewModel(application) {
         if (_isRecording.value == true) {
             _isRecording.value = false
             viewModelScope.launch {
-                logRepository.addLog("AUDIO_STOP", "Audio monitoring stopped")
+                logRepository.addLog(Constants.LOG_AUDIO_STOP, "Audio monitoring stopped")
             }
         }
     }
