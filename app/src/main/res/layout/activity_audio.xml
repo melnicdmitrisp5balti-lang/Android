@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="32dp"
+    android:background="@color/background">
+
+    <ImageView
+        android:id="@+id/iv_mic_icon"
+        android:layout_width="96dp"
+        android:layout_height="96dp"
+        android:src="@drawable/ic_microphone"
+        android:contentDescription="@string/microphone"
+        android:alpha="0.3" />
+
+    <TextView
+        android:id="@+id/tv_audio_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/audio_inactive"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="@color/text_primary" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_start_audio"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_marginTop="32dp"
+        android:text="@string/start_monitoring"
+        android:drawableStart="@drawable/ic_microphone"
+        android:drawablePadding="8dp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_stop_audio"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_marginTop="12dp"
+        android:text="@string/stop_monitoring"
+        android:enabled="false"
+        style="@style/Widget.Material3.Button.OutlinedButton" />
+
+</LinearLayout>

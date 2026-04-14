@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Родительский Контроль</string>
+
+    <!-- Warning screen -->
+    <string name="warning">Предупреждение</string>
+    <string name="warning_title">Важное предупреждение</string>
+    <string name="warning_message">Это приложение использует камеру и микрофон устройства для родительского контроля. Все функции доступны только с вашего согласия.</string>
+    <string name="warning_consent_title">Подтверждаю:</string>
+    <string name="warning_consent_1">Я понимаю, что приложение использует камеру и микрофон</string>
+    <string name="warning_consent_2">Все функции активируются только с согласия пользователя</string>
+    <string name="warning_consent_3">Устройство принадлежит ребёнку, и я как родитель имею разрешение на мониторинг</string>
+    <string name="accept">Принять</string>
+    <string name="decline">Отказаться</string>
+
+    <!-- Auth -->
+    <string name="authentication">Аутентификация</string>
+    <string name="auth_title">Вход для родителя</string>
+    <string name="password">Пароль</string>
+    <string name="login">Войти</string>
+    <string name="set_password">Установить пароль</string>
+    <string name="new_password">Новый пароль</string>
+    <string name="confirm_password">Подтвердите пароль</string>
+    <string name="save">Сохранить</string>
+    <string name="enter_password">Введите пароль</string>
+    <string name="wrong_password">Неверный пароль</string>
+    <string name="no_password_hint">Сначала установите пароль в настройках</string>
+    <string name="password_saved">Пароль сохранён</string>
+    <string name="password_too_short">Пароль должен содержать не менее 4 символов</string>
+    <string name="passwords_dont_match">Пароли не совпадают</string>
+
+    <!-- Main -->
+    <string name="device_status">Статус устройства</string>
+    <string name="status_ready">Готово к работе ✓</string>
+    <string name="status_no_permissions">Нет необходимых разрешений</string>
+    <string name="status_no_camera_permission">Нет разрешения на камеру</string>
+    <string name="status_no_audio_permission">Нет разрешения на микрофон</string>
+
+    <!-- Camera -->
+    <string name="camera">Камера</string>
+    <string name="camera_active">● Камера активна</string>
+    <string name="camera_inactive">Камера не активна</string>
+    <string name="camera_permission_required">Требуется разрешение на использование камеры</string>
+    <string name="camera_error">Ошибка запуска камеры</string>
+    <string name="stop">Остановить</string>
+
+    <!-- Audio -->
+    <string name="microphone">Микрофон</string>
+    <string name="audio_active">● Запись активна</string>
+    <string name="audio_inactive">Микрофон не активен</string>
+    <string name="audio_permission_required">Требуется разрешение на использование микрофона</string>
+    <string name="start_monitoring">Начать мониторинг</string>
+    <string name="stop_monitoring">Остановить мониторинг</string>
+
+    <!-- Settings -->
+    <string name="settings">Настройки</string>
+    <string name="auth_section_title">АУТЕНТИФИКАЦИЯ</string>
+    <string name="data_section_title">ДАННЫЕ</string>
+    <string name="password_status_label">Статус пароля</string>
+    <string name="password_set">Установлен</string>
+    <string name="password_not_set">Не установлен</string>
+    <string name="change_password">Изменить пароль</string>
+    <string name="clear_logs">Очистить журнал активности</string>
+    <string name="logs_cleared">Журнал очищен</string>
+
+    <!-- Activity Log -->
+    <string name="activity_log">Журнал активности</string>
+    <string name="no_logs">Журнал пуст</string>
+
+    <!-- Permissions -->
+    <string name="permissions_required">Необходимо предоставить разрешения для работы приложения</string>
+    <string name="camera_permission_rationale">Разрешение на камеру необходимо для мониторинга видео</string>
+    <string name="audio_permission_rationale">Разрешение на микрофон необходимо для мониторинга звука</string>
+    <string name="permission_required_generic">Требуется разрешение</string>
+
+    <!-- Notifications -->
+    <string name="notification_channel_name">Мониторинг</string>
+    <string name="notification_channel_desc">Уведомления об активном мониторинге камеры или микрофона</string>
+    <string name="notification_monitoring_title">Родительский контроль активен</string>
+    <string name="notification_monitoring_active">Активно: %1$s</string>
+</resources>
