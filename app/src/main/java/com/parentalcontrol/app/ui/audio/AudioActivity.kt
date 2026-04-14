@@ -13,9 +13,7 @@ import com.parentalcontrol.app.utils.PermissionUtils
 class AudioActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityAudioBinding
-    private val viewModel: AudioViewModel by viewModels {
-        AudioViewModelFactory(this)
-    }
+    private val viewModel: AudioViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -76,6 +74,7 @@ class AudioActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         viewModel.stopAudio()
+        stopMonitoringService()
     }
 
     override fun onSupportNavigateUp(): Boolean {

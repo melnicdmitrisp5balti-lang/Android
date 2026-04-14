@@ -11,9 +11,7 @@ import com.parentalcontrol.app.databinding.ActivityActivityLogBinding
 class ActivityLogActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityActivityLogBinding
-    private val viewModel: ActivityLogViewModel by viewModels {
-        ActivityLogViewModelFactory(this)
-    }
+    private val viewModel: ActivityLogViewModel by viewModels()
     private lateinit var adapter: ActivityLogAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {

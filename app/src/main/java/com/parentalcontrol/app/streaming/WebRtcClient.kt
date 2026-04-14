@@ -1,6 +1,5 @@
 package com.parentalcontrol.app.streaming
 
-import android.content.Context
 import android.util.Log
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -14,7 +13,7 @@ import java.util.concurrent.TimeUnit
  * Uses OkHttp WebSocket for signaling channel (HTTPS/WSS).
  * Full WebRTC peer connection can be integrated with google-webrtc library.
  */
-class WebRtcClient(private val context: Context) {
+class WebRtcClient() {
 
     companion object {
         private const val TAG = "WebRtcClient"

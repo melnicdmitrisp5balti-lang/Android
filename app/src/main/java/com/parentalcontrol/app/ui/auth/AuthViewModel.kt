@@ -1,17 +1,17 @@
 package com.parentalcontrol.app.ui.auth
 
-import android.content.Context
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import com.parentalcontrol.app.data.repository.AuthRepository
 import com.parentalcontrol.app.utils.PreferenceManager
 
-class AuthViewModel(
-    private val authRepository: AuthRepository,
-    private val prefs: PreferenceManager
-) : ViewModel() {
+class AuthViewModel(application: Application) : AndroidViewModel(application) {
+
+    private val appContext = application.applicationContext
+    private val authRepository = AuthRepository(appContext)
+    private val prefs = PreferenceManager(appContext)
 
     private val _authResult = MutableLiveData<Boolean>()
     val authResult: LiveData<Boolean> = _authResult
@@ -33,15 +33,5 @@ class AuthViewModel(
             prefs.setAuthenticated(true)
         }
         _authResult.value = result
-    }
-}
-
-class AuthViewModelFactory(private val context: Context) : ViewModelProvider.Factory {
-    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        @Suppress("UNCHECKED_CAST")
-        return AuthViewModel(
-            AuthRepository(context),
-            PreferenceManager(context)
-        ) as T
     }
 }

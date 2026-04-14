@@ -1,14 +1,15 @@
 package com.parentalcontrol.app.ui.main
 
-import android.content.Context
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import com.parentalcontrol.app.R
 import com.parentalcontrol.app.utils.PermissionUtils
 
-class MainViewModel(private val context: Context) : ViewModel() {
+class MainViewModel(application: Application) : AndroidViewModel(application) {
+
+    private val appContext = application.applicationContext
 
     private val _statusText = MutableLiveData<String>()
     val statusText: LiveData<String> = _statusText
@@ -24,27 +25,20 @@ class MainViewModel(private val context: Context) : ViewModel() {
     }
 
     fun refreshStatus() {
-        val cameraOk = PermissionUtils.hasCameraPermission(context)
-        val audioOk = PermissionUtils.hasAudioPermission(context)
+        val cameraOk = PermissionUtils.hasCameraPermission(appContext)
+        val audioOk = PermissionUtils.hasAudioPermission(appContext)
         _cameraPermissionGranted.value = cameraOk
         _audioPermissionGranted.value = audioOk
 
         _statusText.value = when {
-            cameraOk && audioOk -> context.getString(R.string.status_ready)
-            !cameraOk && !audioOk -> context.getString(R.string.status_no_permissions)
-            !cameraOk -> context.getString(R.string.status_no_camera_permission)
-            else -> context.getString(R.string.status_no_audio_permission)
+            cameraOk && audioOk -> appContext.getString(R.string.status_ready)
+            !cameraOk && !audioOk -> appContext.getString(R.string.status_no_permissions)
+            !cameraOk -> appContext.getString(R.string.status_no_camera_permission)
+            else -> appContext.getString(R.string.status_no_audio_permission)
         }
     }
 
     fun onPermissionsResult() {
         refreshStatus()
-    }
-}
-
-class MainViewModelFactory(private val context: Context) : ViewModelProvider.Factory {
-    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        @Suppress("UNCHECKED_CAST")
-        return MainViewModel(context) as T
     }
 }

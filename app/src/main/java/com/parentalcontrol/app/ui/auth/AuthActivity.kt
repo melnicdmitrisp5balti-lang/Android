@@ -12,9 +12,7 @@ import com.parentalcontrol.app.ui.main.MainActivity
 class AuthActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityAuthBinding
-    private val viewModel: AuthViewModel by viewModels {
-        AuthViewModelFactory(this)
-    }
+    private val viewModel: AuthViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

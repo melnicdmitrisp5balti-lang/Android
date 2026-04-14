@@ -19,9 +19,7 @@ import java.util.concurrent.Executors
 class CameraActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityCameraBinding
-    private val viewModel: CameraViewModel by viewModels {
-        CameraViewModelFactory(this)
-    }
+    private val viewModel: CameraViewModel by viewModels()
     private lateinit var cameraExecutor: ExecutorService
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -95,6 +93,8 @@ class CameraActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         cameraExecutor.shutdown()
+        viewModel.onCameraStopped()
+        stopMonitoringService()
     }
 
     override fun onSupportNavigateUp(): Boolean {

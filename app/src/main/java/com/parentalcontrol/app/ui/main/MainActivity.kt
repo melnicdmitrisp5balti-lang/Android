@@ -19,9 +19,7 @@ import com.parentalcontrol.app.utils.PermissionUtils
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    private val viewModel: MainViewModel by viewModels {
-        MainViewModelFactory(this)
-    }
+    private val viewModel: MainViewModel by viewModels()
 
     private val permissionLauncher = registerForActivityResult(
         ActivityResultContracts.RequestMultiplePermissions()

@@ -10,9 +10,7 @@ import com.parentalcontrol.app.databinding.ActivitySetPasswordBinding
 class SetPasswordActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySetPasswordBinding
-    private val viewModel: SetPasswordViewModel by viewModels {
-        SetPasswordViewModelFactory(this)
-    }
+    private val viewModel: SetPasswordViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

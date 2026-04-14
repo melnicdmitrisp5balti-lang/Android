@@ -12,7 +12,7 @@ class AuthRepository(context: Context) {
     private val prefs = PreferenceManager(context)
 
     companion object {
-        private const val ITERATIONS = 120_000
+        private const val PBKDF2_ITERATIONS = 120_000
         private const val KEY_LENGTH = 256
         private const val ALGORITHM = "PBKDF2WithHmacSHA256"
         private const val SALT_LENGTH = 16
@@ -45,7 +45,7 @@ class AuthRepository(context: Context) {
     }
 
     private fun deriveKey(password: String, salt: ByteArray): ByteArray {
-        val spec = PBEKeySpec(password.toCharArray(), salt, ITERATIONS, KEY_LENGTH)
+        val spec = PBEKeySpec(password.toCharArray(), salt, PBKDF2_ITERATIONS, KEY_LENGTH)
         return SecretKeyFactory.getInstance(ALGORITHM).generateSecret(spec).encoded
     }
 }

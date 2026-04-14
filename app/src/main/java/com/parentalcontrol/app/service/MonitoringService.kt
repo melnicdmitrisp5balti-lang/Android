@@ -12,6 +12,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.yield
 
 class MonitoringService : Service() {
 
@@ -79,8 +80,11 @@ class MonitoringService : Service() {
             serviceScope.launch {
                 val buffer = ShortArray(bufferSize)
                 while (isAudioActive) {
-                    audioRecord?.read(buffer, 0, bufferSize)
-                    // Buffer is available for streaming
+                    val read = audioRecord?.read(buffer, 0, bufferSize) ?: break
+                    if (read > 0) {
+                        // Buffer is available for streaming
+                    }
+                    yield()
                 }
             }
         } catch (e: SecurityException) {
