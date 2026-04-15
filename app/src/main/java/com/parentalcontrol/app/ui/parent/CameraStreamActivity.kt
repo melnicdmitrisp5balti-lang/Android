@@ -67,18 +67,8 @@ class CameraStreamActivity : AppCompatActivity() {
                 binding.tvCameraStatus.text = getString(R.string.camera_stream_live)
             } catch (e: IllegalArgumentException) {
                 Log.e(TAG, "Requested lens is not available", e)
-                if (lensFacing == CameraSelector.LENS_FACING_FRONT) {
-                    lensFacing = CameraSelector.LENS_FACING_BACK
-                    try {
-                        bindCamera(lensFacing)
-                        binding.tvCameraStatus.text = getString(R.string.camera_stream_live)
-                        Toast.makeText(this, getString(R.string.front_camera_unavailable), Toast.LENGTH_SHORT).show()
-                        return@addListener
-                    } catch (fallbackException: Exception) {
-                        Log.e(TAG, "Fallback to back camera failed", fallbackException)
-                        showBackCameraError()
-                        return@addListener
-                    }
+                if (lensFacing == CameraSelector.LENS_FACING_FRONT && tryFallbackToBackCamera()) {
+                    return@addListener
                 }
                 showBackCameraError()
                 return@addListener
@@ -95,7 +85,8 @@ class CameraStreamActivity : AppCompatActivity() {
     }
 
     private fun bindCamera(targetLensFacing: Int) {
-        val provider = cameraProvider ?: return
+        val provider = cameraProvider
+            ?: throw IllegalStateException("Camera provider is unavailable")
         val preview = Preview.Builder().build().also {
             it.setSurfaceProvider(binding.previewView.surfaceProvider)
         }
@@ -105,6 +96,20 @@ class CameraStreamActivity : AppCompatActivity() {
             CameraSelector.Builder().requireLensFacing(targetLensFacing).build(),
             preview
         )
+    }
+
+    private fun tryFallbackToBackCamera(): Boolean {
+        lensFacing = CameraSelector.LENS_FACING_BACK
+        return try {
+            bindCamera(lensFacing)
+            binding.tvCameraStatus.text = getString(R.string.camera_stream_live)
+            Toast.makeText(this, getString(R.string.front_camera_unavailable), Toast.LENGTH_SHORT).show()
+            true
+        } catch (fallbackException: Exception) {
+            Log.e(TAG, "Fallback to back camera failed", fallbackException)
+            showBackCameraError()
+            false
+        }
     }
 
     private fun showBackCameraError() {
