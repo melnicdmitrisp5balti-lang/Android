@@ -2,6 +2,7 @@ package com.parentalcontrol.app.ui.parent
 
 import android.Manifest
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
@@ -14,6 +15,9 @@ import com.parentalcontrol.app.databinding.ActivityCameraStreamBinding
 import com.parentalcontrol.app.utils.PermissionUtils
 
 class CameraStreamActivity : AppCompatActivity() {
+    companion object {
+        private const val TAG = "CameraStreamActivity"
+    }
 
     private lateinit var binding: ActivityCameraStreamBinding
     private var cameraProvider: ProcessCameraProvider? = null
@@ -69,7 +73,22 @@ class CameraStreamActivity : AppCompatActivity() {
                     preview
                 )
                 binding.tvCameraStatus.text = getString(R.string.camera_stream_live)
-            } catch (_: Exception) {
+            } catch (e: IllegalArgumentException) {
+                Log.e(TAG, "Requested lens is not available", e)
+                if (lensFacing == CameraSelector.LENS_FACING_FRONT) {
+                    lensFacing = CameraSelector.LENS_FACING_BACK
+                    startCamera()
+                    Toast.makeText(this, getString(R.string.front_camera_unavailable), Toast.LENGTH_SHORT).show()
+                    return@addListener
+                }
+                binding.tvCameraStatus.text = getString(R.string.camera_error)
+                Toast.makeText(this, getString(R.string.camera_error), Toast.LENGTH_SHORT).show()
+            } catch (e: IllegalStateException) {
+                Log.e(TAG, "Camera lifecycle error", e)
+                binding.tvCameraStatus.text = getString(R.string.camera_lifecycle_error)
+                Toast.makeText(this, getString(R.string.camera_lifecycle_error), Toast.LENGTH_SHORT).show()
+            } catch (e: Exception) {
+                Log.e(TAG, "Failed to start camera stream", e)
                 binding.tvCameraStatus.text = getString(R.string.camera_error)
                 Toast.makeText(this, getString(R.string.camera_error), Toast.LENGTH_SHORT).show()
             }
