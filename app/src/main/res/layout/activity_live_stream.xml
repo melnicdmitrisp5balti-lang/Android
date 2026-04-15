@@ -6,8 +6,8 @@
     android:layout_height="match_parent"
     android:background="@android:color/black">
 
-    <!-- Full-screen WebRTC remote video surface -->
-    <org.webrtc.SurfaceViewRenderer
+    <!-- Full-screen video surface (built-in TextureView, replaces WebRTC SurfaceViewRenderer) -->
+    <TextureView
         android:id="@+id/surface_remote_video"
         android:layout_width="0dp"
         android:layout_height="0dp"

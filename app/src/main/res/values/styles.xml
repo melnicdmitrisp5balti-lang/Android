@@ -66,8 +66,6 @@
 
     <!-- Single-digit code input box for ParentCodeInputActivity -->
     <style name="Widget.CodeDigitBox">
-        <item name="android:layout_width">44dp</item>
-        <item name="android:layout_height">56dp</item>
         <item name="android:background">@drawable/bg_code_digit_box</item>
         <item name="android:gravity">center</item>
         <item name="android:inputType">number</item>

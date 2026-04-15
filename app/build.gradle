@@ -35,6 +35,7 @@ android {
 
     buildFeatures {
         viewBinding true
+        dataBinding true
     }
 }
 
@@ -75,8 +76,8 @@ dependencies {
     // OkHttp for HTTPS
     implementation 'com.squareup.okhttp3:okhttp:4.12.0'
 
-    // WebRTC — full peer-to-peer video/audio
-    implementation 'io.getstream:stream-webrtc-android:1.1.8'
+    // WebRTC — replaced by built-in Camera/Audio Android APIs
+    // (stream-webrtc-android removed to fix AAPT resource-merge errors)
 
     // Test
     testImplementation 'junit:junit:4.13.2'

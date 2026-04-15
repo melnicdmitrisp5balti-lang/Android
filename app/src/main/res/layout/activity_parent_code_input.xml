@@ -77,31 +77,43 @@
                     <EditText
                         android:id="@+id/et_digit1"
                         style="@style/Widget.CodeDigitBox"
+                        android:layout_width="44dp"
+                        android:layout_height="56dp"
                         android:layout_marginEnd="6dp" />
 
                     <EditText
                         android:id="@+id/et_digit2"
                         style="@style/Widget.CodeDigitBox"
+                        android:layout_width="44dp"
+                        android:layout_height="56dp"
                         android:layout_marginEnd="6dp" />
 
                     <EditText
                         android:id="@+id/et_digit3"
                         style="@style/Widget.CodeDigitBox"
+                        android:layout_width="44dp"
+                        android:layout_height="56dp"
                         android:layout_marginEnd="12dp" />
 
                     <EditText
                         android:id="@+id/et_digit4"
                         style="@style/Widget.CodeDigitBox"
+                        android:layout_width="44dp"
+                        android:layout_height="56dp"
                         android:layout_marginEnd="6dp" />
 
                     <EditText
                         android:id="@+id/et_digit5"
                         style="@style/Widget.CodeDigitBox"
+                        android:layout_width="44dp"
+                        android:layout_height="56dp"
                         android:layout_marginEnd="6dp" />
 
                     <EditText
                         android:id="@+id/et_digit6"
-                        style="@style/Widget.CodeDigitBox" />
+                        style="@style/Widget.CodeDigitBox"
+                        android:layout_width="44dp"
+                        android:layout_height="56dp" />
 
                 </LinearLayout>
 

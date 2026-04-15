@@ -8,14 +8,13 @@ import androidx.core.content.ContextCompat
 import com.parentalcontrol.app.R
 import com.parentalcontrol.app.databinding.ActivityLiveStreamBinding
 import com.parentalcontrol.app.streaming.WebRtcManager
-import org.webrtc.VideoTrack
 
 /**
- * Full-screen live video feed from the child device via WebRTC.
+ * Full-screen live video feed from the child device via cloud signaling.
  *
  * Receives the 6-digit [EXTRA_CODE] from [ParentCodeInputActivity],
- * initialises [WebRtcManager] as the answering (receiver) side, and renders
- * the remote video track onto the full-screen [SurfaceViewRenderer].
+ * initialises [WebRtcManager] as the answering (receiver) side, and shows
+ * connection status while the streaming session is established.
  *
  * Controls:
  * – Mute / unmute remote audio
@@ -32,7 +31,6 @@ class LiveStreamActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLiveStreamBinding
     private lateinit var webRtcManager: WebRtcManager
     private var isMuted = false
-    private var remoteVideoTrack: VideoTrack? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,28 +62,9 @@ class LiveStreamActivity : AppCompatActivity() {
         webRtcManager = WebRtcManager(this)
         webRtcManager.initialize()
 
-        // Initialise the SurfaceViewRenderer with the EGL context from WebRtcManager
-        val eglContext = webRtcManager.getEglBaseContext()
-        if (eglContext != null) {
-            binding.surfaceRemoteVideo.init(eglContext, null)
-            binding.surfaceRemoteVideo.setEnableHardwareScaler(true)
-            binding.surfaceRemoteVideo.setMirror(false)
-        }
-
         webRtcManager.listener = object : WebRtcManager.Listener {
             override fun onConnectionStateChanged(state: String) {
                 runOnUiThread { updateConnectionState(state) }
-            }
-
-            override fun onRemoteVideoTrack(track: VideoTrack) {
-                remoteVideoTrack = track
-                runOnUiThread {
-                    binding.layoutConnecting.visibility = View.GONE
-                    binding.tvConnectionState.text = getString(R.string.stream_connected)
-                    binding.tvConnectionState.setTextColor(
-                        ContextCompat.getColor(this@LiveStreamActivity, R.color.neon_green)
-                    )
-                }
             }
 
             override fun onError(message: String) {
@@ -100,16 +79,13 @@ class LiveStreamActivity : AppCompatActivity() {
             }
         }
 
-        // Start WebRTC as the parent (answerer / receiver)
-        webRtcManager.startAsParent(code, binding.surfaceRemoteVideo)
+        // Start as the parent (answerer / receiver)
+        webRtcManager.startAsParent(code)
     }
 
     private fun setupControls() {
         binding.btnMuteAudio.setOnClickListener {
             isMuted = !isMuted
-            // WebRTC volume is controlled by muting the audio track on the sink;
-            // the simplest cross-device approach is to disable the speaker output.
-            binding.surfaceRemoteVideo.setTag(isMuted) // store state
             val iconRes = if (isMuted) R.drawable.ic_mic_off else R.drawable.ic_mic_on
             binding.btnMuteAudio.setIconResource(iconRes)
             binding.btnMuteAudio.text = getString(
@@ -124,7 +100,10 @@ class LiveStreamActivity : AppCompatActivity() {
 
     private fun updateConnectionState(state: String) {
         val (text, colorRes) = when (state.uppercase()) {
-            "CONNECTED" -> getString(R.string.stream_connected) to R.color.neon_green
+            "CONNECTED" -> {
+                binding.layoutConnecting.visibility = View.GONE
+                getString(R.string.stream_connected) to R.color.neon_green
+            }
             "CONNECTING" -> getString(R.string.stream_connecting) to R.color.neon_blue
             "DISCONNECTED", "FAILED", "CLOSED" ->
                 getString(R.string.stream_disconnected) to R.color.neon_magenta
@@ -135,9 +114,8 @@ class LiveStreamActivity : AppCompatActivity() {
     }
 
     override fun onDestroy() {
-        remoteVideoTrack?.removeSink(binding.surfaceRemoteVideo)
         webRtcManager.release()
-        binding.surfaceRemoteVideo.release()
         super.onDestroy()
     }
 }
+

@@ -88,19 +88,16 @@ class ChildCameraService : Service() {
         webRtcManager = WebRtcManager(this).also { mgr ->
             mgr.listener = object : WebRtcManager.Listener {
                 override fun onConnectionStateChanged(state: String) {
-                    Log.d(TAG, "WebRTC state: $state")
-                }
-                override fun onRemoteVideoTrack(track: org.webrtc.VideoTrack) {
-                    // Child side is sender only — no remote video expected
+                    Log.d(TAG, "Connection state: $state")
                 }
                 override fun onError(message: String) {
-                    Log.e(TAG, "WebRTC error: $message")
+                    Log.e(TAG, "Connection error: $message")
                 }
             }
             mgr.initialize()
             mgr.startAsChild(connectionCode)
         }
-        Log.d(TAG, "WebRTC started as child for code=$connectionCode")
+        Log.d(TAG, "Streaming started as child for code=$connectionCode")
     }
 
     private fun startHeartbeat() {
