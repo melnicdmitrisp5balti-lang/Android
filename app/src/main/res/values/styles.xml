@@ -26,4 +26,19 @@
     <style name="TextAppearance.ParentalControl.Warning" parent="TextAppearance.Material3.BodyMedium">
         <item name="android:textColor">@color/warning_color</item>
     </style>
+
+    <!-- Single-digit code input box for ParentCodeInputActivity -->
+    <style name="Widget.CodeDigitBox">
+        <item name="android:layout_width">44dp</item>
+        <item name="android:layout_height">56dp</item>
+        <item name="android:background">@drawable/bg_code_digit_box</item>
+        <item name="android:gravity">center</item>
+        <item name="android:inputType">number</item>
+        <item name="android:maxLength">1</item>
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:cursorVisible">false</item>
+        <item name="android:fontFamily">monospace</item>
+    </style>
 </resources>
