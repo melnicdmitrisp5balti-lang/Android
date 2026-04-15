@@ -71,7 +71,6 @@ class CameraStreamActivity : AppCompatActivity() {
                     return@addListener
                 }
                 showBackCameraError()
-                return@addListener
             } catch (e: IllegalStateException) {
                 Log.e(TAG, "Camera lifecycle error", e)
                 binding.tvCameraStatus.text = getString(R.string.camera_lifecycle_error)
