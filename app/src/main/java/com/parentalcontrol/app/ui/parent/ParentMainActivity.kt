@@ -81,7 +81,8 @@ class ParentMainActivity : AppCompatActivity() {
             .setView(dialogBinding.root)
             .setPositiveButton("Подключиться") { _, _ ->
                 val code = dialogBinding.etConnectionCode.text?.toString().orEmpty()
-                viewModel.connect(code)
+                val host = dialogBinding.etChildHost.text?.toString().orEmpty().trim()
+                viewModel.connect(code, host.takeIf { it.isNotBlank() })
             }
             .setNegativeButton("Отмена", null)
             .show()
@@ -96,13 +97,12 @@ class ParentMainActivity : AppCompatActivity() {
     }
 
     private fun openSelectedQuickAction() {
+        openCamera()
         when (binding.dropdownQuickAction.text?.toString().orEmpty()) {
-            getString(R.string.quick_action_camera) -> openCamera()
             getString(R.string.quick_action_audio) -> openAudio()
             getString(R.string.quick_action_logs) -> openLogs()
             getString(R.string.quick_action_location) -> openLocationHint()
-            else -> {
-                openCamera()
+            getString(R.string.quick_action_camera_audio) -> {
                 Toast.makeText(
                     this,
                     getString(R.string.quick_action_camera_audio_hint),
