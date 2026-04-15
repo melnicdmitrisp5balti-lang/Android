@@ -73,16 +73,13 @@ class CameraStreamActivity : AppCompatActivity() {
                         bindCamera(lensFacing)
                         binding.tvCameraStatus.text = getString(R.string.camera_stream_live)
                         Toast.makeText(this, getString(R.string.front_camera_unavailable), Toast.LENGTH_SHORT).show()
-                        return@addListener
                     } catch (fallbackException: Exception) {
                         Log.e(TAG, "Fallback to back camera failed", fallbackException)
-                        binding.tvCameraStatus.text = getString(R.string.back_camera_error)
-                        Toast.makeText(this, getString(R.string.back_camera_error), Toast.LENGTH_SHORT).show()
+                        showBackCameraError()
                         return@addListener
                     }
                 }
-                binding.tvCameraStatus.text = getString(R.string.back_camera_error)
-                Toast.makeText(this, getString(R.string.back_camera_error), Toast.LENGTH_SHORT).show()
+                showBackCameraError()
             } catch (e: IllegalStateException) {
                 Log.e(TAG, "Camera lifecycle error", e)
                 binding.tvCameraStatus.text = getString(R.string.camera_lifecycle_error)
@@ -106,6 +103,11 @@ class CameraStreamActivity : AppCompatActivity() {
             CameraSelector.Builder().requireLensFacing(targetLensFacing).build(),
             preview
         )
+    }
+
+    private fun showBackCameraError() {
+        binding.tvCameraStatus.text = getString(R.string.back_camera_error)
+        Toast.makeText(this, getString(R.string.back_camera_error), Toast.LENGTH_SHORT).show()
     }
 
     override fun onSupportNavigateUp(): Boolean {
