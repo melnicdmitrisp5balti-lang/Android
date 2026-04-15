@@ -76,10 +76,6 @@ class ChildMainActivity : AppCompatActivity() {
         }
 
         binding.btnRegenerateCode.setOnClickListener {
-            if (viewModel.parentConnected.value == true) {
-                Toast.makeText(this, getString(R.string.code_change_blocked_while_parent_connected), Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
-            }
             viewModel.regenerateCode()
             startChildServer()
         }

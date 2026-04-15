@@ -90,7 +90,6 @@
     <string name="copy_code">Скопировать код</string>
     <string name="generate_new_code">Создать новый код</string>
     <string name="generate_code_locked">Код заблокирован (родитель подключен)</string>
-    <string name="code_change_blocked_while_parent_connected">Нельзя менять код, пока родитель подключен</string>
     <string name="status_waiting_connection">Ожидание подключения...</string>
     <string name="qr_optional_hint">QR-код можно добавить позже (опционально)</string>
 
