@@ -12,6 +12,7 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.parentalcontrol.app.R
 import com.parentalcontrol.app.databinding.ActivityChildMainBinding
 import com.parentalcontrol.app.service.ChildSocketServer
@@ -88,7 +89,7 @@ class ChildMainActivity : AppCompatActivity() {
 
     private fun ensurePermissionsAndStartMonitoring() {
         val notGranted = PermissionUtils.REQUIRED_PERMISSIONS.filter {
-            checkSelfPermission(it) != PackageManager.PERMISSION_GRANTED
+            ContextCompat.checkSelfPermission(this, it) != PackageManager.PERMISSION_GRANTED
         }
         if (notGranted.isEmpty()) {
             startMonitoring()
