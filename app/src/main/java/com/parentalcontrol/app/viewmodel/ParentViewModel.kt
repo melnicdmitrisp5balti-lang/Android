@@ -57,11 +57,11 @@ class ParentViewModel(application: Application) : AndroidViewModel(application) 
             }
             val result = connectToChild(code, host, port)
             if (result != null) {
-                val (host, childName) = result
+                val (connectedHost, childName) = result
                 _status.value = "Подключено к: $childName"
                 _connected.value = true
                 _connectionEvent.value = System.currentTimeMillis()
-                prefs.saveLastChildHost(host)
+                prefs.saveLastChildHost(connectedHost)
                 prefs.saveLastConnectionCode(code)
                 sessionDao.insert(
                     SessionEntity(
