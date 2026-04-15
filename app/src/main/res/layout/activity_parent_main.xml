@@ -15,9 +15,11 @@
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardBackgroundColor="#EFFFFFFF"
+            app:cardBackgroundColor="#CC11182B"
             app:cardCornerRadius="24dp"
-            app:cardElevation="6dp">
+            app:cardElevation="0dp"
+            app:strokeColor="#804C8DFF"
+            app:strokeWidth="1dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -71,7 +73,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="56dp"
                     android:layout_marginTop="10dp"
-                    android:text="@string/scan_qr" />
+                    android:text="@string/scan_qr"
+                    app:strokeColor="@color/secondary" />
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
@@ -87,6 +90,7 @@
                 android:id="@+id/btn_camera_stream"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
+                android:backgroundTint="@color/surface"
                 android:text="@string/camera_button_title" />
 
             <com.google.android.material.button.MaterialButton
@@ -94,6 +98,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:layout_marginTop="12dp"
+                android:backgroundTint="@color/surface"
                 android:text="@string/microphone_button_title" />
 
             <com.google.android.material.button.MaterialButton
@@ -101,6 +106,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:layout_marginTop="12dp"
+                android:backgroundTint="@color/surface"
                 android:text="@string/logs_button_title" />
 
             <com.google.android.material.button.MaterialButton
@@ -108,6 +114,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:layout_marginTop="12dp"
+                android:backgroundTint="@color/surface"
                 android:text="@string/location_button_title" />
         </LinearLayout>
     </LinearLayout>

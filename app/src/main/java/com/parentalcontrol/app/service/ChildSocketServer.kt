@@ -75,59 +75,93 @@ class ChildSocketServer : Service() {
 
         val reader = BufferedReader(InputStreamReader(socket.getInputStream()))
         val writer = BufferedWriter(OutputStreamWriter(socket.getOutputStream()))
-        val raw = reader.readLine().orEmpty()
-        if (raw.isBlank()) {
-            writer.write(SocketManager.createServerError("Empty payload"))
-            writer.newLine()
-            writer.flush()
-            socket.close()
-            return
+        try {
+            val raw = reader.readLine().orEmpty()
+            if (raw.isBlank()) {
+                writer.write(SocketManager.createServerError("Empty payload"))
+                writer.newLine()
+                writer.flush()
+                return
+            }
+
+            val request = SocketManager.parse(raw)
+            val type = request.optString("type")
+            val code = request.optString("code")
+            val parentId = socket.inetAddress.hostAddress.orEmpty()
+
+            when (type) {
+                Constants.MSG_CLIENT_CONNECT -> {
+                    logRepository.addLog(
+                        Constants.LOG_CONNECTION_ATTEMPT,
+                        "Parent connection attempt from $parentId with code $code"
+                    )
+
+                    if (code != expectedCode) {
+                        writer.write(SocketManager.createServerError("Invalid code"))
+                        writer.newLine()
+                        writer.flush()
+                        logRepository.addLog(Constants.LOG_CONNECTION_REJECTED, "Rejected parent $parentId")
+                        return
+                    }
+
+                    val activeSession = sessionDao.getActiveByCode(code)
+                    if (activeSession != null) {
+                        writer.write(SocketManager.createServerError("Code is already in active session"))
+                        writer.newLine()
+                        writer.flush()
+                        logRepository.addLog(Constants.LOG_CONNECTION_REJECTED, "Code already in use")
+                        return
+                    }
+
+                    val deviceId = Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID).orEmpty()
+                    currentSessionId = sessionDao.insert(
+                        SessionEntity(
+                            childDeviceId = deviceId,
+                            parentDeviceId = parentId,
+                            connectionCode = code
+                        )
+                    )
+
+                    writer.write(SocketManager.createServerOk(android.os.Build.MODEL))
+                    writer.newLine()
+                    writer.flush()
+                    logRepository.addLog(Constants.LOG_CONNECTION_SUCCESS, "Parent connected from $parentId")
+                    broadcastStatus("Родитель подключен ✓")
+                    resetInactivityTimer()
+                }
+
+                Constants.MSG_VIDEO_STREAM -> {
+                    if (code != expectedCode) {
+                        writer.write(SocketManager.createServerError("Invalid code"))
+                        writer.newLine()
+                        writer.flush()
+                        return
+                    }
+
+                    val activeSession = sessionDao.getActiveByCode(code)
+                    if (activeSession == null) {
+                        writer.write(SocketManager.createServerError("No active parent session"))
+                        writer.newLine()
+                        writer.flush()
+                        return
+                    }
+
+                    writer.write(SocketManager.createVideoStreamStatus(android.os.Build.MODEL))
+                    writer.newLine()
+                    writer.flush()
+                    resetInactivityTimer()
+                }
+
+                else -> {
+                    writer.write(SocketManager.createServerError("Unsupported request type"))
+                    writer.newLine()
+                    writer.flush()
+                }
+            }
+        } finally {
+            runCatching { socket.close() }
+            clientSocket = null
         }
-
-        val request = SocketManager.parse(raw)
-        val type = request.optString("type")
-        val code = request.optString("code")
-        val parentId = socket.inetAddress.hostAddress.orEmpty()
-
-        logRepository.addLog(
-            Constants.LOG_CONNECTION_ATTEMPT,
-            "Parent connection attempt from $parentId with code $code"
-        )
-
-        if (type != Constants.MSG_CLIENT_CONNECT || code != expectedCode) {
-            writer.write(SocketManager.createServerError("Invalid code"))
-            writer.newLine()
-            writer.flush()
-            logRepository.addLog(Constants.LOG_CONNECTION_REJECTED, "Rejected parent $parentId")
-            socket.close()
-            return
-        }
-
-        val activeSession = sessionDao.getActiveByCode(code)
-        if (activeSession != null) {
-            writer.write(SocketManager.createServerError("Code is already in active session"))
-            writer.newLine()
-            writer.flush()
-            logRepository.addLog(Constants.LOG_CONNECTION_REJECTED, "Code already in use")
-            socket.close()
-            return
-        }
-
-        val deviceId = Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID).orEmpty()
-        currentSessionId = sessionDao.insert(
-            SessionEntity(
-                childDeviceId = deviceId,
-                parentDeviceId = parentId,
-                connectionCode = code
-            )
-        )
-
-        writer.write(SocketManager.createServerOk(android.os.Build.MODEL))
-        writer.newLine()
-        writer.flush()
-        logRepository.addLog(Constants.LOG_CONNECTION_SUCCESS, "Parent connected from $parentId")
-        broadcastStatus("Родитель подключен ✓")
-        resetInactivityTimer()
     }
 
     private fun resetInactivityTimer() {

@@ -11,6 +11,7 @@ object Constants {
     const val PREFS_REGULAR = "app_prefs"
     const val PREFS_CHILD_CODE = "child_connection_code"
     const val PREFS_LAST_CHILD_HOST = "last_child_host"
+    const val PREFS_LAST_CONNECTION_CODE = "last_connection_code"
 
     // Password requirements
     const val MIN_PASSWORD_LENGTH = 8
