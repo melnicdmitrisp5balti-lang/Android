@@ -26,8 +26,8 @@ class ChildMainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityChildMainBinding
     private val viewModel: ChildViewModel by viewModels()
 
-    private val connectionStatusReceiver = ChildConnectionStatusReceiver { status ->
-        viewModel.updateConnectionStatus(status)
+    private val connectionStatusReceiver = ChildConnectionStatusReceiver { status, parentConnected ->
+        viewModel.updateConnectionStatus(status, parentConnected)
     }
     private val permissionLauncher = registerForActivityResult(
         ActivityResultContracts.RequestMultiplePermissions()
@@ -55,6 +55,14 @@ class ChildMainActivity : AppCompatActivity() {
         }
         viewModel.connectionStatus.observe(this) { status ->
             binding.tvConnectionStatus.text = status
+        }
+        viewModel.parentConnected.observe(this) { connected ->
+            binding.btnRegenerateCode.isEnabled = !connected
+            if (connected) {
+                binding.btnRegenerateCode.text = getString(R.string.generate_code_locked)
+            } else {
+                binding.btnRegenerateCode.text = getString(R.string.generate_new_code)
+            }
         }
     }
 

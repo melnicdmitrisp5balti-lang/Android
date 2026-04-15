@@ -23,6 +23,8 @@ class ChildViewModel(application: Application) : AndroidViewModel(application) {
 
     private val _connectionStatus = MutableLiveData("Ожидание подключения...")
     val connectionStatus: LiveData<String> = _connectionStatus
+    private val _parentConnected = MutableLiveData(false)
+    val parentConnected: LiveData<Boolean> = _parentConnected
 
     init {
         loadOrGenerateCode()
@@ -38,6 +40,7 @@ class ChildViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun regenerateCode() {
+        if (_parentConnected.value == true) return
         viewModelScope.launch {
             val newCode = CodeGenerator.generateSixDigitCode()
             prefs.saveChildConnectionCode(newCode)
@@ -53,10 +56,12 @@ class ChildViewModel(application: Application) : AndroidViewModel(application) {
             )
             _code.postValue(newCode)
             _connectionStatus.postValue("Ожидание подключения...")
+            _parentConnected.postValue(false)
         }
     }
 
-    fun updateConnectionStatus(status: String) {
+    fun updateConnectionStatus(status: String, parentConnected: Boolean) {
         _connectionStatus.value = status
+        _parentConnected.value = parentConnected
     }
 }

@@ -58,14 +58,14 @@ class ChildSocketServer : Service() {
     private suspend fun runServer() {
         try {
             serverSocket = ServerSocket(Constants.DEFAULT_SOCKET_PORT)
-            broadcastStatus("Ожидание подключения...")
+            broadcastStatus("Ожидание подключения...", false)
             while (true) {
                 val accepted = serverSocket?.accept() ?: break
                 handleClient(accepted)
             }
         } catch (e: Exception) {
             Log.e(TAG, "Server error: ${e.message}")
-            broadcastStatus("Ошибка сервера")
+            broadcastStatus("Ошибка сервера", false)
         }
     }
 
@@ -126,7 +126,7 @@ class ChildSocketServer : Service() {
                     writer.newLine()
                     writer.flush()
                     logRepository.addLog(Constants.LOG_CONNECTION_SUCCESS, "Parent connected from $parentId")
-                    broadcastStatus("Родитель подключен ✓")
+                    broadcastStatus("Родитель подключен ✓", true)
                     resetInactivityTimer()
                 }
 
@@ -169,7 +169,7 @@ class ChildSocketServer : Service() {
         inactivityJob = serviceScope.launch {
             delay(Constants.SOCKET_TIMEOUT_MS)
             closeActiveSession()
-            broadcastStatus("Ожидание подключения...")
+            broadcastStatus("Ожидание подключения...", false)
         }
     }
 
@@ -183,10 +183,11 @@ class ChildSocketServer : Service() {
         clientSocket = null
     }
 
-    private fun broadcastStatus(status: String) {
+    private fun broadcastStatus(status: String, parentConnected: Boolean) {
         sendBroadcast(
             Intent(Constants.ACTION_CHILD_CONNECTION_STATUS).apply {
                 putExtra(Constants.EXTRA_CONNECTION_STATUS, status)
+                putExtra(Constants.EXTRA_PARENT_CONNECTED, parentConnected)
             }
         )
     }

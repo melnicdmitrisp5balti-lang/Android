@@ -38,7 +38,7 @@ class ParentViewModel(application: Application) : AndroidViewModel(application) 
 
     fun validateCode(code: String): Boolean = Regex("^\\d{6}$").matches(code)
 
-    fun connect(code: String, port: Int = Constants.DEFAULT_SOCKET_PORT) {
+    fun connect(code: String, host: String? = null, port: Int = Constants.DEFAULT_SOCKET_PORT) {
         viewModelScope.launch {
             _connected.value = false
             if (!validateCode(code)) {
@@ -50,14 +50,18 @@ class ParentViewModel(application: Application) : AndroidViewModel(application) 
                 return@launch
             }
 
-            _status.value = "Ищем устройство ребёнка..."
-            val result = connectToChild(code, port)
+            _status.value = if (host.isNullOrBlank()) {
+                "Ищем устройство ребёнка..."
+            } else {
+                "Подключаемся к устройству ребёнка через интернет..."
+            }
+            val result = connectToChild(code, host, port)
             if (result != null) {
-                val (host, childName) = result
+                val (connectedHost, childName) = result
                 _status.value = "Подключено к: $childName"
                 _connected.value = true
                 _connectionEvent.value = System.currentTimeMillis()
-                prefs.saveLastChildHost(host)
+                prefs.saveLastChildHost(connectedHost)
                 prefs.saveLastConnectionCode(code)
                 sessionDao.insert(
                     SessionEntity(
@@ -76,14 +80,16 @@ class ParentViewModel(application: Application) : AndroidViewModel(application) 
         }
     }
 
-    private suspend fun connectToChild(code: String, port: Int): Pair<String, String>? {
-        val directHosts = buildDirectCandidates()
-        for (host in directHosts) {
-            val result = ParentSocketClient.connectOnce(host, port, code)
+    private suspend fun connectToChild(code: String, host: String?, port: Int): Pair<String, String>? {
+        val directHosts = buildDirectCandidates(host)
+        for (candidateHost in directHosts) {
+            val result = ParentSocketClient.connectOnce(candidateHost, port, code)
             if (result.isSuccess) {
-                return host to result.getOrNull().orEmpty()
+                return candidateHost to result.getOrNull().orEmpty()
             }
         }
+
+        if (!host.isNullOrBlank()) return null
 
         _status.postValue("Проверяем устройства в локальной сети...")
         val localCandidates = buildLocalNetworkCandidates()
@@ -116,8 +122,9 @@ class ParentViewModel(application: Application) : AndroidViewModel(application) 
         return null
     }
 
-    private fun buildDirectCandidates(): List<String> {
+    private fun buildDirectCandidates(host: String?): List<String> {
         val candidates = mutableListOf<String>()
+        host?.takeIf { it.isNotBlank() }?.let(candidates::add)
         prefs.getLastChildHost()?.takeIf { it.isNotBlank() }?.let(candidates::add)
         candidates.add("10.0.2.2")
         candidates.add("127.0.0.1")

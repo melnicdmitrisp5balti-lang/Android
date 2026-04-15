@@ -56,4 +56,5 @@ object Constants {
     // Child server broadcast
     const val ACTION_CHILD_CONNECTION_STATUS = "action_child_connection_status"
     const val EXTRA_CONNECTION_STATUS = "extra_connection_status"
+    const val EXTRA_PARENT_CONNECTED = "extra_parent_connected"
 }
