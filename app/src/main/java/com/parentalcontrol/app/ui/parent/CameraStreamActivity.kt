@@ -62,27 +62,27 @@ class CameraStreamActivity : AppCompatActivity() {
         val cameraProviderFuture = ProcessCameraProvider.getInstance(this)
         cameraProviderFuture.addListener({
             cameraProvider = cameraProviderFuture.get()
-            val preview = Preview.Builder().build().also {
-                it.setSurfaceProvider(binding.previewView.surfaceProvider)
-            }
             try {
-                cameraProvider?.unbindAll()
-                cameraProvider?.bindToLifecycle(
-                    this,
-                    CameraSelector.Builder().requireLensFacing(lensFacing).build(),
-                    preview
-                )
+                bindCamera(lensFacing)
                 binding.tvCameraStatus.text = getString(R.string.camera_stream_live)
             } catch (e: IllegalArgumentException) {
                 Log.e(TAG, "Requested lens is not available", e)
                 if (lensFacing == CameraSelector.LENS_FACING_FRONT) {
                     lensFacing = CameraSelector.LENS_FACING_BACK
-                    startCamera()
-                    Toast.makeText(this, getString(R.string.front_camera_unavailable), Toast.LENGTH_SHORT).show()
-                    return@addListener
+                    try {
+                        bindCamera(lensFacing)
+                        binding.tvCameraStatus.text = getString(R.string.camera_stream_live)
+                        Toast.makeText(this, getString(R.string.front_camera_unavailable), Toast.LENGTH_SHORT).show()
+                        return@addListener
+                    } catch (fallbackException: Exception) {
+                        Log.e(TAG, "Fallback to back camera failed", fallbackException)
+                        binding.tvCameraStatus.text = getString(R.string.back_camera_error)
+                        Toast.makeText(this, getString(R.string.back_camera_error), Toast.LENGTH_SHORT).show()
+                        return@addListener
+                    }
                 }
-                binding.tvCameraStatus.text = getString(R.string.camera_error)
-                Toast.makeText(this, getString(R.string.camera_error), Toast.LENGTH_SHORT).show()
+                binding.tvCameraStatus.text = getString(R.string.back_camera_error)
+                Toast.makeText(this, getString(R.string.back_camera_error), Toast.LENGTH_SHORT).show()
             } catch (e: IllegalStateException) {
                 Log.e(TAG, "Camera lifecycle error", e)
                 binding.tvCameraStatus.text = getString(R.string.camera_lifecycle_error)
@@ -93,6 +93,19 @@ class CameraStreamActivity : AppCompatActivity() {
                 Toast.makeText(this, getString(R.string.camera_error), Toast.LENGTH_SHORT).show()
             }
         }, ContextCompat.getMainExecutor(this))
+    }
+
+    private fun bindCamera(targetLensFacing: Int) {
+        val provider = cameraProvider ?: return
+        val preview = Preview.Builder().build().also {
+            it.setSurfaceProvider(binding.previewView.surfaceProvider)
+        }
+        provider.unbindAll()
+        provider.bindToLifecycle(
+            this,
+            CameraSelector.Builder().requireLensFacing(targetLensFacing).build(),
+            preview
+        )
     }
 
     override fun onSupportNavigateUp(): Boolean {
