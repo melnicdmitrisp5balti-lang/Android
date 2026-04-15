@@ -73,6 +73,7 @@ class CameraStreamActivity : AppCompatActivity() {
                         bindCamera(lensFacing)
                         binding.tvCameraStatus.text = getString(R.string.camera_stream_live)
                         Toast.makeText(this, getString(R.string.front_camera_unavailable), Toast.LENGTH_SHORT).show()
+                        return@addListener
                     } catch (fallbackException: Exception) {
                         Log.e(TAG, "Fallback to back camera failed", fallbackException)
                         showBackCameraError()
@@ -80,6 +81,7 @@ class CameraStreamActivity : AppCompatActivity() {
                     }
                 }
                 showBackCameraError()
+                return@addListener
             } catch (e: IllegalStateException) {
                 Log.e(TAG, "Camera lifecycle error", e)
                 binding.tvCameraStatus.text = getString(R.string.camera_lifecycle_error)
