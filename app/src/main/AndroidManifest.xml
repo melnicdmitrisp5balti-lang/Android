@@ -94,6 +94,23 @@
             android:exported="false"
             android:theme="@style/Theme.ParentalControl.WithActionBar" />
 
+        <!-- New Firebase + WebRTC activities -->
+        <activity
+            android:name=".ui.child.ChildAutoRegisterActivity"
+            android:exported="false"
+            android:theme="@style/Theme.ParentalControl.WithActionBar" />
+
+        <activity
+            android:name=".ui.parent.ParentCodeInputActivity"
+            android:exported="false"
+            android:theme="@style/Theme.ParentalControl.WithActionBar" />
+
+        <activity
+            android:name=".ui.parent.LiveStreamActivity"
+            android:exported="false"
+            android:screenOrientation="landscape"
+            android:theme="@style/Theme.ParentalControl" />
+
         <service
             android:name=".service.MonitoringService"
             android:foregroundServiceType="camera|microphone"
@@ -106,6 +123,18 @@
 
         <service
             android:name=".service.ChildSocketServer"
+            android:exported="false" />
+
+        <!-- WebRTC child camera + audio streaming service -->
+        <service
+            android:name=".service.ChildCameraService"
+            android:foregroundServiceType="camera|microphone"
+            android:exported="false" />
+
+        <!-- Audio-only monitoring service -->
+        <service
+            android:name=".service.ChildAudioService"
+            android:foregroundServiceType="microphone"
             android:exported="false" />
 
     </application>

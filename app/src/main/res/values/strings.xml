@@ -138,4 +138,36 @@
     <string name="microphone_button_title">🎤 Микрофон</string>
     <string name="logs_button_title">📜 Логи</string>
     <string name="location_button_title">📍 Местоположение</string>
+
+    <!-- ChildAutoRegisterActivity -->
+    <string name="child_auto_register_title">Режим ребёнка</string>
+    <string name="child_auto_register_subtitle">Отправьте этот код родителю — он подключится автоматически</string>
+    <string name="child_registering">⏳ Регистрация в облаке…</string>
+    <string name="child_registered_cloud">✅ Зарегистрировано в облаке</string>
+    <string name="child_register_failed">⚠ Не удалось подключиться к облаку. Проверьте интернет.</string>
+    <string name="child_stream_starting">Запуск видеопотока…</string>
+    <string name="child_stream_active">● Видеопоток активен</string>
+    <string name="child_info_header">ℹ Как это работает</string>
+    <string name="child_info_body">Устройство зарегистрировано в облаке по этому коду. Родитель вводит код в своём приложении — соединение устанавливается автоматически через интернет.</string>
+    <string name="code_copied">Код скопирован</string>
+
+    <!-- ParentCodeInputActivity -->
+    <string name="parent_code_input_title">Подключиться к ребёнку</string>
+    <string name="parent_code_input_subtitle">Введите 6-значный код с устройства ребёнка</string>
+    <string name="code_must_be_6_digits">Введите все 6 цифр кода</string>
+    <string name="searching_device">🔍 Ищем устройство в облаке…</string>
+    <string name="device_found">✅ Найдено: %1$s</string>
+    <string name="device_not_found">❌ Устройство не найдено. Проверьте код и интернет-соединение.</string>
+    <string name="clear_code">Очистить</string>
+    <string name="parent_code_hint_header">💡 Совет</string>
+
+    <!-- LiveStreamActivity -->
+    <string name="child_device">Устройство ребёнка</string>
+    <string name="stream_no_code">Код соединения не указан</string>
+    <string name="stream_connecting">⏳ Подключение…</string>
+    <string name="stream_connected">● Подключено</string>
+    <string name="stream_disconnected">✕ Соединение потеряно</string>
+    <string name="mute_audio">Выкл. звук</string>
+    <string name="unmute_audio">Вкл. звук</string>
+    <string name="disconnect">Отключиться</string>
 </resources>

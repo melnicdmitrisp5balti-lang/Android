@@ -71,6 +71,9 @@ dependencies {
     // OkHttp for HTTPS
     implementation 'com.squareup.okhttp3:okhttp:4.12.0'
 
+    // WebRTC — full peer-to-peer video/audio
+    implementation 'io.getstream:stream-webrtc-android:1.1.8'
+
     // Test
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
