@@ -63,4 +63,14 @@ class PreferenceManager(context: Context) {
 
     fun isAuthenticated(): Boolean =
         regularPrefs.getBoolean(KEY_IS_AUTHENTICATED, false)
+
+    fun saveChildConnectionCode(code: String) {
+        prefs.edit().putString(Constants.PREFS_CHILD_CODE, code).apply()
+    }
+
+    fun getChildConnectionCode(): String? = prefs.getString(Constants.PREFS_CHILD_CODE, null)
+
+    fun clearChildConnectionCode() {
+        prefs.edit().remove(Constants.PREFS_CHILD_CODE).apply()
+    }
 }

@@ -5,12 +5,20 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.parentalcontrol.app.data.model.ActivityLog
+import com.parentalcontrol.app.data.model.ConnectionCode
+import com.parentalcontrol.app.data.model.SessionEntity
 import com.parentalcontrol.app.utils.Constants
 
-@Database(entities = [ActivityLog::class], version = 1, exportSchema = false)
+@Database(
+    entities = [ActivityLog::class, ConnectionCode::class, SessionEntity::class],
+    version = 2,
+    exportSchema = false
+)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun activityLogDao(): ActivityLogDao
+    abstract fun connectionCodeDao(): ConnectionCodeDao
+    abstract fun sessionDao(): SessionDao
 
     companion object {
         @Volatile
@@ -22,7 +30,10 @@ abstract class AppDatabase : RoomDatabase() {
                     context.applicationContext,
                     AppDatabase::class.java,
                     Constants.DB_NAME
-                ).build().also { INSTANCE = it }
+                )
+                    .fallbackToDestructiveMigration()
+                    .build()
+                    .also { INSTANCE = it }
             }
         }
     }

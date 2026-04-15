@@ -78,4 +78,29 @@
     <string name="notification_channel_desc">Уведомления об активном мониторинге камеры или микрофона</string>
     <string name="notification_monitoring_title">Родительский контроль активен</string>
     <string name="notification_monitoring_active">Активно: %1$s</string>
+
+    <!-- Mode selection -->
+    <string name="mode_selection_title">Выберите режим</string>
+    <string name="i_am_child">Я - Ребёнок</string>
+    <string name="i_am_parent">Я - Родитель</string>
+
+    <!-- Child mode -->
+    <string name="child_mode_title">Режим ребёнка</string>
+    <string name="send_code_to_parent">Отправьте этот код родителю</string>
+    <string name="copy_code">Скопировать код</string>
+    <string name="generate_new_code">Создать новый код</string>
+    <string name="status_waiting_connection">Ожидание подключения...</string>
+    <string name="qr_optional_hint">QR-код можно добавить позже (опционально)</string>
+
+    <!-- Parent mode -->
+    <string name="parent_mode_title">Режим родителя</string>
+    <string name="parent_not_connected">Не подключено</string>
+    <string name="connect">Подключиться</string>
+    <string name="scan_qr">Сканировать QR</string>
+    <string name="enter_6_digit_code">Введите 6-значный код</string>
+    <string name="host_hint">IP адрес ребёнка</string>
+    <string name="port_hint">Порт</string>
+    <string name="qr_scanner_placeholder">Сканер QR-кода (опционально) будет доступен на этом экране.</string>
+    <string name="camera_stream_placeholder">Прямая трансляция видео будет отображаться здесь.</string>
+    <string name="audio_stream_placeholder">Прямое воспроизведение звука будет доступно здесь.</string>
 </resources>
