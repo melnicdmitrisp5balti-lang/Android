@@ -13,22 +13,11 @@
         android:inputType="number"
         android:maxLength="6" />
 
-    <EditText
-        android:id="@+id/et_host"
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
-        android:hint="@string/host_hint"
-        android:inputType="text"
-        android:text="10.0.2.2" />
-
-    <EditText
-        android:id="@+id/et_port"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:hint="@string/port_hint"
-        android:inputType="number"
-        android:text="5050" />
+        android:text="@string/connect_dialog_auto_hint"
+        android:textColor="@color/text_secondary" />
 
 </LinearLayout>

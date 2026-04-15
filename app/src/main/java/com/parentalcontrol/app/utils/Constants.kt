@@ -10,6 +10,7 @@ object Constants {
     const val PREFS_SECURE_FALLBACK = "secure_prefs_fallback"
     const val PREFS_REGULAR = "app_prefs"
     const val PREFS_CHILD_CODE = "child_connection_code"
+    const val PREFS_LAST_CHILD_HOST = "last_child_host"
 
     // Password requirements
     const val MIN_PASSWORD_LENGTH = 8
@@ -39,6 +40,8 @@ object Constants {
     // Socket
     const val DEFAULT_SOCKET_PORT = 5050
     const val SOCKET_TIMEOUT_MS = 30 * 60 * 1000L
+    const val SOCKET_CONNECT_TIMEOUT_MS = 1_200
+    const val SOCKET_HANDSHAKE_TIMEOUT_MS = 3_000
     const val MSG_CLIENT_CONNECT = "CLIENT_CONNECT"
     const val MSG_SERVER_OK = "SERVER_OK"
     const val MSG_SERVER_ERROR = "SERVER_ERROR"

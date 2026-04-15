@@ -2,10 +2,12 @@ package com.parentalcontrol.app.ui.parent
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.parentalcontrol.app.R
 import com.parentalcontrol.app.databinding.ActivityParentMainBinding
 import com.parentalcontrol.app.databinding.DialogEnterCodeBinding
 import com.parentalcontrol.app.databinding.DialogQrScannerBinding
@@ -16,32 +18,43 @@ class ParentMainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityParentMainBinding
     private val viewModel: ParentViewModel by viewModels()
+    private var lastConnectionEvent = 0L
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityParentMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        setupQuickActionDropdown()
         setupClickListeners()
         observeViewModel()
+    }
+
+    private fun setupQuickActionDropdown() {
+        val options = listOf(
+            getString(R.string.quick_action_camera_audio),
+            getString(R.string.quick_action_camera),
+            getString(R.string.quick_action_audio),
+            getString(R.string.quick_action_logs),
+            getString(R.string.quick_action_location)
+        )
+        val adapter = ArrayAdapter(
+            this,
+            android.R.layout.simple_list_item_1,
+            options
+        )
+        binding.dropdownQuickAction.setAdapter(adapter)
+        binding.dropdownQuickAction.setText(options.first(), false)
     }
 
     private fun setupClickListeners() {
         binding.btnConnect.setOnClickListener { showCodeDialog() }
         binding.btnScanQr.setOnClickListener { showQrDialog() }
 
-        binding.btnCameraStream.setOnClickListener {
-            startActivity(Intent(this, CameraStreamActivity::class.java))
-        }
-        binding.btnAudioStream.setOnClickListener {
-            startActivity(Intent(this, AudioStreamActivity::class.java))
-        }
-        binding.btnLogs.setOnClickListener {
-            startActivity(Intent(this, ActivityLogActivity::class.java))
-        }
-        binding.btnLocation.setOnClickListener {
-            Toast.makeText(this, "Местоположение доступно при наличии разрешения", Toast.LENGTH_SHORT).show()
-        }
+        binding.btnCameraStream.setOnClickListener { openCamera() }
+        binding.btnAudioStream.setOnClickListener { openAudio() }
+        binding.btnLogs.setOnClickListener { openLogs() }
+        binding.btnLocation.setOnClickListener { openLocationHint() }
     }
 
     private fun observeViewModel() {
@@ -55,6 +68,11 @@ class ParentMainActivity : AppCompatActivity() {
             binding.btnLogs.isEnabled = connected
             binding.btnLocation.isEnabled = connected
         }
+        viewModel.connectionEvent.observe(this) { event ->
+            if (event <= 0L || event == lastConnectionEvent) return@observe
+            lastConnectionEvent = event
+            openSelectedQuickAction()
+        }
     }
 
     private fun showCodeDialog() {
@@ -63,9 +81,7 @@ class ParentMainActivity : AppCompatActivity() {
             .setView(dialogBinding.root)
             .setPositiveButton("Подключиться") { _, _ ->
                 val code = dialogBinding.etConnectionCode.text?.toString().orEmpty()
-                val host = dialogBinding.etHost.text?.toString().orEmpty().ifBlank { "10.0.2.2" }
-                val port = dialogBinding.etPort.text?.toString()?.toIntOrNull() ?: 5050
-                viewModel.connect(host, port, code)
+                viewModel.connect(code)
             }
             .setNegativeButton("Отмена", null)
             .show()
@@ -77,5 +93,34 @@ class ParentMainActivity : AppCompatActivity() {
             .setView(dialogBinding.root)
             .setPositiveButton("Ок", null)
             .show()
+    }
+
+    private fun openSelectedQuickAction() {
+        when (binding.dropdownQuickAction.text?.toString().orEmpty()) {
+            getString(R.string.quick_action_camera) -> openCamera()
+            getString(R.string.quick_action_audio) -> openAudio()
+            getString(R.string.quick_action_logs) -> openLogs()
+            getString(R.string.quick_action_location) -> openLocationHint()
+            else -> {
+                openCamera()
+                openAudio()
+            }
+        }
+    }
+
+    private fun openCamera() {
+        startActivity(Intent(this, CameraStreamActivity::class.java))
+    }
+
+    private fun openAudio() {
+        startActivity(Intent(this, AudioStreamActivity::class.java))
+    }
+
+    private fun openLogs() {
+        startActivity(Intent(this, ActivityLogActivity::class.java))
+    }
+
+    private fun openLocationHint() {
+        Toast.makeText(this, "Местоположение доступно при наличии разрешения", Toast.LENGTH_SHORT).show()
     }
 }
