@@ -82,10 +82,10 @@ class ParentViewModel(application: Application) : AndroidViewModel(application) 
 
     private suspend fun connectToChild(code: String, host: String?, port: Int): Pair<String, String>? {
         val directHosts = buildDirectCandidates(host)
-        for (host in directHosts) {
-            val result = ParentSocketClient.connectOnce(host, port, code)
+        for (candidateHost in directHosts) {
+            val result = ParentSocketClient.connectOnce(candidateHost, port, code)
             if (result.isSuccess) {
-                return host to result.getOrNull().orEmpty()
+                return candidateHost to result.getOrNull().orEmpty()
             }
         }
 
