@@ -88,14 +88,14 @@ class ChildMainActivity : AppCompatActivity() {
     }
 
     private fun ensurePermissionsAndStartMonitoring() {
-        val notGranted = PermissionUtils.REQUIRED_PERMISSIONS.filter {
+        val missingPermissions = PermissionUtils.REQUIRED_PERMISSIONS.filter {
             ContextCompat.checkSelfPermission(this, it) != PackageManager.PERMISSION_GRANTED
         }
-        if (notGranted.isEmpty()) {
+        if (missingPermissions.isEmpty()) {
             startMonitoring()
             return
         }
-        permissionLauncher.launch(notGranted.toTypedArray())
+        permissionLauncher.launch(missingPermissions.toTypedArray())
     }
 
     private fun startChildServer() {
