@@ -13,6 +13,11 @@ import java.net.Socket
 
 class ParentSocketClient {
 
+    data class CameraStreamInfo(
+        val childName: String,
+        val streamUrl: String
+    )
+
     companion object {
         suspend fun connectOnce(host: String, port: Int, code: String): Result<String> =
             withContext(Dispatchers.IO) {
@@ -59,7 +64,7 @@ class ParentSocketClient {
     suspend fun connect(host: String, port: Int, code: String): Result<String> =
         connectOnce(host, port, code)
 
-    suspend fun requestChildCameraStatus(host: String, port: Int, code: String): Result<String> =
+    suspend fun requestChildCameraStatus(host: String, port: Int, code: String): Result<CameraStreamInfo> =
         withContext(Dispatchers.IO) {
             var socket: Socket? = null
             try {
@@ -83,7 +88,15 @@ class ParentSocketClient {
                     val json = SocketManager.parse(response)
                     val type = json.optString("type")
                     if (type == Constants.MSG_SERVER_OK && json.optString("stream_source") == "child_camera") {
-                        Result.success(json.optString("child_name", "Child"))
+                        val streamPort = json.optInt("stream_port", Constants.DEFAULT_MJPEG_PORT)
+                        val streamPath = json.optString("stream_path", Constants.MJPEG_STREAM_PATH)
+                        val normalizedPath = if (streamPath.startsWith("/")) streamPath else "/$streamPath"
+                        Result.success(
+                            CameraStreamInfo(
+                                childName = json.optString("child_name", "Child"),
+                                streamUrl = "http://$host:$streamPort$normalizedPath"
+                            )
+                        )
                     } else {
                         Result.failure(
                             IllegalStateException(

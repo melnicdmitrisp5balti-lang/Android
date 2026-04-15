@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.parentalcontrol.app.R
 import com.parentalcontrol.app.databinding.ActivityChildMainBinding
+import com.parentalcontrol.app.service.CameraStreamService
 import com.parentalcontrol.app.service.ChildSocketServer
 import com.parentalcontrol.app.service.MonitoringService
 import com.parentalcontrol.app.utils.Constants
@@ -82,6 +83,7 @@ class ChildMainActivity : AppCompatActivity() {
     }
 
     private fun startMonitoring() {
+        startForegroundService(Intent(this, CameraStreamService::class.java))
         startForegroundService(
             Intent(this, MonitoringService::class.java).apply {
                 action = MonitoringService.ACTION_START_CAMERA
