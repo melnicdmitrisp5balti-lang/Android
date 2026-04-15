@@ -5,15 +5,20 @@ import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
+import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import com.parentalcontrol.app.R
 import com.parentalcontrol.app.databinding.ActivityChildMainBinding
 import com.parentalcontrol.app.service.ChildSocketServer
 import com.parentalcontrol.app.service.MonitoringService
 import com.parentalcontrol.app.utils.Constants
+import com.parentalcontrol.app.utils.PermissionUtils
 import com.parentalcontrol.app.viewmodel.ChildViewModel
 
 class ChildMainActivity : AppCompatActivity() {
@@ -24,6 +29,15 @@ class ChildMainActivity : AppCompatActivity() {
     private val connectionStatusReceiver = ChildConnectionStatusReceiver { status ->
         viewModel.updateConnectionStatus(status)
     }
+    private val permissionLauncher = registerForActivityResult(
+        ActivityResultContracts.RequestMultiplePermissions()
+    ) { permissions ->
+        if (permissions.values.all { it }) {
+            startMonitoring()
+        } else {
+            Toast.makeText(this, getString(R.string.permissions_required), Toast.LENGTH_LONG).show()
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,7 +46,7 @@ class ChildMainActivity : AppCompatActivity() {
 
         observeViewModel()
         setupClickListeners()
-        startMonitoring()
+        ensurePermissionsAndStartMonitoring()
     }
 
     private fun observeViewModel() {
@@ -71,6 +85,17 @@ class ChildMainActivity : AppCompatActivity() {
             }
         )
         startChildServer()
+    }
+
+    private fun ensurePermissionsAndStartMonitoring() {
+        val missingPermissions = PermissionUtils.REQUIRED_PERMISSIONS.filter {
+            ContextCompat.checkSelfPermission(this, it) != PackageManager.PERMISSION_GRANTED
+        }
+        if (missingPermissions.isEmpty()) {
+            startMonitoring()
+            return
+        }
+        permissionLauncher.launch(missingPermissions.toTypedArray())
     }
 
     private fun startChildServer() {
