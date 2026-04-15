@@ -111,4 +111,13 @@
     <string name="qr_scanner_placeholder">Сканер QR-кода (опционально) будет доступен на этом экране.</string>
     <string name="camera_stream_placeholder">Прямая трансляция видео будет отображаться здесь.</string>
     <string name="audio_stream_placeholder">Прямое воспроизведение звука будет доступно здесь.</string>
+    <string name="camera_stream_live">● Камера подключена, видео отображается в реальном времени</string>
+    <string name="switch_camera">Сменить камеру</string>
+    <string name="front_camera_unavailable">Передняя камера недоступна, включена задняя</string>
+    <string name="back_camera_error">Не удалось открыть выбранную камеру</string>
+    <string name="camera_lifecycle_error">Не удалось запустить камеру: повторите попытку</string>
+    <string name="camera_button_title">📷 Камера</string>
+    <string name="microphone_button_title">🎤 Микрофон</string>
+    <string name="logs_button_title">📜 Логи</string>
+    <string name="location_button_title">📍 Местоположение</string>
 </resources>
