@@ -5,58 +5,67 @@
     android:layout_height="match_parent"
     android:background="@drawable/bg_parent_screen">
 
-    <androidx.camera.view.PreviewView
-        android:id="@+id/preview_view"
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card_remote_camera"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_margin="12dp"
-        android:background="@android:color/black"
+        android:layout_margin="16dp"
+        app:cardBackgroundColor="#CC10162F"
+        app:cardCornerRadius="24dp"
+        app:cardElevation="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <com.google.android.material.card.MaterialCardView
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        app:cardBackgroundColor="#8A1A1F36"
-        app:cardCornerRadius="20dp"
-        app:cardElevation="0dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:strokeColor="#4DFFFFFF"
+        app:strokeColor="#8037E5FF"
         app:strokeWidth="1dp">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:paddingHorizontal="16dp"
-            android:paddingVertical="12dp">
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="24dp">
+
+            <TextView
+                android:id="@+id/tv_stream_source_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/remote_camera_source_title"
+                android:textColor="@android:color/white"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_stream_hint"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:text="@string/camera_stream_child_hint"
+                android:textColor="#B3D8E5FF"
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/tv_camera_status"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/camera_stream_live"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:text="@string/camera_stream_waiting_child"
                 android:textColor="@android:color/white"
                 android:textSize="15sp"
                 android:textStyle="bold" />
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_switch_camera"
+                android:id="@+id/btn_refresh_stream"
                 style="@style/Widget.Material3.Button.OutlinedButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:minHeight="0dp"
-                android:paddingHorizontal="14dp"
-                android:text="@string/switch_camera"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginTop="24dp"
+                android:text="@string/refresh_child_camera"
                 android:textColor="@android:color/white"
-                app:strokeColor="@android:color/white" />
+                app:strokeColor="#80F14BFF" />
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
 

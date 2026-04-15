@@ -80,4 +80,11 @@ class PreferenceManager(context: Context) {
 
     fun getLastChildHost(): String? =
         regularPrefs.getString(Constants.PREFS_LAST_CHILD_HOST, null)
+
+    fun saveLastConnectionCode(code: String) {
+        regularPrefs.edit().putString(Constants.PREFS_LAST_CONNECTION_CODE, code).apply()
+    }
+
+    fun getLastConnectionCode(): String? =
+        regularPrefs.getString(Constants.PREFS_LAST_CONNECTION_CODE, null)
 }

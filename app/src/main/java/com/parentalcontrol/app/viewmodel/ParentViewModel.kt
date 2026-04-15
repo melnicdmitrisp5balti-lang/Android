@@ -58,6 +58,7 @@ class ParentViewModel(application: Application) : AndroidViewModel(application) 
                 _connected.value = true
                 _connectionEvent.value = System.currentTimeMillis()
                 prefs.saveLastChildHost(host)
+                prefs.saveLastConnectionCode(code)
                 sessionDao.insert(
                     SessionEntity(
                         childDeviceId = childName,
