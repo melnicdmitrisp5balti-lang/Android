@@ -9,6 +9,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.parentalcontrol.app.cloud.CloudSignalingClient
 import com.parentalcontrol.app.data.database.AppDatabase
 import com.parentalcontrol.app.data.model.SessionEntity
 import com.parentalcontrol.app.service.ParentSocketClient
@@ -27,6 +28,7 @@ class ParentViewModel(application: Application) : AndroidViewModel(application) 
     private val client = ParentSocketClient()
     private val sessionDao = AppDatabase.getInstance(appContext).sessionDao()
     private val prefs = PreferenceManager(appContext)
+    private val cloudSignaling = CloudSignalingClient()
 
     private val _status = MutableLiveData<String>()
     val status: LiveData<String> = _status
@@ -38,7 +40,18 @@ class ParentViewModel(application: Application) : AndroidViewModel(application) 
 
     fun validateCode(code: String): Boolean = Regex("^\\d{6}$").matches(code)
 
-    fun connect(code: String, host: String? = null, port: Int = Constants.DEFAULT_SOCKET_PORT) {
+    /**
+     * Connect to the child device identified by [code].
+     *
+     * Discovery order:
+     * 1. Firebase cloud lookup (works across any network / internet).
+     * 2. Last known host from preferences (same-LAN fast-path).
+     * 3. Local-network scan (same-LAN fallback).
+     *
+     * An optional [host] can be supplied to skip cloud/scan and connect
+     * directly to a known IP (useful for advanced / debug scenarios).
+     */
+    fun connect(code: String, host: String? = null) {
         viewModelScope.launch {
             _connected.value = false
             if (!validateCode(code)) {
@@ -50,22 +63,36 @@ class ParentViewModel(application: Application) : AndroidViewModel(application) 
                 return@launch
             }
 
-            _status.value = if (host.isNullOrBlank()) {
-                "Ищем устройство ребёнка..."
-            } else {
-                "Подключаемся к устройству ребёнка через интернет..."
+            // --- 1. Direct host override (debug / advanced) ------------------
+            if (!host.isNullOrBlank()) {
+                _status.value = "Подключаемся напрямую…"
+                val result = ParentSocketClient.connectOnce(host, Constants.DEFAULT_SOCKET_PORT, code)
+                if (result.isSuccess) {
+                    onConnected(host, result.getOrNull().orEmpty(), code)
+                } else {
+                    _status.value = "Не удалось подключиться по указанному адресу"
+                    _connected.value = false
+                }
+                return@launch
             }
-            val result = connectToChild(code, host, port)
-            if (result != null) {
-                val (connectedHost, childName) = result
-                _status.value = "Подключено к: $childName"
+
+            // --- 2. Cloud lookup via Firebase ---------------------------------
+            _status.value = "Ищем устройство ребёнка в облаке…"
+            val cloudInfo = cloudSignaling.lookupDevice(code)
+            if (cloudInfo != null) {
+                // Device found in the cloud — connection is established at the
+                // signaling level.  The actual media stream is negotiated via
+                // WebRTC (signaling data is already in Firebase under /signaling/{code}).
+                _status.value = "Подключено к: ${cloudInfo.deviceName}"
                 _connected.value = true
                 _connectionEvent.value = System.currentTimeMillis()
-                prefs.saveLastChildHost(connectedHost)
                 prefs.saveLastConnectionCode(code)
+                // Do NOT save an IP-based host for cloud connections; leave the
+                // host blank so that CameraStreamActivity switches to cloud mode.
+                prefs.saveLastChildHost("")
                 sessionDao.insert(
                     SessionEntity(
-                        childDeviceId = childName,
+                        childDeviceId = cloudInfo.deviceName,
                         parentDeviceId = Settings.Secure.getString(
                             appContext.contentResolver,
                             Settings.Secure.ANDROID_ID
@@ -73,6 +100,15 @@ class ParentViewModel(application: Application) : AndroidViewModel(application) 
                         connectionCode = code
                     )
                 )
+                return@launch
+            }
+
+            // --- 3. Same-LAN TCP scan (fallback when Firebase is not set up) --
+            _status.value = "Ищем устройство в локальной сети…"
+            val lanResult = connectToChildLan(code)
+            if (lanResult != null) {
+                val (connectedHost, childName) = lanResult
+                onConnected(connectedHost, childName, code)
             } else {
                 _status.value = "Не удалось найти устройство по коду. Убедитесь, что ребёнок открыл режим мониторинга"
                 _connected.value = false
@@ -80,58 +116,61 @@ class ParentViewModel(application: Application) : AndroidViewModel(application) 
         }
     }
 
-    private suspend fun connectToChild(code: String, host: String?, port: Int): Pair<String, String>? {
-        val directHosts = buildDirectCandidates(host)
-        for (candidateHost in directHosts) {
-            val result = ParentSocketClient.connectOnce(candidateHost, port, code)
-            if (result.isSuccess) {
-                return candidateHost to result.getOrNull().orEmpty()
-            }
+    private fun onConnected(host: String, childName: String, code: String) {
+        viewModelScope.launch {
+            _status.value = "Подключено к: $childName"
+            _connected.value = true
+            _connectionEvent.value = System.currentTimeMillis()
+            prefs.saveLastChildHost(host)
+            prefs.saveLastConnectionCode(code)
+            sessionDao.insert(
+                SessionEntity(
+                    childDeviceId = childName,
+                    parentDeviceId = Settings.Secure.getString(
+                        appContext.contentResolver,
+                        Settings.Secure.ANDROID_ID
+                    ).orEmpty(),
+                    connectionCode = code
+                )
+            )
         }
+    }
 
-        if (!host.isNullOrBlank()) return null
+    // -------------------------------------------------------------------------
+    // LAN scan helpers (kept as a fallback when Firebase is not configured)
+    // -------------------------------------------------------------------------
 
-        _status.postValue("Проверяем устройства в локальной сети...")
-        val localCandidates = buildLocalNetworkCandidates()
-            .filterNot { directHosts.contains(it) }
-            .distinct()
+    private suspend fun connectToChildLan(code: String): Pair<String, String>? {
+        val candidates = buildLanCandidates()
+        if (candidates.isEmpty()) return null
 
-        if (localCandidates.isEmpty()) return null
-
-        val chunks = localCandidates.chunked(Constants.SOCKET_SCAN_CHUNK_SIZE)
+        val chunks = candidates.chunked(Constants.SOCKET_SCAN_CHUNK_SIZE)
         for (chunk in chunks) {
             val success = coroutineScope {
-                val attempts = chunk.map { host ->
+                val attempts = chunk.map { candidateHost ->
                     async(Dispatchers.IO) {
-                        host to ParentSocketClient.connectOnce(host, port, code)
+                        candidateHost to ParentSocketClient.connectOnce(
+                            candidateHost,
+                            Constants.DEFAULT_SOCKET_PORT,
+                            code
+                        )
                     }
                 }
                 var found: Pair<String, String>? = null
                 for (deferred in attempts) {
-                    val (host, result) = deferred.await()
+                    val (candidateHost, result) = deferred.await()
                     if (result.isSuccess && found == null) {
-                        found = host to result.getOrNull().orEmpty()
+                        found = candidateHost to result.getOrNull().orEmpty()
                     }
                 }
                 found
             }
-            if (success != null) {
-                return success
-            }
+            if (success != null) return success
         }
         return null
     }
 
-    private fun buildDirectCandidates(host: String?): List<String> {
-        val candidates = mutableListOf<String>()
-        host?.takeIf { it.isNotBlank() }?.let(candidates::add)
-        prefs.getLastChildHost()?.takeIf { it.isNotBlank() }?.let(candidates::add)
-        candidates.add("10.0.2.2")
-        candidates.add("127.0.0.1")
-        return candidates.distinct()
-    }
-
-    private fun buildLocalNetworkCandidates(): List<String> {
+    private fun buildLanCandidates(): List<String> {
         val localIpv4 = runCatching {
             NetworkInterface.getNetworkInterfaces().toList()
                 .flatMap { it.inetAddresses.toList() }
@@ -141,7 +180,11 @@ class ParentViewModel(application: Application) : AndroidViewModel(application) 
         }.getOrDefault(emptyList())
 
         val ownAddresses = localIpv4.toSet()
-        return localIpv4
+
+        // Also include common emulator host addresses.
+        val extra = listOf("10.0.2.2", "127.0.0.1")
+
+        return (localIpv4
             .mapNotNull { ip ->
                 val parts = ip.split(".")
                 if (parts.size == 4) "${parts[0]}.${parts[1]}.${parts[2]}" else null
@@ -151,7 +194,8 @@ class ParentViewModel(application: Application) : AndroidViewModel(application) 
                 (Constants.SOCKET_SCAN_HOST_MIN..Constants.SOCKET_SCAN_HOST_MAX)
                     .map { lastOctet -> "$prefix.$lastOctet" }
             }
-            .filterNot { ownAddresses.contains(it) }
+            .filterNot { ownAddresses.contains(it) } + extra)
+            .distinct()
     }
 
     private fun hasInternetCapability(): Boolean {

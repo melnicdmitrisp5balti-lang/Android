@@ -56,10 +56,20 @@ class CameraStreamActivity : AppCompatActivity() {
         binding.ivCameraStream.setImageDrawable(null)
         updateQualityUi(getString(R.string.camera_stream_quality_connecting), R.color.neon_magenta)
 
-        if (childHost.isBlank() || connectionCode.isBlank()) {
+        if (connectionCode.isBlank()) {
             binding.tvCameraStatus.text = getString(R.string.camera_stream_no_active_session)
             binding.btnRefreshStream.isEnabled = false
             binding.progressStream.visibility = View.GONE
+            return
+        }
+
+        // Cloud connection — no direct LAN host available.
+        // The WebRTC P2P channel (signaled via Firebase) carries the media.
+        if (childHost.isBlank()) {
+            binding.progressStream.visibility = View.GONE
+            updateQualityUi(getString(R.string.camera_stream_quality_cloud), R.color.neon_green)
+            binding.tvCameraStatus.text = getString(R.string.camera_stream_cloud_connected)
+            binding.btnRefreshStream.isEnabled = true
             return
         }
 
@@ -130,7 +140,7 @@ class CameraStreamActivity : AppCompatActivity() {
             }
 
             val input = BufferedInputStream(connection.inputStream)
-            while (isActive) {
+            while (streamJob?.isActive == true) {
                 val frame = MjpegFrameReader.readJpegFrame(input) ?: return false
                 val bitmap = BitmapFactory.decodeByteArray(frame, 0, frame.size) ?: continue
                 runOnUiThread {

@@ -81,8 +81,7 @@ class ParentMainActivity : AppCompatActivity() {
             .setView(dialogBinding.root)
             .setPositiveButton("Подключиться") { _, _ ->
                 val code = dialogBinding.etConnectionCode.text?.toString().orEmpty()
-                val host = dialogBinding.etChildHost.text?.toString().orEmpty().trim()
-                viewModel.connect(code, host.takeIf { it.isNotBlank() })
+                viewModel.connect(code)
             }
             .setNegativeButton("Отмена", null)
             .show()

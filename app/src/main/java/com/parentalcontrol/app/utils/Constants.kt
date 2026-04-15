@@ -60,4 +60,18 @@ object Constants {
     const val ACTION_CHILD_CONNECTION_STATUS = "action_child_connection_status"
     const val EXTRA_CONNECTION_STATUS = "extra_connection_status"
     const val EXTRA_PARENT_CONNECTED = "extra_parent_connected"
+
+    // Cloud signaling (Firebase Realtime Database)
+    // Replace with your Firebase project's Realtime Database URL:
+    // e.g. "https://my-project-default-rtdb.firebaseio.com"
+    const val FIREBASE_DATABASE_URL = ""
+
+    // WebRTC STUN / TURN servers
+    // Public Google STUN server — no credentials required.
+    const val STUN_SERVER_URI = "stun:stun.l.google.com:19302"
+    // Replace with your TURN server credentials for NAT traversal across
+    // restrictive networks (e.g. a Twilio TURN or self-hosted COTURN).
+    const val TURN_SERVER_URI = ""
+    const val TURN_USERNAME = ""
+    const val TURN_CREDENTIAL = ""
 }
