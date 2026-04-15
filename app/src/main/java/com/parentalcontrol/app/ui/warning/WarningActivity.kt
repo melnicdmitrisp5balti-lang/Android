@@ -5,7 +5,7 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.parentalcontrol.app.databinding.ActivityWarningBinding
-import com.parentalcontrol.app.ui.auth.AuthActivity
+import com.parentalcontrol.app.ui.mode.ModeSelectionActivity
 
 class WarningActivity : AppCompatActivity() {
 
@@ -48,7 +48,7 @@ class WarningActivity : AppCompatActivity() {
     }
 
     private fun navigateToAuth() {
-        startActivity(Intent(this, AuthActivity::class.java))
+        startActivity(Intent(this, ModeSelectionActivity::class.java))
         finish()
     }
 }

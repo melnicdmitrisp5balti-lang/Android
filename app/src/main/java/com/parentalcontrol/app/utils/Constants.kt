@@ -9,6 +9,7 @@ object Constants {
     const val PREFS_SECURE = "secure_prefs"
     const val PREFS_SECURE_FALLBACK = "secure_prefs_fallback"
     const val PREFS_REGULAR = "app_prefs"
+    const val PREFS_CHILD_CODE = "child_connection_code"
 
     // Password requirements
     const val MIN_PASSWORD_LENGTH = 8
@@ -31,4 +32,21 @@ object Constants {
     const val LOG_AUDIO_STOP = "AUDIO_STOP"
     const val LOG_AUTH_SUCCESS = "AUTH_SUCCESS"
     const val LOG_PASSWORD_SET = "PASSWORD_SET"
+    const val LOG_CONNECTION_ATTEMPT = "CONNECTION_ATTEMPT"
+    const val LOG_CONNECTION_SUCCESS = "CONNECTION_SUCCESS"
+    const val LOG_CONNECTION_REJECTED = "CONNECTION_REJECTED"
+
+    // Socket
+    const val DEFAULT_SOCKET_PORT = 5050
+    const val SOCKET_TIMEOUT_MS = 30 * 60 * 1000L
+    const val MSG_CLIENT_CONNECT = "CLIENT_CONNECT"
+    const val MSG_SERVER_OK = "SERVER_OK"
+    const val MSG_SERVER_ERROR = "SERVER_ERROR"
+    const val MSG_VIDEO_STREAM = "VIDEO_STREAM"
+    const val MSG_AUDIO_STREAM = "AUDIO_STREAM"
+    const val MSG_ACTIVITY_LOG = "ACTIVITY_LOG"
+
+    // Child server broadcast
+    const val ACTION_CHILD_CONNECTION_STATUS = "action_child_connection_status"
+    const val EXTRA_CONNECTION_STATUS = "extra_connection_status"
 }

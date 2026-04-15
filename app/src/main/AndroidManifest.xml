@@ -38,6 +38,31 @@
             android:theme="@style/Theme.ParentalControl.WithActionBar" />
 
         <activity
+            android:name=".ui.mode.ModeSelectionActivity"
+            android:exported="false"
+            android:theme="@style/Theme.ParentalControl.WithActionBar" />
+
+        <activity
+            android:name=".ui.child.ChildMainActivity"
+            android:exported="false"
+            android:theme="@style/Theme.ParentalControl.WithActionBar" />
+
+        <activity
+            android:name=".ui.parent.ParentMainActivity"
+            android:exported="false"
+            android:theme="@style/Theme.ParentalControl.WithActionBar" />
+
+        <activity
+            android:name=".ui.parent.CameraStreamActivity"
+            android:exported="false"
+            android:theme="@style/Theme.ParentalControl.WithActionBar" />
+
+        <activity
+            android:name=".ui.parent.AudioStreamActivity"
+            android:exported="false"
+            android:theme="@style/Theme.ParentalControl.WithActionBar" />
+
+        <activity
             android:name=".ui.auth.SetPasswordActivity"
             android:exported="false"
             android:theme="@style/Theme.ParentalControl.WithActionBar" />
@@ -71,6 +96,10 @@
         <service
             android:name=".service.MonitoringService"
             android:foregroundServiceType="camera|microphone"
+            android:exported="false" />
+
+        <service
+            android:name=".service.ChildSocketServer"
             android:exported="false" />
 
     </application>
