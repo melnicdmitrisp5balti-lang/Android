@@ -16,6 +16,7 @@ import com.parentalcontrol.app.utils.Constants
 import com.parentalcontrol.app.utils.PreferenceManager
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 import java.net.Inet4Address
 import java.net.NetworkInterface
@@ -39,14 +40,13 @@ class ParentViewModel(application: Application) : AndroidViewModel(application) 
 
     fun connect(code: String, port: Int = Constants.DEFAULT_SOCKET_PORT) {
         viewModelScope.launch {
+            _connected.value = false
             if (!validateCode(code)) {
                 _status.value = "Код должен состоять из 6 цифр"
-                _connected.value = false
                 return@launch
             }
-            if (!isInternetAvailable()) {
+            if (!hasInternetCapability()) {
                 _status.value = "Включите интернет и попробуйте снова"
-                _connected.value = false
                 return@launch
             }
 
@@ -91,18 +91,25 @@ class ParentViewModel(application: Application) : AndroidViewModel(application) 
 
         if (localCandidates.isEmpty()) return null
 
-        val chunks = localCandidates.chunked(32)
+        val chunks = localCandidates.chunked(Constants.SOCKET_SCAN_CHUNK_SIZE)
         for (chunk in chunks) {
-            val attempts = chunk.map { host ->
-                async(Dispatchers.IO) {
-                    host to ParentSocketClient.connectOnce(host, port, code)
+            val success = coroutineScope {
+                val attempts = chunk.map { host ->
+                    async(Dispatchers.IO) {
+                        host to ParentSocketClient.connectOnce(host, port, code)
+                    }
                 }
+                var found: Pair<String, String>? = null
+                for (deferred in attempts) {
+                    val (host, result) = deferred.await()
+                    if (result.isSuccess && found == null) {
+                        found = host to result.getOrNull().orEmpty()
+                    }
+                }
+                found
             }
-            attempts.forEach { deferred ->
-                val (host, result) = deferred.await()
-                if (result.isSuccess) {
-                    return host to result.getOrNull().orEmpty()
-                }
+            if (success != null) {
+                return success
             }
         }
         return null
@@ -132,12 +139,17 @@ class ParentViewModel(application: Application) : AndroidViewModel(application) 
                 if (parts.size == 4) "${parts[0]}.${parts[1]}.${parts[2]}" else null
             }
             .distinct()
-            .flatMap { prefix -> (1..254).map { host -> "$prefix.$host" } }
+            .flatMap { prefix ->
+                (Constants.SOCKET_SCAN_HOST_MIN..Constants.SOCKET_SCAN_HOST_MAX)
+                    .map { lastOctet -> "$prefix.$lastOctet" }
+            }
             .filterNot { ownAddresses.contains(it) }
     }
 
-    private fun isInternetAvailable(): Boolean {
-        val manager = appContext.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+    private fun hasInternetCapability(): Boolean {
+        val manager =
+            appContext.getSystemService(Context.CONNECTIVITY_SERVICE) as? ConnectivityManager
+                ?: return false
         val network = manager.activeNetwork ?: return false
         val capabilities = manager.getNetworkCapabilities(network) ?: return false
         return capabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)

@@ -107,6 +107,7 @@
     <string name="quick_action_audio">Только микрофон</string>
     <string name="quick_action_logs">Журнал активности</string>
     <string name="quick_action_location">Местоположение</string>
+    <string name="quick_action_camera_audio_hint">Открыта камера. Для звука нажмите «Микрофон» на главном экране.</string>
     <string name="qr_scanner_placeholder">Сканер QR-кода (опционально) будет доступен на этом экране.</string>
     <string name="camera_stream_placeholder">Прямая трансляция видео будет отображаться здесь.</string>
     <string name="audio_stream_placeholder">Прямое воспроизведение звука будет доступно здесь.</string>

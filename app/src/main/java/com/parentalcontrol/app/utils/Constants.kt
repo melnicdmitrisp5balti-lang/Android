@@ -42,6 +42,9 @@ object Constants {
     const val SOCKET_TIMEOUT_MS = 30 * 60 * 1000L
     const val SOCKET_CONNECT_TIMEOUT_MS = 1_200
     const val SOCKET_HANDSHAKE_TIMEOUT_MS = 3_000
+    const val SOCKET_SCAN_CHUNK_SIZE = 24
+    const val SOCKET_SCAN_HOST_MIN = 2
+    const val SOCKET_SCAN_HOST_MAX = 220
     const val MSG_CLIENT_CONNECT = "CLIENT_CONNECT"
     const val MSG_SERVER_OK = "SERVER_OK"
     const val MSG_SERVER_ERROR = "SERVER_ERROR"

@@ -59,5 +59,6 @@ class ParentSocketClient {
     suspend fun connect(host: String, port: Int, code: String): Result<String> =
         connectOnce(host, port, code)
 
+    @Deprecated("No persistent socket is kept; use connectOnce/connect for each request.")
     fun disconnect() = Unit
 }

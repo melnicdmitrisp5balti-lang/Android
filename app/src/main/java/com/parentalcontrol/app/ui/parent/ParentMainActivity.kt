@@ -103,7 +103,11 @@ class ParentMainActivity : AppCompatActivity() {
             getString(R.string.quick_action_location) -> openLocationHint()
             else -> {
                 openCamera()
-                openAudio()
+                Toast.makeText(
+                    this,
+                    getString(R.string.quick_action_camera_audio_hint),
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         }
     }
