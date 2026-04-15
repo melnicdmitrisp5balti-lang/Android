@@ -57,6 +57,37 @@
                 android:textSize="15sp"
                 android:textStyle="bold" />
 
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="240dp"
+                android:layout_marginTop="16dp"
+                android:background="#8010181F">
+
+                <ImageView
+                    android:id="@+id/iv_camera_stream"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:contentDescription="@string/remote_camera_source_title"
+                    android:scaleType="centerCrop" />
+
+                <ProgressBar
+                    android:id="@+id/progress_stream"
+                    android:layout_width="44dp"
+                    android:layout_height="44dp"
+                    android:layout_gravity="center" />
+            </FrameLayout>
+
+            <TextView
+                android:id="@+id/tv_connection_quality"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:text="@string/camera_stream_quality_connecting"
+                android:textColor="@color/neon_magenta"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_refresh_stream"
                 style="@style/Widget.Material3.Button.OutlinedButton"

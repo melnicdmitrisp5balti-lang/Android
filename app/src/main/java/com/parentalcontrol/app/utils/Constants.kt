@@ -40,9 +40,12 @@ object Constants {
 
     // Socket
     const val DEFAULT_SOCKET_PORT = 5050
+    const val DEFAULT_MJPEG_PORT = 5051
+    const val MJPEG_STREAM_PATH = "/camera.mjpeg"
     const val SOCKET_TIMEOUT_MS = 30 * 60 * 1000L
     const val SOCKET_CONNECT_TIMEOUT_MS = 1_200
     const val SOCKET_HANDSHAKE_TIMEOUT_MS = 3_000
+    const val STREAM_RECONNECT_DELAY_MS = 1_500L
     const val SOCKET_SCAN_CHUNK_SIZE = 24
     const val SOCKET_SCAN_HOST_MIN = 2
     const val SOCKET_SCAN_HOST_MAX = 220

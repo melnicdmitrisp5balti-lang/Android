@@ -125,6 +125,11 @@
     <string name="camera_stream_child_ready">Камера ребёнка (%1$s) доступна для родительского просмотра</string>
     <string name="camera_stream_child_unavailable">Не удалось получить доступ к камере ребёнка</string>
     <string name="camera_stream_no_active_session">Сначала подключитесь к ребёнку на главном экране родителя</string>
+    <string name="camera_stream_reconnect_attempt">Переподключение к камере ребёнка… (%1$d)</string>
+    <string name="camera_stream_quality_good">Качество соединения: хорошее</string>
+    <string name="camera_stream_quality_connecting">Качество соединения: подключение…</string>
+    <string name="camera_stream_quality_reconnecting">Качество соединения: переподключение…</string>
+    <string name="camera_stream_quality_lost">Качество соединения: потеряно</string>
     <string name="camera_button_title">📷 Камера</string>
     <string name="microphone_button_title">🎤 Микрофон</string>
     <string name="logs_button_title">📜 Логи</string>

@@ -146,7 +146,20 @@ class ChildSocketServer : Service() {
                         return
                     }
 
-                    writer.write(SocketManager.createVideoStreamStatus(android.os.Build.MODEL))
+                    if (!CameraStreamService.isStreamReady()) {
+                        writer.write(SocketManager.createServerError("Child camera stream is not ready"))
+                        writer.newLine()
+                        writer.flush()
+                        return
+                    }
+
+                    writer.write(
+                        SocketManager.createVideoStreamStatus(
+                            childName = android.os.Build.MODEL,
+                            streamPort = Constants.DEFAULT_MJPEG_PORT,
+                            streamPath = Constants.MJPEG_STREAM_PATH
+                        )
+                    )
                     writer.newLine()
                     writer.flush()
                     resetInactivityTimer()

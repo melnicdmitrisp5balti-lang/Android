@@ -26,11 +26,13 @@ object SocketManager {
         .put("message", message)
         .toString()
 
-    fun createVideoStreamStatus(childName: String): String = JSONObject()
+    fun createVideoStreamStatus(childName: String, streamPort: Int, streamPath: String): String = JSONObject()
         .put("type", Constants.MSG_SERVER_OK)
         .put("status", "stream_ready")
         .put("child_name", childName)
         .put("stream_source", "child_camera")
+        .put("stream_port", streamPort)
+        .put("stream_path", streamPath)
         .toString()
 
     fun parse(raw: String): JSONObject = JSONObject(raw)
