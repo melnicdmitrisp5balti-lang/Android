@@ -100,6 +100,14 @@
     <string name="enter_6_digit_code">Введите 6-значный код</string>
     <string name="host_hint">IP адрес ребёнка</string>
     <string name="port_hint">Порт</string>
+    <string name="connect_dialog_auto_hint">Приложение подключится автоматически, когда код верный и интернет включен.</string>
+    <string name="quick_action_hint">Что открыть сразу после подключения</string>
+    <string name="quick_action_camera_audio">Камера и микрофон</string>
+    <string name="quick_action_camera">Только камера</string>
+    <string name="quick_action_audio">Только микрофон</string>
+    <string name="quick_action_logs">Журнал активности</string>
+    <string name="quick_action_location">Местоположение</string>
+    <string name="quick_action_camera_audio_hint">Открыта камера. Для звука нажмите «Микрофон» на главном экране.</string>
     <string name="qr_scanner_placeholder">Сканер QR-кода (опционально) будет доступен на этом экране.</string>
     <string name="camera_stream_placeholder">Прямая трансляция видео будет отображаться здесь.</string>
     <string name="audio_stream_placeholder">Прямое воспроизведение звука будет доступно здесь.</string>

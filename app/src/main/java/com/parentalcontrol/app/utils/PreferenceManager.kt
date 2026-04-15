@@ -73,4 +73,11 @@ class PreferenceManager(context: Context) {
     fun clearChildConnectionCode() {
         prefs.edit().remove(Constants.PREFS_CHILD_CODE).apply()
     }
+
+    fun saveLastChildHost(host: String) {
+        regularPrefs.edit().putString(Constants.PREFS_LAST_CHILD_HOST, host).apply()
+    }
+
+    fun getLastChildHost(): String? =
+        regularPrefs.getString(Constants.PREFS_LAST_CHILD_HOST, null)
 }
