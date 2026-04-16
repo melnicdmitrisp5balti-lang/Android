@@ -1,0 +1,165 @@
+<<<<<<< HEAD
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Application themes -->
+    <style name="Theme.ParentalControl" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryContainer">@color/primary_variant</item>
+        <item name="colorOnPrimary">@android:color/white</item>
+        <item name="colorSecondary">@color/secondary</item>
+        <item name="colorSurface">@color/surface</item>
+        <item name="android:colorBackground">@color/background</item>
+        <item name="colorError">@color/error</item>
+        <item name="materialButtonStyle">@style/Widget.ParentalControl.NeonButton</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.ParentalControl.WithActionBar" parent="Theme.Material3.DayNight">
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryContainer">@color/primary_variant</item>
+        <item name="colorOnPrimary">@android:color/white</item>
+        <item name="colorSecondary">@color/secondary</item>
+        <item name="colorSurface">@color/surface</item>
+        <item name="android:colorBackground">@color/background</item>
+        <item name="colorError">@color/error</item>
+        <item name="materialButtonStyle">@style/Widget.ParentalControl.NeonButton</item>
+    </style>
+
+    <!-- Widget base style (required parent for Widget.* custom styles) -->
+    <style name="Widget" parent="android:Widget" />
+
+    <!-- Button style -->
+    <style name="Widget.ParentalControl.NeonButton" parent="Widget.Material3.Button">
+        <item name="backgroundTint">@color/surface</item>
+        <item name="strokeColor">@color/neon_blue</item>
+        <item name="strokeWidth">1dp</item>
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="elevation">8dp</item>
+    </style>
+
+    <!-- Text styles -->
+    <style name="TextAppearance.ParentalControl.Title" parent="TextAppearance.Material3.HeadlineMedium">
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextAppearance.ParentalControl.Body" parent="TextAppearance.Material3.BodyMedium">
+        <item name="android:textColor">@color/text_secondary</item>
+    </style>
+
+    <!-- Section header style -->
+    <style name="TextAppearance.ParentalControl.SectionHeader" parent="TextAppearance.Material3.LabelMedium">
+        <item name="android:textColor">@color/primary</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+
+    <!-- Status indicator styles -->
+    <style name="TextAppearance.ParentalControl.StatusActive" parent="TextAppearance.Material3.BodyLarge">
+        <item name="android:textColor">@color/status_active</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextAppearance.ParentalControl.Warning" parent="TextAppearance.Material3.BodyMedium">
+        <item name="android:textColor">@color/warning_color</item>
+    </style>
+
+    <!-- Single-digit code input box for ParentCodeInputActivity -->
+    <style name="Widget.CodeDigitBox">
+        <item name="android:layout_width">44dp</item>
+        <item name="android:layout_height">56dp</item>
+        <item name="android:background">@drawable/bg_code_digit_box</item>
+        <item name="android:gravity">center</item>
+        <item name="android:inputType">number</item>
+        <item name="android:maxLength">1</item>
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:cursorVisible">false</item>
+        <item name="android:fontFamily">monospace</item>
+    </style>
+</resources>
+=======
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Application themes -->
+    <style name="Theme.ParentalControl" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryContainer">@color/primary_variant</item>
+        <item name="colorOnPrimary">@android:color/white</item>
+        <item name="colorSecondary">@color/secondary</item>
+        <item name="colorSurface">@color/surface</item>
+        <item name="android:colorBackground">@color/background</item>
+        <item name="colorError">@color/error</item>
+        <item name="materialButtonStyle">@style/Widget.ParentalControl.NeonButton</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.ParentalControl.WithActionBar" parent="Theme.Material3.DayNight">
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryContainer">@color/primary_variant</item>
+        <item name="colorOnPrimary">@android:color/white</item>
+        <item name="colorSecondary">@color/secondary</item>
+        <item name="colorSurface">@color/surface</item>
+        <item name="android:colorBackground">@color/background</item>
+        <item name="colorError">@color/error</item>
+        <item name="materialButtonStyle">@style/Widget.ParentalControl.NeonButton</item>
+    </style>
+
+    <!-- Widget base style (required parent for Widget.* custom styles) -->
+    <style name="Widget" parent="android:Widget" />
+
+    <!-- Button style -->
+    <style name="Widget.ParentalControl.NeonButton" parent="Widget.Material3.Button">
+        <item name="backgroundTint">@color/surface</item>
+        <item name="strokeColor">@color/neon_blue</item>
+        <item name="strokeWidth">1dp</item>
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="elevation">8dp</item>
+    </style>
+
+    <!-- Text styles -->
+    <style name="TextAppearance.ParentalControl.Title" parent="TextAppearance.Material3.HeadlineMedium">
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextAppearance.ParentalControl.Body" parent="TextAppearance.Material3.BodyMedium">
+        <item name="android:textColor">@color/text_secondary</item>
+    </style>
+
+    <!-- Section header style -->
+    <style name="TextAppearance.ParentalControl.SectionHeader" parent="TextAppearance.Material3.LabelMedium">
+        <item name="android:textColor">@color/primary</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+
+    <!-- Status indicator styles -->
+    <style name="TextAppearance.ParentalControl.StatusActive" parent="TextAppearance.Material3.BodyLarge">
+        <item name="android:textColor">@color/status_active</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextAppearance.ParentalControl.Warning" parent="TextAppearance.Material3.BodyMedium">
+        <item name="android:textColor">@color/warning_color</item>
+    </style>
+
+    <!-- Single-digit code input box for ParentCodeInputActivity -->
+    <style name="Widget.CodeDigitBox">
+        <item name="android:layout_width">44dp</item>
+        <item name="android:layout_height">56dp</item>
+        <item name="android:background">@drawable/bg_code_digit_box</item>
+        <item name="android:gravity">center</item>
+        <item name="android:inputType">number</item>
+        <item name="android:maxLength">1</item>
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:cursorVisible">false</item>
+        <item name="android:fontFamily">monospace</item>
+    </style>
+</resources>
+>>>>>>> a1f791063e2890681a681f6a89b0ee2ae0427c6b

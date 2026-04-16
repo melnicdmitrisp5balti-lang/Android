@@ -1,0 +1,88 @@
+<<<<<<< HEAD
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Neon Colors -->
+    <color name="neon_cyan">#00D9FF</color>
+    <color name="neon_magenta">#FF00FF</color>
+    <color name="neon_green">#39FF14</color>
+    <color name="neon_yellow">#FFFF00</color>
+    <color name="neon_blue">#0080FF</color>
+
+    <!-- Dark Theme -->
+    <color name="dark_bg">#0A0E27</color>
+    <color name="dark_surface">#1A1F3A</color>
+    <color name="card_bg">#151B2F</color>
+
+    <!-- Status -->
+    <color name="error_red">#FF4444</color>
+    <color name="success_green">#00DD00</color>
+
+    <!-- Standard -->
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+
+    <!-- Text Colors -->
+    <color name="text_primary">@android:color/white</color>
+    <color name="text_secondary">@android:color/darker_gray</color>
+
+    <!-- Status Colors -->
+    <color name="status_active">@color/neon_green</color>
+    <color name="status_inactive">@color/error_red</color>
+    <color name="warning_color">@color/neon_yellow</color>
+
+    <!-- Primary Colors -->
+    <color name="primary">@color/neon_cyan</color>
+    <color name="primary_variant">@color/neon_magenta</color>
+    <color name="secondary">@color/neon_green</color>
+    <color name="secondary_variant">@color/neon_yellow</color>
+    <color name="surface">@color/dark_surface</color>
+    <color name="background">@color/dark_bg</color>
+    <color name="error">@color/error_red</color>
+
+    <!-- Divider -->
+    <color name="divider">#333333</color>
+=======
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Neon Colors -->
+    <color name="neon_cyan">#00D9FF</color>
+    <color name="neon_magenta">#FF00FF</color>
+    <color name="neon_green">#39FF14</color>
+    <color name="neon_yellow">#FFFF00</color>
+    <color name="neon_blue">#0080FF</color>
+
+    <!-- Dark Theme -->
+    <color name="dark_bg">#0A0E27</color>
+    <color name="dark_surface">#1A1F3A</color>
+    <color name="card_bg">#151B2F</color>
+
+    <!-- Status -->
+    <color name="error_red">#FF4444</color>
+    <color name="success_green">#00DD00</color>
+
+    <!-- Standard -->
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+
+    <!-- Text Colors -->
+    <color name="text_primary">@android:color/white</color>
+    <color name="text_secondary">@android:color/darker_gray</color>
+
+    <!-- Status Colors -->
+    <color name="status_active">@color/neon_green</color>
+    <color name="status_inactive">@color/error_red</color>
+    <color name="warning_color">@color/neon_yellow</color>
+
+    <!-- Primary Colors -->
+    <color name="primary">@color/neon_cyan</color>
+    <color name="primary_variant">@color/neon_magenta</color>
+    <color name="secondary">@color/neon_green</color>
+    <color name="secondary_variant">@color/neon_yellow</color>
+    <color name="surface">@color/dark_surface</color>
+    <color name="background">@color/dark_bg</color>
+    <color name="error">@color/error_red</color>
+
+    <!-- Divider -->
+    <color name="divider">#333333</color>
+>>>>>>> a1f791063e2890681a681f6a89b0ee2ae0427c6b
+</resources>
