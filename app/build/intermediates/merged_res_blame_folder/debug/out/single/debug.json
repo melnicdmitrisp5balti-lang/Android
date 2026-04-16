@@ -1,0 +1,146 @@
+[
+    {
+        "merged": "com.parentalcontrol.app-merged_res-53:/layout_item_activity_log.xml.flat",
+        "source": "com.parentalcontrol.app-main-55:/layout/item_activity_log.xml"
+    },
+    {
+        "merged": "com.parentalcontrol.app-merged_res-53:/xml_network_security_config.xml.flat",
+        "source": "com.parentalcontrol.app-main-55:/xml/network_security_config.xml"
+    },
+    {
+        "merged": "com.parentalcontrol.app-merged_res-53:/drawable_bg_parent_screen.xml.flat",
+        "source": "com.parentalcontrol.app-main-55:/drawable/bg_parent_screen.xml"
+    },
+    {
+        "merged": "com.parentalcontrol.app-merged_res-53:/mipmap-mdpi_ic_launcher.xml.flat",
+        "source": "com.parentalcontrol.app-main-55:/mipmap-mdpi/ic_launcher.xml"
+    },
+    {
+        "merged": "com.parentalcontrol.app-merged_res-53:/layout_activity_camera.xml.flat",
+        "source": "com.parentalcontrol.app-main-55:/layout/activity_camera.xml"
+    },
+    {
+        "merged": "com.parentalcontrol.app-merged_res-53:/layout_dialog_qr_scanner.xml.flat",
+        "source": "com.parentalcontrol.app-main-55:/layout/dialog_qr_scanner.xml"
+    },
+    {
+        "merged": "com.parentalcontrol.app-merged_res-53:/drawable_ic_mic_off.xml.flat",
+        "source": "com.parentalcontrol.app-main-55:/drawable/ic_mic_off.xml"
+    },
+    {
+        "merged": "com.parentalcontrol.app-merged_res-53:/layout_activity_settings.xml.flat",
+        "source": "com.parentalcontrol.app-main-55:/layout/activity_settings.xml"
+    },
+    {
+        "merged": "com.parentalcontrol.app-merged_res-53:/layout_activity_auth.xml.flat",
+        "source": "com.parentalcontrol.app-main-55:/layout/activity_auth.xml"
+    },
+    {
+        "merged": "com.parentalcontrol.app-merged_res-53:/drawable_ic_microphone.xml.flat",
+        "source": "com.parentalcontrol.app-main-55:/drawable/ic_microphone.xml"
+    },
+    {
+        "merged": "com.parentalcontrol.app-merged_res-53:/drawable_ic_monitoring.xml.flat",
+        "source": "com.parentalcontrol.app-main-55:/drawable/ic_monitoring.xml"
+    },
+    {
+        "merged": "com.parentalcontrol.app-merged_res-53:/drawable_ic_check_circle.xml.flat",
+        "source": "com.parentalcontrol.app-main-55:/drawable/ic_check_circle.xml"
+    },
+    {
+        "merged": "com.parentalcontrol.app-merged_res-53:/layout_activity_main.xml.flat",
+        "source": "com.parentalcontrol.app-main-55:/layout/activity_main.xml"
+    },
+    {
+        "merged": "com.parentalcontrol.app-merged_res-53:/mipmap-mdpi_ic_launcher_round.xml.flat",
+        "source": "com.parentalcontrol.app-main-55:/mipmap-mdpi/ic_launcher_round.xml"
+    },
+    {
+        "merged": "com.parentalcontrol.app-merged_res-53:/layout_activity_set_password.xml.flat",
+        "source": "com.parentalcontrol.app-main-55:/layout/activity_set_password.xml"
+    },
+    {
+        "merged": "com.parentalcontrol.app-merged_res-53:/drawable_bg_code_digit_box.xml.flat",
+        "source": "com.parentalcontrol.app-main-55:/drawable/bg_code_digit_box.xml"
+    },
+    {
+        "merged": "com.parentalcontrol.app-merged_res-53:/layout_activity_activity_log.xml.flat",
+        "source": "com.parentalcontrol.app-main-55:/layout/activity_activity_log.xml"
+    },
+    {
+        "merged": "com.parentalcontrol.app-merged_res-53:/drawable_ic_lock.xml.flat",
+        "source": "com.parentalcontrol.app-main-55:/drawable/ic_lock.xml"
+    },
+    {
+        "merged": "com.parentalcontrol.app-merged_res-53:/layout_activity_child_main.xml.flat",
+        "source": "com.parentalcontrol.app-main-55:/layout/activity_child_main.xml"
+    },
+    {
+        "merged": "com.parentalcontrol.app-merged_res-53:/drawable_ic_camera.xml.flat",
+        "source": "com.parentalcontrol.app-main-55:/drawable/ic_camera.xml"
+    },
+    {
+        "merged": "com.parentalcontrol.app-merged_res-53:/layout_activity_parent_code_input.xml.flat",
+        "source": "com.parentalcontrol.app-main-55:/layout/activity_parent_code_input.xml"
+    },
+    {
+        "merged": "com.parentalcontrol.app-merged_res-53:/layout_activity_camera_stream.xml.flat",
+        "source": "com.parentalcontrol.app-main-55:/layout/activity_camera_stream.xml"
+    },
+    {
+        "merged": "com.parentalcontrol.app-merged_res-53:/layout_activity_live_stream.xml.flat",
+        "source": "com.parentalcontrol.app-main-55:/layout/activity_live_stream.xml"
+    },
+    {
+        "merged": "com.parentalcontrol.app-merged_res-53:/layout_activity_mode_selection.xml.flat",
+        "source": "com.parentalcontrol.app-main-55:/layout/activity_mode_selection.xml"
+    },
+    {
+        "merged": "com.parentalcontrol.app-merged_res-53:/drawable_ic_settings.xml.flat",
+        "source": "com.parentalcontrol.app-main-55:/drawable/ic_settings.xml"
+    },
+    {
+        "merged": "com.parentalcontrol.app-merged_res-53:/layout_dialog_enter_code.xml.flat",
+        "source": "com.parentalcontrol.app-main-55:/layout/dialog_enter_code.xml"
+    },
+    {
+        "merged": "com.parentalcontrol.app-merged_res-53:/layout_activity_parent_main.xml.flat",
+        "source": "com.parentalcontrol.app-main-55:/layout/activity_parent_main.xml"
+    },
+    {
+        "merged": "com.parentalcontrol.app-merged_res-53:/drawable_ic_history.xml.flat",
+        "source": "com.parentalcontrol.app-main-55:/drawable/ic_history.xml"
+    },
+    {
+        "merged": "com.parentalcontrol.app-merged_res-53:/layout_activity_audio.xml.flat",
+        "source": "com.parentalcontrol.app-main-55:/layout/activity_audio.xml"
+    },
+    {
+        "merged": "com.parentalcontrol.app-merged_res-53:/drawable_ic_mic_on.xml.flat",
+        "source": "com.parentalcontrol.app-main-55:/drawable/ic_mic_on.xml"
+    },
+    {
+        "merged": "com.parentalcontrol.app-merged_res-53:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "com.parentalcontrol.app-main-55:/mipmap-anydpi-v26/ic_launcher_round.xml"
+    },
+    {
+        "merged": "com.parentalcontrol.app-merged_res-53:/layout_activity_child_auto_register.xml.flat",
+        "source": "com.parentalcontrol.app-main-55:/layout/activity_child_auto_register.xml"
+    },
+    {
+        "merged": "com.parentalcontrol.app-merged_res-53:/drawable_ic_warning.xml.flat",
+        "source": "com.parentalcontrol.app-main-55:/drawable/ic_warning.xml"
+    },
+    {
+        "merged": "com.parentalcontrol.app-merged_res-53:/layout_activity_audio_stream.xml.flat",
+        "source": "com.parentalcontrol.app-main-55:/layout/activity_audio_stream.xml"
+    },
+    {
+        "merged": "com.parentalcontrol.app-merged_res-53:/mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "com.parentalcontrol.app-main-55:/mipmap-anydpi-v26/ic_launcher.xml"
+    },
+    {
+        "merged": "com.parentalcontrol.app-merged_res-53:/layout_activity_warning.xml.flat",
+        "source": "com.parentalcontrol.app-main-55:/layout/activity_warning.xml"
+    }
+]

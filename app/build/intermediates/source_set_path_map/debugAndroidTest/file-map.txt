@@ -1,0 +1,6 @@
+com.parentalcontrol.app.test.app-core-1.5.0-0 C:\Users\melni\.gradle\caches\transforms-3\3841aeda8a9c0cf662db9758d1341688\transformed\core-1.5.0\res
+com.parentalcontrol.app.test.app-annotation-experimental-1.3.0-1 C:\Users\melni\.gradle\caches\transforms-3\a246a887426600b605a6d48f48419098\transformed\annotation-experimental-1.3.0\res
+com.parentalcontrol.app.test.app-androidTest-2 C:\Users\melni\StudioProjects\Android1\app\build\generated\res\resValues\androidTest\debug
+com.parentalcontrol.app.test.app-mergeDebugAndroidTestResources-3 C:\Users\melni\StudioProjects\Android1\app\build\intermediates\incremental\debugAndroidTest\mergeDebugAndroidTestResources\merged.dir
+com.parentalcontrol.app.test.app-mergeDebugAndroidTestResources-4 C:\Users\melni\StudioProjects\Android1\app\build\intermediates\incremental\debugAndroidTest\mergeDebugAndroidTestResources\stripped.dir
+com.parentalcontrol.app.test.app-merged_res-5 C:\Users\melni\StudioProjects\Android1\app\build\intermediates\merged_res\debugAndroidTest

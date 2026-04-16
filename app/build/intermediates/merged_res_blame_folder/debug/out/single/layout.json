@@ -1,0 +1,78 @@
+[
+    {
+        "merged": "com.parentalcontrol.app-mergeDebugResources-52:/layout/activity_child_main.xml",
+        "source": "com.parentalcontrol.app-main-55:/layout/activity_child_main.xml"
+    },
+    {
+        "merged": "com.parentalcontrol.app-mergeDebugResources-52:/layout/activity_main.xml",
+        "source": "com.parentalcontrol.app-main-55:/layout/activity_main.xml"
+    },
+    {
+        "merged": "com.parentalcontrol.app-mergeDebugResources-52:/layout/activity_camera_stream.xml",
+        "source": "com.parentalcontrol.app-main-55:/layout/activity_camera_stream.xml"
+    },
+    {
+        "merged": "com.parentalcontrol.app-mergeDebugResources-52:/layout/activity_live_stream.xml",
+        "source": "com.parentalcontrol.app-main-55:/layout/activity_live_stream.xml"
+    },
+    {
+        "merged": "com.parentalcontrol.app-mergeDebugResources-52:/layout/activity_mode_selection.xml",
+        "source": "com.parentalcontrol.app-main-55:/layout/activity_mode_selection.xml"
+    },
+    {
+        "merged": "com.parentalcontrol.app-mergeDebugResources-52:/layout/item_activity_log.xml",
+        "source": "com.parentalcontrol.app-main-55:/layout/item_activity_log.xml"
+    },
+    {
+        "merged": "com.parentalcontrol.app-mergeDebugResources-52:/layout/activity_parent_main.xml",
+        "source": "com.parentalcontrol.app-main-55:/layout/activity_parent_main.xml"
+    },
+    {
+        "merged": "com.parentalcontrol.app-mergeDebugResources-52:/layout/activity_set_password.xml",
+        "source": "com.parentalcontrol.app-main-55:/layout/activity_set_password.xml"
+    },
+    {
+        "merged": "com.parentalcontrol.app-mergeDebugResources-52:/layout/activity_camera.xml",
+        "source": "com.parentalcontrol.app-main-55:/layout/activity_camera.xml"
+    },
+    {
+        "merged": "com.parentalcontrol.app-mergeDebugResources-52:/layout/activity_settings.xml",
+        "source": "com.parentalcontrol.app-main-55:/layout/activity_settings.xml"
+    },
+    {
+        "merged": "com.parentalcontrol.app-mergeDebugResources-52:/layout/activity_audio_stream.xml",
+        "source": "com.parentalcontrol.app-main-55:/layout/activity_audio_stream.xml"
+    },
+    {
+        "merged": "com.parentalcontrol.app-mergeDebugResources-52:/layout/dialog_enter_code.xml",
+        "source": "com.parentalcontrol.app-main-55:/layout/dialog_enter_code.xml"
+    },
+    {
+        "merged": "com.parentalcontrol.app-mergeDebugResources-52:/layout/dialog_qr_scanner.xml",
+        "source": "com.parentalcontrol.app-main-55:/layout/dialog_qr_scanner.xml"
+    },
+    {
+        "merged": "com.parentalcontrol.app-mergeDebugResources-52:/layout/activity_audio.xml",
+        "source": "com.parentalcontrol.app-main-55:/layout/activity_audio.xml"
+    },
+    {
+        "merged": "com.parentalcontrol.app-mergeDebugResources-52:/layout/activity_child_auto_register.xml",
+        "source": "com.parentalcontrol.app-main-55:/layout/activity_child_auto_register.xml"
+    },
+    {
+        "merged": "com.parentalcontrol.app-mergeDebugResources-52:/layout/activity_auth.xml",
+        "source": "com.parentalcontrol.app-main-55:/layout/activity_auth.xml"
+    },
+    {
+        "merged": "com.parentalcontrol.app-mergeDebugResources-52:/layout/activity_warning.xml",
+        "source": "com.parentalcontrol.app-main-55:/layout/activity_warning.xml"
+    },
+    {
+        "merged": "com.parentalcontrol.app-mergeDebugResources-52:/layout/activity_parent_code_input.xml",
+        "source": "com.parentalcontrol.app-main-55:/layout/activity_parent_code_input.xml"
+    },
+    {
+        "merged": "com.parentalcontrol.app-mergeDebugResources-52:/layout/activity_activity_log.xml",
+        "source": "com.parentalcontrol.app-main-55:/layout/activity_activity_log.xml"
+    }
+]

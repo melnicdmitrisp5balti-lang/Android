@@ -1,0 +1,519 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.parentalcontrol.app"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="29"
+9        android:targetSdkVersion="34" />
+10
+11    <uses-permission android:name="android.permission.CAMERA" />
+11-->C:\Users\melni\StudioProjects\Android1\app\src\main\AndroidManifest.xml:4:5-65
+11-->C:\Users\melni\StudioProjects\Android1\app\src\main\AndroidManifest.xml:4:22-62
+12    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+12-->C:\Users\melni\StudioProjects\Android1\app\src\main\AndroidManifest.xml:5:5-71
+12-->C:\Users\melni\StudioProjects\Android1\app\src\main\AndroidManifest.xml:5:22-68
+13    <uses-permission android:name="android.permission.INTERNET" />
+13-->C:\Users\melni\StudioProjects\Android1\app\src\main\AndroidManifest.xml:6:5-67
+13-->C:\Users\melni\StudioProjects\Android1\app\src\main\AndroidManifest.xml:6:22-64
+14    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+14-->C:\Users\melni\StudioProjects\Android1\app\src\main\AndroidManifest.xml:7:5-79
+14-->C:\Users\melni\StudioProjects\Android1\app\src\main\AndroidManifest.xml:7:22-76
+15    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+15-->C:\Users\melni\StudioProjects\Android1\app\src\main\AndroidManifest.xml:8:5-77
+15-->C:\Users\melni\StudioProjects\Android1\app\src\main\AndroidManifest.xml:8:22-74
+16    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_CAMERA" />
+16-->C:\Users\melni\StudioProjects\Android1\app\src\main\AndroidManifest.xml:9:5-84
+16-->C:\Users\melni\StudioProjects\Android1\app\src\main\AndroidManifest.xml:9:22-81
+17    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MICROPHONE" />
+17-->C:\Users\melni\StudioProjects\Android1\app\src\main\AndroidManifest.xml:10:5-88
+17-->C:\Users\melni\StudioProjects\Android1\app\src\main\AndroidManifest.xml:10:22-85
+18    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+18-->C:\Users\melni\StudioProjects\Android1\app\src\main\AndroidManifest.xml:11:5-77
+18-->C:\Users\melni\StudioProjects\Android1\app\src\main\AndroidManifest.xml:11:22-74
+19    <uses-permission android:name="android.permission.WAKE_LOCK" />
+19-->C:\Users\melni\StudioProjects\Android1\app\src\main\AndroidManifest.xml:12:5-68
+19-->C:\Users\melni\StudioProjects\Android1\app\src\main\AndroidManifest.xml:12:22-65
+20
+21    <uses-feature
+21-->C:\Users\melni\StudioProjects\Android1\app\src\main\AndroidManifest.xml:14:5-85
+22        android:name="android.hardware.camera"
+22-->C:\Users\melni\StudioProjects\Android1\app\src\main\AndroidManifest.xml:14:19-57
+23        android:required="false" />
+23-->C:\Users\melni\StudioProjects\Android1\app\src\main\AndroidManifest.xml:14:58-82
+24    <uses-feature
+24-->C:\Users\melni\StudioProjects\Android1\app\src\main\AndroidManifest.xml:15:5-89
+25        android:name="android.hardware.microphone"
+25-->C:\Users\melni\StudioProjects\Android1\app\src\main\AndroidManifest.xml:15:19-61
+26        android:required="false" />
+26-->C:\Users\melni\StudioProjects\Android1\app\src\main\AndroidManifest.xml:15:62-86
+27
+28    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+28-->[com.google.android.recaptcha:recaptcha:18.4.0] C:\Users\melni\.gradle\caches\transforms-3\d188dfbd7d3a9388c12dbc2784a976a1\transformed\recaptcha-18.4.0\AndroidManifest.xml:9:5-98
+28-->[com.google.android.recaptcha:recaptcha:18.4.0] C:\Users\melni\.gradle\caches\transforms-3\d188dfbd7d3a9388c12dbc2784a976a1\transformed\recaptcha-18.4.0\AndroidManifest.xml:9:22-95
+29
+30    <permission
+30-->[androidx.core:core:1.12.0] C:\Users\melni\.gradle\caches\transforms-3\ac0e4045f958799724929c17b54381c3\transformed\core-1.12.0\AndroidManifest.xml:22:5-24:47
+31        android:name="com.parentalcontrol.app.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+31-->[androidx.core:core:1.12.0] C:\Users\melni\.gradle\caches\transforms-3\ac0e4045f958799724929c17b54381c3\transformed\core-1.12.0\AndroidManifest.xml:23:9-81
+32        android:protectionLevel="signature" />
+32-->[androidx.core:core:1.12.0] C:\Users\melni\.gradle\caches\transforms-3\ac0e4045f958799724929c17b54381c3\transformed\core-1.12.0\AndroidManifest.xml:24:9-44
+33
+34    <uses-permission android:name="com.parentalcontrol.app.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+34-->[androidx.core:core:1.12.0] C:\Users\melni\.gradle\caches\transforms-3\ac0e4045f958799724929c17b54381c3\transformed\core-1.12.0\AndroidManifest.xml:26:5-97
+34-->[androidx.core:core:1.12.0] C:\Users\melni\.gradle\caches\transforms-3\ac0e4045f958799724929c17b54381c3\transformed\core-1.12.0\AndroidManifest.xml:26:22-94
+35
+36    <application
+36-->C:\Users\melni\StudioProjects\Android1\app\src\main\AndroidManifest.xml:17:5-140:19
+37        android:allowBackup="true"
+37-->C:\Users\melni\StudioProjects\Android1\app\src\main\AndroidManifest.xml:18:9-35
+38        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+38-->[androidx.core:core:1.12.0] C:\Users\melni\.gradle\caches\transforms-3\ac0e4045f958799724929c17b54381c3\transformed\core-1.12.0\AndroidManifest.xml:28:18-86
+39        android:debuggable="true"
+40        android:extractNativeLibs="false"
+41        android:icon="@mipmap/ic_launcher"
+41-->C:\Users\melni\StudioProjects\Android1\app\src\main\AndroidManifest.xml:19:9-43
+42        android:label="@string/app_name"
+42-->C:\Users\melni\StudioProjects\Android1\app\src\main\AndroidManifest.xml:20:9-41
+43        android:networkSecurityConfig="@xml/network_security_config"
+43-->C:\Users\melni\StudioProjects\Android1\app\src\main\AndroidManifest.xml:24:9-69
+44        android:roundIcon="@mipmap/ic_launcher_round"
+44-->C:\Users\melni\StudioProjects\Android1\app\src\main\AndroidManifest.xml:21:9-54
+45        android:supportsRtl="true"
+45-->C:\Users\melni\StudioProjects\Android1\app\src\main\AndroidManifest.xml:22:9-35
+46        android:theme="@style/Theme.ParentalControl" >
+46-->C:\Users\melni\StudioProjects\Android1\app\src\main\AndroidManifest.xml:23:9-53
+47        <activity
+47-->C:\Users\melni\StudioProjects\Android1\app\src\main\AndroidManifest.xml:26:9-34:20
+48            android:name="com.parentalcontrol.app.ui.warning.WarningActivity"
+48-->C:\Users\melni\StudioProjects\Android1\app\src\main\AndroidManifest.xml:27:13-55
+49            android:exported="true"
+49-->C:\Users\melni\StudioProjects\Android1\app\src\main\AndroidManifest.xml:28:13-36
+50            android:theme="@style/Theme.ParentalControl" >
+50-->C:\Users\melni\StudioProjects\Android1\app\src\main\AndroidManifest.xml:29:13-57
+51            <intent-filter>
+51-->C:\Users\melni\StudioProjects\Android1\app\src\main\AndroidManifest.xml:30:13-33:29
+52                <action android:name="android.intent.action.MAIN" />
+52-->C:\Users\melni\StudioProjects\Android1\app\src\main\AndroidManifest.xml:31:17-69
+52-->C:\Users\melni\StudioProjects\Android1\app\src\main\AndroidManifest.xml:31:25-66
+53
+54                <category android:name="android.intent.category.LAUNCHER" />
+54-->C:\Users\melni\StudioProjects\Android1\app\src\main\AndroidManifest.xml:32:17-77
+54-->C:\Users\melni\StudioProjects\Android1\app\src\main\AndroidManifest.xml:32:27-74
+55            </intent-filter>
+56        </activity>
+57        <activity
+57-->C:\Users\melni\StudioProjects\Android1\app\src\main\AndroidManifest.xml:36:9-39:74
+58            android:name="com.parentalcontrol.app.ui.auth.AuthActivity"
+58-->C:\Users\melni\StudioProjects\Android1\app\src\main\AndroidManifest.xml:37:13-49
+59            android:exported="false"
+59-->C:\Users\melni\StudioProjects\Android1\app\src\main\AndroidManifest.xml:38:13-37
+60            android:theme="@style/Theme.ParentalControl.WithActionBar" />
+60-->C:\Users\melni\StudioProjects\Android1\app\src\main\AndroidManifest.xml:39:13-71
+61        <activity
+61-->C:\Users\melni\StudioProjects\Android1\app\src\main\AndroidManifest.xml:41:9-44:74
+62            android:name="com.parentalcontrol.app.ui.mode.ModeSelectionActivity"
+62-->C:\Users\melni\StudioProjects\Android1\app\src\main\AndroidManifest.xml:42:13-58
+63            android:exported="false"
+63-->C:\Users\melni\StudioProjects\Android1\app\src\main\AndroidManifest.xml:43:13-37
+64            android:theme="@style/Theme.ParentalControl.WithActionBar" />
+64-->C:\Users\melni\StudioProjects\Android1\app\src\main\AndroidManifest.xml:44:13-71
+65        <activity
+65-->C:\Users\melni\StudioProjects\Android1\app\src\main\AndroidManifest.xml:46:9-49:74
+66            android:name="com.parentalcontrol.app.ui.child.ChildMainActivity"
+66-->C:\Users\melni\StudioProjects\Android1\app\src\main\AndroidManifest.xml:47:13-55
+67            android:exported="false"
+67-->C:\Users\melni\StudioProjects\Android1\app\src\main\AndroidManifest.xml:48:13-37
+68            android:theme="@style/Theme.ParentalControl.WithActionBar" />
+68-->C:\Users\melni\StudioProjects\Android1\app\src\main\AndroidManifest.xml:49:13-71
+69        <activity
+69-->C:\Users\melni\StudioProjects\Android1\app\src\main\AndroidManifest.xml:51:9-54:74
+70            android:name="com.parentalcontrol.app.ui.parent.ParentMainActivity"
+70-->C:\Users\melni\StudioProjects\Android1\app\src\main\AndroidManifest.xml:52:13-57
+71            android:exported="false"
+71-->C:\Users\melni\StudioProjects\Android1\app\src\main\AndroidManifest.xml:53:13-37
+72            android:theme="@style/Theme.ParentalControl.WithActionBar" />
+72-->C:\Users\melni\StudioProjects\Android1\app\src\main\AndroidManifest.xml:54:13-71
+73        <activity
+73-->C:\Users\melni\StudioProjects\Android1\app\src\main\AndroidManifest.xml:56:9-59:74
+74            android:name="com.parentalcontrol.app.ui.parent.CameraStreamActivity"
+74-->C:\Users\melni\StudioProjects\Android1\app\src\main\AndroidManifest.xml:57:13-59
+75            android:exported="false"
+75-->C:\Users\melni\StudioProjects\Android1\app\src\main\AndroidManifest.xml:58:13-37
+76            android:theme="@style/Theme.ParentalControl.WithActionBar" />
+76-->C:\Users\melni\StudioProjects\Android1\app\src\main\AndroidManifest.xml:59:13-71
+77        <activity
+77-->C:\Users\melni\StudioProjects\Android1\app\src\main\AndroidManifest.xml:61:9-64:74
+78            android:name="com.parentalcontrol.app.ui.parent.AudioStreamActivity"
+78-->C:\Users\melni\StudioProjects\Android1\app\src\main\AndroidManifest.xml:62:13-58
+79            android:exported="false"
+79-->C:\Users\melni\StudioProjects\Android1\app\src\main\AndroidManifest.xml:63:13-37
+80            android:theme="@style/Theme.ParentalControl.WithActionBar" />
+80-->C:\Users\melni\StudioProjects\Android1\app\src\main\AndroidManifest.xml:64:13-71
+81        <activity
+81-->C:\Users\melni\StudioProjects\Android1\app\src\main\AndroidManifest.xml:66:9-69:74
+82            android:name="com.parentalcontrol.app.ui.auth.SetPasswordActivity"
+82-->C:\Users\melni\StudioProjects\Android1\app\src\main\AndroidManifest.xml:67:13-56
+83            android:exported="false"
+83-->C:\Users\melni\StudioProjects\Android1\app\src\main\AndroidManifest.xml:68:13-37
+84            android:theme="@style/Theme.ParentalControl.WithActionBar" />
+84-->C:\Users\melni\StudioProjects\Android1\app\src\main\AndroidManifest.xml:69:13-71
+85        <activity
+85-->C:\Users\melni\StudioProjects\Android1\app\src\main\AndroidManifest.xml:71:9-74:74
+86            android:name="com.parentalcontrol.app.ui.main.MainActivity"
+86-->C:\Users\melni\StudioProjects\Android1\app\src\main\AndroidManifest.xml:72:13-49
+87            android:exported="false"
+87-->C:\Users\melni\StudioProjects\Android1\app\src\main\AndroidManifest.xml:73:13-37
+88            android:theme="@style/Theme.ParentalControl.WithActionBar" />
+88-->C:\Users\melni\StudioProjects\Android1\app\src\main\AndroidManifest.xml:74:13-71
+89        <activity
+89-->C:\Users\melni\StudioProjects\Android1\app\src\main\AndroidManifest.xml:76:9-80:74
+90            android:name="com.parentalcontrol.app.ui.camera.CameraActivity"
+90-->C:\Users\melni\StudioProjects\Android1\app\src\main\AndroidManifest.xml:77:13-53
+91            android:exported="false"
+91-->C:\Users\melni\StudioProjects\Android1\app\src\main\AndroidManifest.xml:78:13-37
+92            android:screenOrientation="portrait"
+92-->C:\Users\melni\StudioProjects\Android1\app\src\main\AndroidManifest.xml:79:13-49
+93            android:theme="@style/Theme.ParentalControl.WithActionBar" />
+93-->C:\Users\melni\StudioProjects\Android1\app\src\main\AndroidManifest.xml:80:13-71
+94        <activity
+94-->C:\Users\melni\StudioProjects\Android1\app\src\main\AndroidManifest.xml:82:9-85:74
+95            android:name="com.parentalcontrol.app.ui.audio.AudioActivity"
+95-->C:\Users\melni\StudioProjects\Android1\app\src\main\AndroidManifest.xml:83:13-51
+96            android:exported="false"
+96-->C:\Users\melni\StudioProjects\Android1\app\src\main\AndroidManifest.xml:84:13-37
+97            android:theme="@style/Theme.ParentalControl.WithActionBar" />
+97-->C:\Users\melni\StudioProjects\Android1\app\src\main\AndroidManifest.xml:85:13-71
+98        <activity
+98-->C:\Users\melni\StudioProjects\Android1\app\src\main\AndroidManifest.xml:87:9-90:74
+99            android:name="com.parentalcontrol.app.ui.settings.SettingsActivity"
+99-->C:\Users\melni\StudioProjects\Android1\app\src\main\AndroidManifest.xml:88:13-57
+100            android:exported="false"
+100-->C:\Users\melni\StudioProjects\Android1\app\src\main\AndroidManifest.xml:89:13-37
+101            android:theme="@style/Theme.ParentalControl.WithActionBar" />
+101-->C:\Users\melni\StudioProjects\Android1\app\src\main\AndroidManifest.xml:90:13-71
+102        <activity
+102-->C:\Users\melni\StudioProjects\Android1\app\src\main\AndroidManifest.xml:92:9-95:74
+103            android:name="com.parentalcontrol.app.ui.logs.ActivityLogActivity"
+103-->C:\Users\melni\StudioProjects\Android1\app\src\main\AndroidManifest.xml:93:13-56
+104            android:exported="false"
+104-->C:\Users\melni\StudioProjects\Android1\app\src\main\AndroidManifest.xml:94:13-37
+105            android:theme="@style/Theme.ParentalControl.WithActionBar" />
+105-->C:\Users\melni\StudioProjects\Android1\app\src\main\AndroidManifest.xml:95:13-71
+106
+107        <!-- New Firebase + WebRTC activities -->
+108        <activity
+108-->C:\Users\melni\StudioProjects\Android1\app\src\main\AndroidManifest.xml:98:9-101:74
+109            android:name="com.parentalcontrol.app.ui.child.ChildAutoRegisterActivity"
+109-->C:\Users\melni\StudioProjects\Android1\app\src\main\AndroidManifest.xml:99:13-63
+110            android:exported="false"
+110-->C:\Users\melni\StudioProjects\Android1\app\src\main\AndroidManifest.xml:100:13-37
+111            android:theme="@style/Theme.ParentalControl.WithActionBar" />
+111-->C:\Users\melni\StudioProjects\Android1\app\src\main\AndroidManifest.xml:101:13-71
+112        <activity
+112-->C:\Users\melni\StudioProjects\Android1\app\src\main\AndroidManifest.xml:103:9-106:74
+113            android:name="com.parentalcontrol.app.ui.parent.ParentCodeInputActivity"
+113-->C:\Users\melni\StudioProjects\Android1\app\src\main\AndroidManifest.xml:104:13-62
+114            android:exported="false"
+114-->C:\Users\melni\StudioProjects\Android1\app\src\main\AndroidManifest.xml:105:13-37
+115            android:theme="@style/Theme.ParentalControl.WithActionBar" />
+115-->C:\Users\melni\StudioProjects\Android1\app\src\main\AndroidManifest.xml:106:13-71
+116        <activity
+116-->C:\Users\melni\StudioProjects\Android1\app\src\main\AndroidManifest.xml:108:9-112:60
+117            android:name="com.parentalcontrol.app.ui.parent.LiveStreamActivity"
+117-->C:\Users\melni\StudioProjects\Android1\app\src\main\AndroidManifest.xml:109:13-57
+118            android:exported="false"
+118-->C:\Users\melni\StudioProjects\Android1\app\src\main\AndroidManifest.xml:110:13-37
+119            android:screenOrientation="landscape"
+119-->C:\Users\melni\StudioProjects\Android1\app\src\main\AndroidManifest.xml:111:13-50
+120            android:theme="@style/Theme.ParentalControl" />
+120-->C:\Users\melni\StudioProjects\Android1\app\src\main\AndroidManifest.xml:112:13-57
+121
+122        <service
+122-->C:\Users\melni\StudioProjects\Android1\app\src\main\AndroidManifest.xml:114:9-117:40
+123            android:name="com.parentalcontrol.app.service.MonitoringService"
+123-->C:\Users\melni\StudioProjects\Android1\app\src\main\AndroidManifest.xml:115:13-54
+124            android:exported="false"
+124-->C:\Users\melni\StudioProjects\Android1\app\src\main\AndroidManifest.xml:117:13-37
+125            android:foregroundServiceType="camera|microphone" />
+125-->C:\Users\melni\StudioProjects\Android1\app\src\main\AndroidManifest.xml:116:13-62
+126        <service
+126-->C:\Users\melni\StudioProjects\Android1\app\src\main\AndroidManifest.xml:119:9-122:40
+127            android:name="com.parentalcontrol.app.service.CameraStreamService"
+127-->C:\Users\melni\StudioProjects\Android1\app\src\main\AndroidManifest.xml:120:13-56
+128            android:exported="false"
+128-->C:\Users\melni\StudioProjects\Android1\app\src\main\AndroidManifest.xml:122:13-37
+129            android:foregroundServiceType="camera" />
+129-->C:\Users\melni\StudioProjects\Android1\app\src\main\AndroidManifest.xml:121:13-51
+130        <service
+130-->C:\Users\melni\StudioProjects\Android1\app\src\main\AndroidManifest.xml:124:9-126:40
+131            android:name="com.parentalcontrol.app.service.ChildSocketServer"
+131-->C:\Users\melni\StudioProjects\Android1\app\src\main\AndroidManifest.xml:125:13-54
+132            android:exported="false" />
+132-->C:\Users\melni\StudioProjects\Android1\app\src\main\AndroidManifest.xml:126:13-37
+133
+134        <!-- WebRTC child camera + audio streaming service -->
+135        <service
+135-->C:\Users\melni\StudioProjects\Android1\app\src\main\AndroidManifest.xml:129:9-132:40
+136            android:name="com.parentalcontrol.app.service.ChildCameraService"
+136-->C:\Users\melni\StudioProjects\Android1\app\src\main\AndroidManifest.xml:130:13-55
+137            android:exported="false"
+137-->C:\Users\melni\StudioProjects\Android1\app\src\main\AndroidManifest.xml:132:13-37
+138            android:foregroundServiceType="camera|microphone" />
+138-->C:\Users\melni\StudioProjects\Android1\app\src\main\AndroidManifest.xml:131:13-62
+139
+140        <!-- Audio-only monitoring service -->
+141        <service
+141-->C:\Users\melni\StudioProjects\Android1\app\src\main\AndroidManifest.xml:135:9-138:40
+142            android:name="com.parentalcontrol.app.service.ChildAudioService"
+142-->C:\Users\melni\StudioProjects\Android1\app\src\main\AndroidManifest.xml:136:13-54
+143            android:exported="false"
+143-->C:\Users\melni\StudioProjects\Android1\app\src\main\AndroidManifest.xml:138:13-37
+144            android:foregroundServiceType="microphone" />
+144-->C:\Users\melni\StudioProjects\Android1\app\src\main\AndroidManifest.xml:137:13-55
+145        <service
+145-->[androidx.camera:camera-camera2:1.2.3] C:\Users\melni\.gradle\caches\transforms-3\16700bbeb84a1d2586743c8e8bdc144f\transformed\camera-camera2-1.2.3\AndroidManifest.xml:24:9-33:19
+146            android:name="androidx.camera.core.impl.MetadataHolderService"
+146-->[androidx.camera:camera-camera2:1.2.3] C:\Users\melni\.gradle\caches\transforms-3\16700bbeb84a1d2586743c8e8bdc144f\transformed\camera-camera2-1.2.3\AndroidManifest.xml:25:13-75
+147            android:enabled="false"
+147-->[androidx.camera:camera-camera2:1.2.3] C:\Users\melni\.gradle\caches\transforms-3\16700bbeb84a1d2586743c8e8bdc144f\transformed\camera-camera2-1.2.3\AndroidManifest.xml:26:13-36
+148            android:exported="false" >
+148-->[androidx.camera:camera-camera2:1.2.3] C:\Users\melni\.gradle\caches\transforms-3\16700bbeb84a1d2586743c8e8bdc144f\transformed\camera-camera2-1.2.3\AndroidManifest.xml:27:13-37
+149            <meta-data
+149-->[androidx.camera:camera-camera2:1.2.3] C:\Users\melni\.gradle\caches\transforms-3\16700bbeb84a1d2586743c8e8bdc144f\transformed\camera-camera2-1.2.3\AndroidManifest.xml:30:13-32:89
+150                android:name="androidx.camera.core.impl.MetadataHolderService.DEFAULT_CONFIG_PROVIDER"
+150-->[androidx.camera:camera-camera2:1.2.3] C:\Users\melni\.gradle\caches\transforms-3\16700bbeb84a1d2586743c8e8bdc144f\transformed\camera-camera2-1.2.3\AndroidManifest.xml:31:17-103
+151                android:value="androidx.camera.camera2.Camera2Config$DefaultProvider" />
+151-->[androidx.camera:camera-camera2:1.2.3] C:\Users\melni\.gradle\caches\transforms-3\16700bbeb84a1d2586743c8e8bdc144f\transformed\camera-camera2-1.2.3\AndroidManifest.xml:32:17-86
+152        </service>
+153
+154        <activity
+154-->[com.google.firebase:firebase-auth:22.3.1] C:\Users\melni\.gradle\caches\transforms-3\fbb9c8d2bb28a9ac5563b43d91cff4a4\transformed\firebase-auth-22.3.1\AndroidManifest.xml:29:9-46:20
+155            android:name="com.google.firebase.auth.internal.GenericIdpActivity"
+155-->[com.google.firebase:firebase-auth:22.3.1] C:\Users\melni\.gradle\caches\transforms-3\fbb9c8d2bb28a9ac5563b43d91cff4a4\transformed\firebase-auth-22.3.1\AndroidManifest.xml:30:13-80
+156            android:excludeFromRecents="true"
+156-->[com.google.firebase:firebase-auth:22.3.1] C:\Users\melni\.gradle\caches\transforms-3\fbb9c8d2bb28a9ac5563b43d91cff4a4\transformed\firebase-auth-22.3.1\AndroidManifest.xml:31:13-46
+157            android:exported="true"
+157-->[com.google.firebase:firebase-auth:22.3.1] C:\Users\melni\.gradle\caches\transforms-3\fbb9c8d2bb28a9ac5563b43d91cff4a4\transformed\firebase-auth-22.3.1\AndroidManifest.xml:32:13-36
+158            android:launchMode="singleTask"
+158-->[com.google.firebase:firebase-auth:22.3.1] C:\Users\melni\.gradle\caches\transforms-3\fbb9c8d2bb28a9ac5563b43d91cff4a4\transformed\firebase-auth-22.3.1\AndroidManifest.xml:33:13-44
+159            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+159-->[com.google.firebase:firebase-auth:22.3.1] C:\Users\melni\.gradle\caches\transforms-3\fbb9c8d2bb28a9ac5563b43d91cff4a4\transformed\firebase-auth-22.3.1\AndroidManifest.xml:34:13-72
+160            <intent-filter>
+160-->[com.google.firebase:firebase-auth:22.3.1] C:\Users\melni\.gradle\caches\transforms-3\fbb9c8d2bb28a9ac5563b43d91cff4a4\transformed\firebase-auth-22.3.1\AndroidManifest.xml:35:13-45:29
+161                <action android:name="android.intent.action.VIEW" />
+161-->[com.google.firebase:firebase-auth:22.3.1] C:\Users\melni\.gradle\caches\transforms-3\fbb9c8d2bb28a9ac5563b43d91cff4a4\transformed\firebase-auth-22.3.1\AndroidManifest.xml:36:17-69
+161-->[com.google.firebase:firebase-auth:22.3.1] C:\Users\melni\.gradle\caches\transforms-3\fbb9c8d2bb28a9ac5563b43d91cff4a4\transformed\firebase-auth-22.3.1\AndroidManifest.xml:36:25-66
+162
+163                <category android:name="android.intent.category.DEFAULT" />
+163-->[com.google.firebase:firebase-auth:22.3.1] C:\Users\melni\.gradle\caches\transforms-3\fbb9c8d2bb28a9ac5563b43d91cff4a4\transformed\firebase-auth-22.3.1\AndroidManifest.xml:38:17-76
+163-->[com.google.firebase:firebase-auth:22.3.1] C:\Users\melni\.gradle\caches\transforms-3\fbb9c8d2bb28a9ac5563b43d91cff4a4\transformed\firebase-auth-22.3.1\AndroidManifest.xml:38:27-73
+164                <category android:name="android.intent.category.BROWSABLE" />
+164-->[com.google.firebase:firebase-auth:22.3.1] C:\Users\melni\.gradle\caches\transforms-3\fbb9c8d2bb28a9ac5563b43d91cff4a4\transformed\firebase-auth-22.3.1\AndroidManifest.xml:39:17-78
+164-->[com.google.firebase:firebase-auth:22.3.1] C:\Users\melni\.gradle\caches\transforms-3\fbb9c8d2bb28a9ac5563b43d91cff4a4\transformed\firebase-auth-22.3.1\AndroidManifest.xml:39:27-75
+165
+166                <data
+166-->[com.google.firebase:firebase-auth:22.3.1] C:\Users\melni\.gradle\caches\transforms-3\fbb9c8d2bb28a9ac5563b43d91cff4a4\transformed\firebase-auth-22.3.1\AndroidManifest.xml:41:17-44:51
+167                    android:host="firebase.auth"
+167-->[com.google.firebase:firebase-auth:22.3.1] C:\Users\melni\.gradle\caches\transforms-3\fbb9c8d2bb28a9ac5563b43d91cff4a4\transformed\firebase-auth-22.3.1\AndroidManifest.xml:42:21-49
+168                    android:path="/"
+168-->[com.google.firebase:firebase-auth:22.3.1] C:\Users\melni\.gradle\caches\transforms-3\fbb9c8d2bb28a9ac5563b43d91cff4a4\transformed\firebase-auth-22.3.1\AndroidManifest.xml:43:21-37
+169                    android:scheme="genericidp" />
+169-->[com.google.firebase:firebase-auth:22.3.1] C:\Users\melni\.gradle\caches\transforms-3\fbb9c8d2bb28a9ac5563b43d91cff4a4\transformed\firebase-auth-22.3.1\AndroidManifest.xml:44:21-48
+170            </intent-filter>
+171        </activity>
+172        <activity
+172-->[com.google.firebase:firebase-auth:22.3.1] C:\Users\melni\.gradle\caches\transforms-3\fbb9c8d2bb28a9ac5563b43d91cff4a4\transformed\firebase-auth-22.3.1\AndroidManifest.xml:47:9-64:20
+173            android:name="com.google.firebase.auth.internal.RecaptchaActivity"
+173-->[com.google.firebase:firebase-auth:22.3.1] C:\Users\melni\.gradle\caches\transforms-3\fbb9c8d2bb28a9ac5563b43d91cff4a4\transformed\firebase-auth-22.3.1\AndroidManifest.xml:48:13-79
+174            android:excludeFromRecents="true"
+174-->[com.google.firebase:firebase-auth:22.3.1] C:\Users\melni\.gradle\caches\transforms-3\fbb9c8d2bb28a9ac5563b43d91cff4a4\transformed\firebase-auth-22.3.1\AndroidManifest.xml:49:13-46
+175            android:exported="true"
+175-->[com.google.firebase:firebase-auth:22.3.1] C:\Users\melni\.gradle\caches\transforms-3\fbb9c8d2bb28a9ac5563b43d91cff4a4\transformed\firebase-auth-22.3.1\AndroidManifest.xml:50:13-36
+176            android:launchMode="singleTask"
+176-->[com.google.firebase:firebase-auth:22.3.1] C:\Users\melni\.gradle\caches\transforms-3\fbb9c8d2bb28a9ac5563b43d91cff4a4\transformed\firebase-auth-22.3.1\AndroidManifest.xml:51:13-44
+177            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+177-->[com.google.firebase:firebase-auth:22.3.1] C:\Users\melni\.gradle\caches\transforms-3\fbb9c8d2bb28a9ac5563b43d91cff4a4\transformed\firebase-auth-22.3.1\AndroidManifest.xml:52:13-72
+178            <intent-filter>
+178-->[com.google.firebase:firebase-auth:22.3.1] C:\Users\melni\.gradle\caches\transforms-3\fbb9c8d2bb28a9ac5563b43d91cff4a4\transformed\firebase-auth-22.3.1\AndroidManifest.xml:53:13-63:29
+179                <action android:name="android.intent.action.VIEW" />
+179-->[com.google.firebase:firebase-auth:22.3.1] C:\Users\melni\.gradle\caches\transforms-3\fbb9c8d2bb28a9ac5563b43d91cff4a4\transformed\firebase-auth-22.3.1\AndroidManifest.xml:36:17-69
+179-->[com.google.firebase:firebase-auth:22.3.1] C:\Users\melni\.gradle\caches\transforms-3\fbb9c8d2bb28a9ac5563b43d91cff4a4\transformed\firebase-auth-22.3.1\AndroidManifest.xml:36:25-66
+180
+181                <category android:name="android.intent.category.DEFAULT" />
+181-->[com.google.firebase:firebase-auth:22.3.1] C:\Users\melni\.gradle\caches\transforms-3\fbb9c8d2bb28a9ac5563b43d91cff4a4\transformed\firebase-auth-22.3.1\AndroidManifest.xml:38:17-76
+181-->[com.google.firebase:firebase-auth:22.3.1] C:\Users\melni\.gradle\caches\transforms-3\fbb9c8d2bb28a9ac5563b43d91cff4a4\transformed\firebase-auth-22.3.1\AndroidManifest.xml:38:27-73
+182                <category android:name="android.intent.category.BROWSABLE" />
+182-->[com.google.firebase:firebase-auth:22.3.1] C:\Users\melni\.gradle\caches\transforms-3\fbb9c8d2bb28a9ac5563b43d91cff4a4\transformed\firebase-auth-22.3.1\AndroidManifest.xml:39:17-78
+182-->[com.google.firebase:firebase-auth:22.3.1] C:\Users\melni\.gradle\caches\transforms-3\fbb9c8d2bb28a9ac5563b43d91cff4a4\transformed\firebase-auth-22.3.1\AndroidManifest.xml:39:27-75
+183
+184                <data
+184-->[com.google.firebase:firebase-auth:22.3.1] C:\Users\melni\.gradle\caches\transforms-3\fbb9c8d2bb28a9ac5563b43d91cff4a4\transformed\firebase-auth-22.3.1\AndroidManifest.xml:41:17-44:51
+185                    android:host="firebase.auth"
+185-->[com.google.firebase:firebase-auth:22.3.1] C:\Users\melni\.gradle\caches\transforms-3\fbb9c8d2bb28a9ac5563b43d91cff4a4\transformed\firebase-auth-22.3.1\AndroidManifest.xml:42:21-49
+186                    android:path="/"
+186-->[com.google.firebase:firebase-auth:22.3.1] C:\Users\melni\.gradle\caches\transforms-3\fbb9c8d2bb28a9ac5563b43d91cff4a4\transformed\firebase-auth-22.3.1\AndroidManifest.xml:43:21-37
+187                    android:scheme="recaptcha" />
+187-->[com.google.firebase:firebase-auth:22.3.1] C:\Users\melni\.gradle\caches\transforms-3\fbb9c8d2bb28a9ac5563b43d91cff4a4\transformed\firebase-auth-22.3.1\AndroidManifest.xml:44:21-48
+188            </intent-filter>
+189        </activity>
+190
+191        <service
+191-->[com.google.firebase:firebase-auth:22.3.1] C:\Users\melni\.gradle\caches\transforms-3\fbb9c8d2bb28a9ac5563b43d91cff4a4\transformed\firebase-auth-22.3.1\AndroidManifest.xml:66:9-72:19
+192            android:name="com.google.firebase.components.ComponentDiscoveryService"
+192-->[com.google.firebase:firebase-auth:22.3.1] C:\Users\melni\.gradle\caches\transforms-3\fbb9c8d2bb28a9ac5563b43d91cff4a4\transformed\firebase-auth-22.3.1\AndroidManifest.xml:67:13-84
+193            android:directBootAware="true"
+193-->[com.google.firebase:firebase-common:20.4.2] C:\Users\melni\.gradle\caches\transforms-3\d65ce349d4fc7dfb9b3cc750032e79ed\transformed\firebase-common-20.4.2\AndroidManifest.xml:32:13-43
+194            android:exported="false" >
+194-->[com.google.firebase:firebase-auth:22.3.1] C:\Users\melni\.gradle\caches\transforms-3\fbb9c8d2bb28a9ac5563b43d91cff4a4\transformed\firebase-auth-22.3.1\AndroidManifest.xml:68:13-37
+195            <meta-data
+195-->[com.google.firebase:firebase-auth:22.3.1] C:\Users\melni\.gradle\caches\transforms-3\fbb9c8d2bb28a9ac5563b43d91cff4a4\transformed\firebase-auth-22.3.1\AndroidManifest.xml:69:13-71:85
+196                android:name="com.google.firebase.components:com.google.firebase.auth.FirebaseAuthRegistrar"
+196-->[com.google.firebase:firebase-auth:22.3.1] C:\Users\melni\.gradle\caches\transforms-3\fbb9c8d2bb28a9ac5563b43d91cff4a4\transformed\firebase-auth-22.3.1\AndroidManifest.xml:70:17-109
+197                android:value="com.google.firebase.components.ComponentRegistrar" />
+197-->[com.google.firebase:firebase-auth:22.3.1] C:\Users\melni\.gradle\caches\transforms-3\fbb9c8d2bb28a9ac5563b43d91cff4a4\transformed\firebase-auth-22.3.1\AndroidManifest.xml:71:17-82
+198            <meta-data
+198-->[com.google.firebase:firebase-firestore:24.8.1] C:\Users\melni\.gradle\caches\transforms-3\73e7712c8d69d4b0cb49eab6137456fb\transformed\firebase-firestore-24.8.1\AndroidManifest.xml:17:13-19:85
+199                android:name="com.google.firebase.components:com.google.firebase.firestore.FirestoreRegistrar"
+199-->[com.google.firebase:firebase-firestore:24.8.1] C:\Users\melni\.gradle\caches\transforms-3\73e7712c8d69d4b0cb49eab6137456fb\transformed\firebase-firestore-24.8.1\AndroidManifest.xml:18:17-111
+200                android:value="com.google.firebase.components.ComponentRegistrar" />
+200-->[com.google.firebase:firebase-firestore:24.8.1] C:\Users\melni\.gradle\caches\transforms-3\73e7712c8d69d4b0cb49eab6137456fb\transformed\firebase-firestore-24.8.1\AndroidManifest.xml:19:17-82
+201            <meta-data
+201-->[com.google.firebase:firebase-database:20.3.0] C:\Users\melni\.gradle\caches\transforms-3\be6dcfed859af3afc72ab2ea4b6a9013\transformed\firebase-database-20.3.0\AndroidManifest.xml:29:13-31:85
+202                android:name="com.google.firebase.components:com.google.firebase.database.FirebaseDatabaseKtxRegistrar"
+202-->[com.google.firebase:firebase-database:20.3.0] C:\Users\melni\.gradle\caches\transforms-3\be6dcfed859af3afc72ab2ea4b6a9013\transformed\firebase-database-20.3.0\AndroidManifest.xml:30:17-120
+203                android:value="com.google.firebase.components.ComponentRegistrar" />
+203-->[com.google.firebase:firebase-database:20.3.0] C:\Users\melni\.gradle\caches\transforms-3\be6dcfed859af3afc72ab2ea4b6a9013\transformed\firebase-database-20.3.0\AndroidManifest.xml:31:17-82
+204            <meta-data
+204-->[com.google.firebase:firebase-database:20.3.0] C:\Users\melni\.gradle\caches\transforms-3\be6dcfed859af3afc72ab2ea4b6a9013\transformed\firebase-database-20.3.0\AndroidManifest.xml:32:13-34:85
+205                android:name="com.google.firebase.components:com.google.firebase.database.DatabaseRegistrar"
+205-->[com.google.firebase:firebase-database:20.3.0] C:\Users\melni\.gradle\caches\transforms-3\be6dcfed859af3afc72ab2ea4b6a9013\transformed\firebase-database-20.3.0\AndroidManifest.xml:33:17-109
+206                android:value="com.google.firebase.components.ComponentRegistrar" />
+206-->[com.google.firebase:firebase-database:20.3.0] C:\Users\melni\.gradle\caches\transforms-3\be6dcfed859af3afc72ab2ea4b6a9013\transformed\firebase-database-20.3.0\AndroidManifest.xml:34:17-82
+207            <meta-data
+207-->[com.google.firebase:firebase-storage:20.2.0] C:\Users\melni\.gradle\caches\transforms-3\68ff583df44fd437192107e4666fe702\transformed\firebase-storage-20.2.0\AndroidManifest.xml:32:13-34:85
+208                android:name="com.google.firebase.components:com.google.firebase.storage.StorageRegistrar"
+208-->[com.google.firebase:firebase-storage:20.2.0] C:\Users\melni\.gradle\caches\transforms-3\68ff583df44fd437192107e4666fe702\transformed\firebase-storage-20.2.0\AndroidManifest.xml:33:17-107
+209                android:value="com.google.firebase.components.ComponentRegistrar" />
+209-->[com.google.firebase:firebase-storage:20.2.0] C:\Users\melni\.gradle\caches\transforms-3\68ff583df44fd437192107e4666fe702\transformed\firebase-storage-20.2.0\AndroidManifest.xml:34:17-82
+210            <meta-data
+210-->[com.google.firebase:firebase-common-ktx:20.4.2] C:\Users\melni\.gradle\caches\transforms-3\89260b40a8a742547c3e929e8c876c68\transformed\firebase-common-ktx-20.4.2\AndroidManifest.xml:12:13-14:85
+211                android:name="com.google.firebase.components:com.google.firebase.ktx.FirebaseCommonLegacyRegistrar"
+211-->[com.google.firebase:firebase-common-ktx:20.4.2] C:\Users\melni\.gradle\caches\transforms-3\89260b40a8a742547c3e929e8c876c68\transformed\firebase-common-ktx-20.4.2\AndroidManifest.xml:13:17-116
+212                android:value="com.google.firebase.components.ComponentRegistrar" />
+212-->[com.google.firebase:firebase-common-ktx:20.4.2] C:\Users\melni\.gradle\caches\transforms-3\89260b40a8a742547c3e929e8c876c68\transformed\firebase-common-ktx-20.4.2\AndroidManifest.xml:14:17-82
+213            <meta-data
+213-->[com.google.firebase:firebase-common:20.4.2] C:\Users\melni\.gradle\caches\transforms-3\d65ce349d4fc7dfb9b3cc750032e79ed\transformed\firebase-common-20.4.2\AndroidManifest.xml:35:13-37:85
+214                android:name="com.google.firebase.components:com.google.firebase.FirebaseCommonKtxRegistrar"
+214-->[com.google.firebase:firebase-common:20.4.2] C:\Users\melni\.gradle\caches\transforms-3\d65ce349d4fc7dfb9b3cc750032e79ed\transformed\firebase-common-20.4.2\AndroidManifest.xml:36:17-109
+215                android:value="com.google.firebase.components.ComponentRegistrar" />
+215-->[com.google.firebase:firebase-common:20.4.2] C:\Users\melni\.gradle\caches\transforms-3\d65ce349d4fc7dfb9b3cc750032e79ed\transformed\firebase-common-20.4.2\AndroidManifest.xml:37:17-82
+216        </service>
+217
+218        <provider
+218-->[com.google.firebase:firebase-common:20.4.2] C:\Users\melni\.gradle\caches\transforms-3\d65ce349d4fc7dfb9b3cc750032e79ed\transformed\firebase-common-20.4.2\AndroidManifest.xml:23:9-28:39
+219            android:name="com.google.firebase.provider.FirebaseInitProvider"
+219-->[com.google.firebase:firebase-common:20.4.2] C:\Users\melni\.gradle\caches\transforms-3\d65ce349d4fc7dfb9b3cc750032e79ed\transformed\firebase-common-20.4.2\AndroidManifest.xml:24:13-77
+220            android:authorities="com.parentalcontrol.app.firebaseinitprovider"
+220-->[com.google.firebase:firebase-common:20.4.2] C:\Users\melni\.gradle\caches\transforms-3\d65ce349d4fc7dfb9b3cc750032e79ed\transformed\firebase-common-20.4.2\AndroidManifest.xml:25:13-72
+221            android:directBootAware="true"
+221-->[com.google.firebase:firebase-common:20.4.2] C:\Users\melni\.gradle\caches\transforms-3\d65ce349d4fc7dfb9b3cc750032e79ed\transformed\firebase-common-20.4.2\AndroidManifest.xml:26:13-43
+222            android:exported="false"
+222-->[com.google.firebase:firebase-common:20.4.2] C:\Users\melni\.gradle\caches\transforms-3\d65ce349d4fc7dfb9b3cc750032e79ed\transformed\firebase-common-20.4.2\AndroidManifest.xml:27:13-37
+223            android:initOrder="100" />
+223-->[com.google.firebase:firebase-common:20.4.2] C:\Users\melni\.gradle\caches\transforms-3\d65ce349d4fc7dfb9b3cc750032e79ed\transformed\firebase-common-20.4.2\AndroidManifest.xml:28:13-36
+224
+225        <activity
+225-->[com.google.android.gms:play-services-base:18.1.0] C:\Users\melni\.gradle\caches\transforms-3\372d95d1efa2d43be0e8e0ef4b0a8736\transformed\play-services-base-18.1.0\AndroidManifest.xml:20:9-22:45
+226            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+226-->[com.google.android.gms:play-services-base:18.1.0] C:\Users\melni\.gradle\caches\transforms-3\372d95d1efa2d43be0e8e0ef4b0a8736\transformed\play-services-base-18.1.0\AndroidManifest.xml:20:19-85
+227            android:exported="false"
+227-->[com.google.android.gms:play-services-base:18.1.0] C:\Users\melni\.gradle\caches\transforms-3\372d95d1efa2d43be0e8e0ef4b0a8736\transformed\play-services-base-18.1.0\AndroidManifest.xml:22:19-43
+228            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+228-->[com.google.android.gms:play-services-base:18.1.0] C:\Users\melni\.gradle\caches\transforms-3\372d95d1efa2d43be0e8e0ef4b0a8736\transformed\play-services-base-18.1.0\AndroidManifest.xml:21:19-78
+229
+230        <provider
+230-->[androidx.emoji2:emoji2:1.2.0] C:\Users\melni\.gradle\caches\transforms-3\1a20a66e6be97d0377e8abc1dc8c97fd\transformed\emoji2-1.2.0\AndroidManifest.xml:24:9-32:20
+231            android:name="androidx.startup.InitializationProvider"
+231-->[androidx.emoji2:emoji2:1.2.0] C:\Users\melni\.gradle\caches\transforms-3\1a20a66e6be97d0377e8abc1dc8c97fd\transformed\emoji2-1.2.0\AndroidManifest.xml:25:13-67
+232            android:authorities="com.parentalcontrol.app.androidx-startup"
+232-->[androidx.emoji2:emoji2:1.2.0] C:\Users\melni\.gradle\caches\transforms-3\1a20a66e6be97d0377e8abc1dc8c97fd\transformed\emoji2-1.2.0\AndroidManifest.xml:26:13-68
+233            android:exported="false" >
+233-->[androidx.emoji2:emoji2:1.2.0] C:\Users\melni\.gradle\caches\transforms-3\1a20a66e6be97d0377e8abc1dc8c97fd\transformed\emoji2-1.2.0\AndroidManifest.xml:27:13-37
+234            <meta-data
+234-->[androidx.emoji2:emoji2:1.2.0] C:\Users\melni\.gradle\caches\transforms-3\1a20a66e6be97d0377e8abc1dc8c97fd\transformed\emoji2-1.2.0\AndroidManifest.xml:29:13-31:52
+235                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+235-->[androidx.emoji2:emoji2:1.2.0] C:\Users\melni\.gradle\caches\transforms-3\1a20a66e6be97d0377e8abc1dc8c97fd\transformed\emoji2-1.2.0\AndroidManifest.xml:30:17-75
+236                android:value="androidx.startup" />
+236-->[androidx.emoji2:emoji2:1.2.0] C:\Users\melni\.gradle\caches\transforms-3\1a20a66e6be97d0377e8abc1dc8c97fd\transformed\emoji2-1.2.0\AndroidManifest.xml:31:17-49
+237            <meta-data
+237-->[androidx.lifecycle:lifecycle-process:2.6.1] C:\Users\melni\.gradle\caches\transforms-3\4b5a025693f37aff99a50e1e0bbad069\transformed\lifecycle-process-2.6.1\AndroidManifest.xml:29:13-31:52
+238                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+238-->[androidx.lifecycle:lifecycle-process:2.6.1] C:\Users\melni\.gradle\caches\transforms-3\4b5a025693f37aff99a50e1e0bbad069\transformed\lifecycle-process-2.6.1\AndroidManifest.xml:30:17-78
+239                android:value="androidx.startup" />
+239-->[androidx.lifecycle:lifecycle-process:2.6.1] C:\Users\melni\.gradle\caches\transforms-3\4b5a025693f37aff99a50e1e0bbad069\transformed\lifecycle-process-2.6.1\AndroidManifest.xml:31:17-49
+240            <meta-data
+240-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\melni\.gradle\caches\transforms-3\3b5de283d359183d662c351f312bfd15\transformed\profileinstaller-1.3.0\AndroidManifest.xml:29:13-31:52
+241                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
+241-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\melni\.gradle\caches\transforms-3\3b5de283d359183d662c351f312bfd15\transformed\profileinstaller-1.3.0\AndroidManifest.xml:30:17-85
+242                android:value="androidx.startup" />
+242-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\melni\.gradle\caches\transforms-3\3b5de283d359183d662c351f312bfd15\transformed\profileinstaller-1.3.0\AndroidManifest.xml:31:17-49
+243        </provider>
+244
+245        <meta-data
+245-->[com.google.android.gms:play-services-basement:18.1.0] C:\Users\melni\.gradle\caches\transforms-3\32a45d4191bb14b05d602e46530be95a\transformed\play-services-basement-18.1.0\AndroidManifest.xml:21:9-23:69
+246            android:name="com.google.android.gms.version"
+246-->[com.google.android.gms:play-services-basement:18.1.0] C:\Users\melni\.gradle\caches\transforms-3\32a45d4191bb14b05d602e46530be95a\transformed\play-services-basement-18.1.0\AndroidManifest.xml:22:13-58
+247            android:value="@integer/google_play_services_version" />
+247-->[com.google.android.gms:play-services-basement:18.1.0] C:\Users\melni\.gradle\caches\transforms-3\32a45d4191bb14b05d602e46530be95a\transformed\play-services-basement-18.1.0\AndroidManifest.xml:23:13-66
+248
+249        <service
+249-->[androidx.room:room-runtime:2.5.2] C:\Users\melni\.gradle\caches\transforms-3\a1900ce0fd8e112ff9915fd0cff66963\transformed\room-runtime-2.5.2\AndroidManifest.xml:24:9-28:63
+250            android:name="androidx.room.MultiInstanceInvalidationService"
+250-->[androidx.room:room-runtime:2.5.2] C:\Users\melni\.gradle\caches\transforms-3\a1900ce0fd8e112ff9915fd0cff66963\transformed\room-runtime-2.5.2\AndroidManifest.xml:25:13-74
+251            android:directBootAware="true"
+251-->[androidx.room:room-runtime:2.5.2] C:\Users\melni\.gradle\caches\transforms-3\a1900ce0fd8e112ff9915fd0cff66963\transformed\room-runtime-2.5.2\AndroidManifest.xml:26:13-43
+252            android:exported="false" />
+252-->[androidx.room:room-runtime:2.5.2] C:\Users\melni\.gradle\caches\transforms-3\a1900ce0fd8e112ff9915fd0cff66963\transformed\room-runtime-2.5.2\AndroidManifest.xml:27:13-37
+253
+254        <receiver
+254-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\melni\.gradle\caches\transforms-3\3b5de283d359183d662c351f312bfd15\transformed\profileinstaller-1.3.0\AndroidManifest.xml:34:9-52:20
+255            android:name="androidx.profileinstaller.ProfileInstallReceiver"
+255-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\melni\.gradle\caches\transforms-3\3b5de283d359183d662c351f312bfd15\transformed\profileinstaller-1.3.0\AndroidManifest.xml:35:13-76
+256            android:directBootAware="false"
+256-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\melni\.gradle\caches\transforms-3\3b5de283d359183d662c351f312bfd15\transformed\profileinstaller-1.3.0\AndroidManifest.xml:36:13-44
+257            android:enabled="true"
+257-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\melni\.gradle\caches\transforms-3\3b5de283d359183d662c351f312bfd15\transformed\profileinstaller-1.3.0\AndroidManifest.xml:37:13-35
+258            android:exported="true"
+258-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\melni\.gradle\caches\transforms-3\3b5de283d359183d662c351f312bfd15\transformed\profileinstaller-1.3.0\AndroidManifest.xml:38:13-36
+259            android:permission="android.permission.DUMP" >
+259-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\melni\.gradle\caches\transforms-3\3b5de283d359183d662c351f312bfd15\transformed\profileinstaller-1.3.0\AndroidManifest.xml:39:13-57
+260            <intent-filter>
+260-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\melni\.gradle\caches\transforms-3\3b5de283d359183d662c351f312bfd15\transformed\profileinstaller-1.3.0\AndroidManifest.xml:40:13-42:29
+261                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
+261-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\melni\.gradle\caches\transforms-3\3b5de283d359183d662c351f312bfd15\transformed\profileinstaller-1.3.0\AndroidManifest.xml:41:17-91
+261-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\melni\.gradle\caches\transforms-3\3b5de283d359183d662c351f312bfd15\transformed\profileinstaller-1.3.0\AndroidManifest.xml:41:25-88
+262            </intent-filter>
+263            <intent-filter>
+263-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\melni\.gradle\caches\transforms-3\3b5de283d359183d662c351f312bfd15\transformed\profileinstaller-1.3.0\AndroidManifest.xml:43:13-45:29
+264                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
+264-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\melni\.gradle\caches\transforms-3\3b5de283d359183d662c351f312bfd15\transformed\profileinstaller-1.3.0\AndroidManifest.xml:44:17-85
+264-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\melni\.gradle\caches\transforms-3\3b5de283d359183d662c351f312bfd15\transformed\profileinstaller-1.3.0\AndroidManifest.xml:44:25-82
+265            </intent-filter>
+266            <intent-filter>
+266-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\melni\.gradle\caches\transforms-3\3b5de283d359183d662c351f312bfd15\transformed\profileinstaller-1.3.0\AndroidManifest.xml:46:13-48:29
+267                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
+267-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\melni\.gradle\caches\transforms-3\3b5de283d359183d662c351f312bfd15\transformed\profileinstaller-1.3.0\AndroidManifest.xml:47:17-88
+267-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\melni\.gradle\caches\transforms-3\3b5de283d359183d662c351f312bfd15\transformed\profileinstaller-1.3.0\AndroidManifest.xml:47:25-85
+268            </intent-filter>
+269            <intent-filter>
+269-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\melni\.gradle\caches\transforms-3\3b5de283d359183d662c351f312bfd15\transformed\profileinstaller-1.3.0\AndroidManifest.xml:49:13-51:29
+270                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
+270-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\melni\.gradle\caches\transforms-3\3b5de283d359183d662c351f312bfd15\transformed\profileinstaller-1.3.0\AndroidManifest.xml:50:17-95
+270-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\melni\.gradle\caches\transforms-3\3b5de283d359183d662c351f312bfd15\transformed\profileinstaller-1.3.0\AndroidManifest.xml:50:25-92
+271            </intent-filter>
+272        </receiver>
+273    </application>
+274
+275</manifest>
