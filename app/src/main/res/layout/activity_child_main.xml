@@ -79,6 +79,19 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/tv_stream_url"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:background="#1A37E5FF"
+                    android:paddingHorizontal="12dp"
+                    android:paddingVertical="8dp"
+                    android:text="@string/stream_url_loading"
+                    android:textColor="@color/neon_green"
+                    android:textSize="12sp"
+                    android:typeface="monospace" />
+
+                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
