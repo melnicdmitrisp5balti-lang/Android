@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.parentalcontrol.app.R
 import com.parentalcontrol.app.databinding.ActivityCameraStreamBinding
+import com.parentalcontrol.app.ui.widget.MjpegStreamListener
 import com.parentalcontrol.app.ui.widget.MjpegViewCustom
 import com.parentalcontrol.app.utils.Constants
 import com.parentalcontrol.app.utils.PreferenceManager
@@ -48,7 +49,7 @@ class CameraStreamActivity : AppCompatActivity() {
     }
 
     private fun setupMjpegView() {
-        binding.ivCameraStream.streamListener = object : MjpegViewCustom.StreamListener {
+        binding.ivCameraStream.streamListener = object : MjpegStreamListener {
             override fun onConnected() {
                 updateQualityUi(getString(R.string.camera_stream_quality_good), R.color.neon_green)
                 binding.tvCameraStatus.text = getString(R.string.camera_stream_live)
@@ -60,8 +61,11 @@ class CameraStreamActivity : AppCompatActivity() {
                 // No extra action needed per frame
             }
 
-            override fun onDisconnected(error: Boolean) {
-                if (!error) return
+            override fun onDisconnected() {
+                // Clean disconnect — nothing to do
+            }
+
+            override fun onError(message: String) {
                 reconnectAttempt++
                 binding.progressStream.visibility = View.VISIBLE
                 updateQualityUi(
