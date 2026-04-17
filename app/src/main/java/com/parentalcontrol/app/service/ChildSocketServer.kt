@@ -37,7 +37,8 @@ class ChildSocketServer : Service() {
     private var currentSessionId: Long? = null
     private var expectedCode: String = ""
 
-    private val logRepository by lazy { ActivityLogRepository(applicationContext) }
+    private val activityLogDao by lazy { AppDatabase.getInstance(applicationContext).activityLogDao() }
+    private val logRepository by lazy { ActivityLogRepository(activityLogDao) }
     private val sessionDao by lazy { AppDatabase.getInstance(applicationContext).sessionDao() }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
