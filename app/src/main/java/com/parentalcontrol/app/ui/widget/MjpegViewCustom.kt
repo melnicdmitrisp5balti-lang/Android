@@ -1,0 +1,111 @@
+package com.parentalcontrol.app.ui.widget
+
+import android.content.Context
+import android.graphics.BitmapFactory
+import android.util.AttributeSet
+import androidx.appcompat.widget.AppCompatImageView
+import com.parentalcontrol.app.utils.MjpegFrameReader
+import java.io.BufferedInputStream
+import java.net.HttpURLConnection
+import java.net.URL
+import kotlin.concurrent.thread
+
+/**
+ * Custom ImageView that connects to an MJPEG HTTP stream and renders
+ * decoded JPEG frames in real-time (~15 FPS).
+ *
+ * Usage:
+ *   1. Call [startStream] with the stream URL to begin playback.
+ *   2. Call [stopStream] to stop (automatically called on detach).
+ */
+class MjpegViewCustom @JvmOverloads constructor(
+    context: Context,
+    attrs: AttributeSet? = null
+) : AppCompatImageView(context, attrs) {
+
+    interface StreamListener {
+        /** Called on the main thread when the HTTP connection is established. */
+        fun onConnected()
+        /** Called on the main thread after each frame is rendered. */
+        fun onFrameReceived()
+        /**
+         * Called on the main thread when the stream ends or an error occurs.
+         * @param error true if the disconnection was caused by a network error.
+         */
+        fun onDisconnected(error: Boolean)
+    }
+
+    var streamListener: StreamListener? = null
+
+    @Volatile private var active = false
+    private var streamThread: Thread? = null
+
+    /**
+     * Start receiving and displaying the MJPEG stream at [url].
+     * Any previously running stream is stopped first.
+     */
+    fun startStream(url: String) {
+        stopStream()
+        active = true
+        streamThread = thread(isDaemon = true, name = "MjpegStreamThread") {
+            streamLoop(url)
+        }
+    }
+
+    /** Stop the stream and clear the displayed image. */
+    fun stopStream() {
+        active = false
+        streamThread?.interrupt()
+        streamThread = null
+        post { setImageDrawable(null) }
+    }
+
+    private fun streamLoop(url: String) {
+        while (active && !Thread.currentThread().isInterrupted) {
+            var connection: HttpURLConnection? = null
+            var errorOccurred = false
+            try {
+                connection = (URL(url).openConnection() as HttpURLConnection).apply {
+                    connectTimeout = 5_000
+                    readTimeout = 15_000
+                    doInput = true
+                }
+                connection.connect()
+                post { streamListener?.onConnected() }
+
+                val input = BufferedInputStream(connection.inputStream, 8192)
+                while (active && !Thread.currentThread().isInterrupted) {
+                    val jpegBytes = MjpegFrameReader.readJpegFrame(input) ?: break
+                    val bitmap = BitmapFactory.decodeByteArray(jpegBytes, 0, jpegBytes.size)
+                        ?: continue
+                    post {
+                        setImageBitmap(bitmap)
+                        streamListener?.onFrameReceived()
+                    }
+                }
+            } catch (_: InterruptedException) {
+                break
+            } catch (_: Exception) {
+                errorOccurred = true
+            } finally {
+                runCatching { connection?.disconnect() }
+            }
+
+            val capturedError = errorOccurred
+            post { streamListener?.onDisconnected(error = capturedError) }
+
+            if (active) {
+                try {
+                    Thread.sleep(1_500)
+                } catch (_: InterruptedException) {
+                    break
+                }
+            }
+        }
+    }
+
+    override fun onDetachedFromWindow() {
+        stopStream()
+        super.onDetachedFromWindow()
+    }
+}

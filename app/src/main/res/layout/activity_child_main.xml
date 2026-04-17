@@ -91,6 +91,15 @@
                     android:textSize="12sp"
                     android:typeface="monospace" />
 
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_copy_stream_url"
+                    style="@style/Widget.Material3.Button.OutlinedButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/copy_stream_url"
+                    app:strokeColor="@color/neon_green" />
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
