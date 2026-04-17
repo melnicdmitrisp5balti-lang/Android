@@ -4,9 +4,9 @@ package com.parentalcontrol.app.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import com.parentalcontrol.app.ui.widget.MjpegViewCustom;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -30,7 +30,7 @@ public final class ActivityCameraStreamBinding implements ViewBinding {
   public final MaterialCardView cardRemoteCamera;
 
   @NonNull
-  public final ImageView ivCameraStream;
+  public final MjpegViewCustom ivCameraStream;
 
   @NonNull
   public final ProgressBar progressStream;
@@ -49,7 +49,7 @@ public final class ActivityCameraStreamBinding implements ViewBinding {
 
   private ActivityCameraStreamBinding(@NonNull ConstraintLayout rootView,
       @NonNull MaterialButton btnRefreshStream, @NonNull MaterialCardView cardRemoteCamera,
-      @NonNull ImageView ivCameraStream, @NonNull ProgressBar progressStream,
+      @NonNull MjpegViewCustom ivCameraStream, @NonNull ProgressBar progressStream,
       @NonNull TextView tvCameraStatus, @NonNull TextView tvConnectionQuality,
       @NonNull TextView tvStreamHint, @NonNull TextView tvStreamSourceTitle) {
     this.rootView = rootView;
@@ -103,7 +103,7 @@ public final class ActivityCameraStreamBinding implements ViewBinding {
       }
 
       id = R.id.iv_camera_stream;
-      ImageView ivCameraStream = ViewBindings.findChildViewById(rootView, id);
+      MjpegViewCustom ivCameraStream = ViewBindings.findChildViewById(rootView, id);
       if (ivCameraStream == null) {
         break missingId;
       }
