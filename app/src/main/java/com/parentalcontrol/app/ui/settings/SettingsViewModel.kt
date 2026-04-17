@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.parentalcontrol.app.R
+import com.parentalcontrol.app.data.database.AppDatabase
 import com.parentalcontrol.app.data.repository.ActivityLogRepository
 import com.parentalcontrol.app.data.repository.AuthRepository
 import kotlinx.coroutines.launch
@@ -14,7 +15,8 @@ class SettingsViewModel(application: Application) : AndroidViewModel(application
 
     private val appContext = application.applicationContext
     private val authRepository = AuthRepository(appContext)
-    private val logRepository = ActivityLogRepository(appContext)
+    private val activityLogDao = AppDatabase.getInstance(appContext).activityLogDao()
+    private val logRepository = ActivityLogRepository(activityLogDao)
 
     private val _message = MutableLiveData<String>()
     val message: LiveData<String> = _message
