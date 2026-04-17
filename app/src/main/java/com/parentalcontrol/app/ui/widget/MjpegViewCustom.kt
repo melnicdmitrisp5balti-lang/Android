@@ -75,7 +75,11 @@ class MjpegViewCustom @JvmOverloads constructor(
 
                 val input = BufferedInputStream(connection.inputStream, 8192)
                 while (active && !Thread.currentThread().isInterrupted) {
-                    val jpegBytes = MjpegFrameReader.readJpegFrame(input) ?: break
+                    val jpegBytes = MjpegFrameReader.readJpegFrame(input) ?: run {
+                        // null means EOF or broken stream — treat as an error disconnect
+                        errorOccurred = true
+                        break
+                    }
                     val bitmap = BitmapFactory.decodeByteArray(jpegBytes, 0, jpegBytes.size)
                         ?: continue
                     post {
