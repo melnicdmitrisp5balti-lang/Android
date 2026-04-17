@@ -5,13 +5,15 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.parentalcontrol.app.data.database.AppDatabase
 import com.parentalcontrol.app.data.repository.ActivityLogRepository
 import com.parentalcontrol.app.utils.Constants
 import kotlinx.coroutines.launch
 
 class CameraViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val logRepository = ActivityLogRepository(application.applicationContext)
+    private val dao = AppDatabase.getInstance(application).activityLogDao()
+    private val logRepository = ActivityLogRepository(dao)
 
     private val _isStreaming = MutableLiveData<Boolean>(false)
     val isStreaming: LiveData<Boolean> = _isStreaming
