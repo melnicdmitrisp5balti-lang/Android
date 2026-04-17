@@ -111,6 +111,14 @@ class ChildMainActivity : AppCompatActivity() {
             Toast.makeText(this, "Код скопирован", Toast.LENGTH_SHORT).show()
         }
 
+        binding.btnCopyStreamUrl.setOnClickListener {
+            val url = binding.tvStreamUrl.text.toString()
+            if (url.isBlank() || url == getString(R.string.stream_url_loading)) return@setOnClickListener
+            val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+            clipboard.setPrimaryClip(ClipData.newPlainText("stream_url", url))
+            Toast.makeText(this, getString(R.string.stream_url_copied), Toast.LENGTH_SHORT).show()
+        }
+
         binding.btnRegenerateCode.setOnClickListener {
             viewModel.regenerateCode()
             startChildServer()
