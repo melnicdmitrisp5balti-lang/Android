@@ -63,6 +63,10 @@ class CameraStreamActivity : AppCompatActivity() {
                 binding.tilChildIp.error = getString(R.string.hint_child_ip)
                 return@setOnClickListener
             }
+            if (!isValidIpAddress(ip)) {
+                binding.tilChildIp.error = getString(R.string.error_invalid_ip)
+                return@setOnClickListener
+            }
             binding.tilChildIp.error = null
             childHost = ip
             prefs.saveLastChildHost(ip)
@@ -80,6 +84,15 @@ class CameraStreamActivity : AppCompatActivity() {
             } else {
                 false
             }
+        }
+    }
+
+    private fun isValidIpAddress(ip: String): Boolean {
+        val parts = ip.split(".")
+        if (parts.size != 4) return false
+        return parts.all { part ->
+            val num = part.toIntOrNull() ?: return false
+            num in 0..255
         }
     }
 
@@ -125,13 +138,13 @@ class CameraStreamActivity : AppCompatActivity() {
                             R.string.camera_stream_reconnect_attempt,
                             reconnectAttempt
                         )
-                        if (reconnectAttempt > 3) {
+                        if (reconnectAttempt > Constants.MAX_MJPEG_RECONNECT_ATTEMPTS) {
                             // After several failed attempts, let the user change the IP
                             showIpInputPanel()
                             binding.btnRefreshStream.isEnabled = true
                         }
                     }
-                    if (reconnectAttempt > 3) break
+                    if (reconnectAttempt > Constants.MAX_MJPEG_RECONNECT_ATTEMPTS) break
                     delay(Constants.STREAM_RECONNECT_DELAY_MS)
                 } else {
                     reconnectAttempt = 0

@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <network-security-config>
     <!-- Allow cleartext HTTP for LAN MJPEG streaming (local private network) -->
+    <!-- Note: Android Network Security Config does not support CIDR IP ranges, so
+         cleartext is permitted globally for the base config and explicitly blocked
+         for cloud endpoints below. The app only uses plaintext HTTP for
+         same-LAN MJPEG streaming from the child camera. -->
     <base-config cleartextTrafficPermitted="true">
         <trust-anchors>
             <certificates src="system" />

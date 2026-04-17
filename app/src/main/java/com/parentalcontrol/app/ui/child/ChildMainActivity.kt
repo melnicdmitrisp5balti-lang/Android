@@ -78,23 +78,27 @@ class ChildMainActivity : AppCompatActivity() {
 
     private fun updateStreamUrl() {
         val ip = getLocalIpAddress()
-        binding.tvStreamUrl.text = getString(
-            R.string.stream_url_format,
-            ip,
-            Constants.DEFAULT_MJPEG_PORT,
-            Constants.MJPEG_STREAM_PATH
-        )
+        if (ip == null) {
+            binding.tvStreamUrl.text = getString(R.string.stream_url_loading)
+        } else {
+            binding.tvStreamUrl.text = getString(
+                R.string.stream_url_format,
+                ip,
+                Constants.DEFAULT_MJPEG_PORT,
+                Constants.MJPEG_STREAM_PATH
+            )
+        }
     }
 
-    private fun getLocalIpAddress(): String {
+    private fun getLocalIpAddress(): String? {
         return try {
             NetworkInterface.getNetworkInterfaces()?.toList()
                 ?.flatMap { it.inetAddresses.toList() }
                 ?.filterIsInstance<Inet4Address>()
                 ?.filter { !it.isLoopbackAddress }
-                ?.firstOrNull()?.hostAddress ?: "..."
+                ?.firstOrNull()?.hostAddress
         } catch (e: Exception) {
-            "..."
+            null
         }
     }
 

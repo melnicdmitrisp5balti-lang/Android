@@ -46,6 +46,7 @@ object Constants {
     const val SOCKET_CONNECT_TIMEOUT_MS = 1_200
     const val SOCKET_HANDSHAKE_TIMEOUT_MS = 3_000
     const val STREAM_RECONNECT_DELAY_MS = 1_500L
+    const val MAX_MJPEG_RECONNECT_ATTEMPTS = 3
     const val SOCKET_SCAN_CHUNK_SIZE = 24
     const val SOCKET_SCAN_HOST_MIN = 2
     const val SOCKET_SCAN_HOST_MAX = 220

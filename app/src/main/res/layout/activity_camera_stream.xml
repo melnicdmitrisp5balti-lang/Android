@@ -67,7 +67,8 @@
                         android:id="@+id/et_child_ip"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="text"
+                        android:digits="0123456789."
+                        android:inputType="phone"
                         android:imeOptions="actionDone"
                         android:textColor="@android:color/white"
                         android:textColorHint="#80FFFFFF" />
