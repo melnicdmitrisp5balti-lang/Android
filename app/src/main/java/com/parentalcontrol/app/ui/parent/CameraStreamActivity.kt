@@ -3,13 +3,14 @@ package com.parentalcontrol.app.ui.parent
 import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.view.View
+import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import com.parentalcontrol.app.R
 import com.parentalcontrol.app.databinding.ActivityCameraStreamBinding
-import com.parentalcontrol.app.service.ParentSocketClient
 import com.parentalcontrol.app.utils.Constants
 import com.parentalcontrol.app.utils.MjpegFrameReader
 import com.parentalcontrol.app.utils.PreferenceManager
@@ -25,10 +26,8 @@ import java.net.URL
 class CameraStreamActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityCameraStreamBinding
-    private val socketClient = ParentSocketClient()
     private lateinit var prefs: PreferenceManager
     private var childHost: String = ""
-    private var connectionCode: String = ""
     private var streamJob: Job? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,67 +37,90 @@ class CameraStreamActivity : AppCompatActivity() {
 
         prefs = PreferenceManager(this)
         childHost = prefs.getLastChildHost().orEmpty()
-        connectionCode = prefs.getLastConnectionCode().orEmpty()
 
         supportActionBar?.title = getString(R.string.camera)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
+        setupIpInput()
+
         binding.btnRefreshStream.setOnClickListener {
-            requestChildCameraStatus()
+            connectToStream()
         }
 
-        requestChildCameraStatus()
+        if (childHost.isNotBlank()) {
+            // Host already known — connect immediately
+            connectToStream()
+        } else {
+            // No host stored — prompt user to enter the child's IP address
+            showIpInputPanel()
+        }
     }
 
-    private fun requestChildCameraStatus() {
+    private fun setupIpInput() {
+        binding.btnConnectIp.setOnClickListener {
+            val ip = binding.etChildIp.text?.toString()?.trim().orEmpty()
+            if (ip.isBlank()) {
+                binding.tilChildIp.error = getString(R.string.hint_child_ip)
+                return@setOnClickListener
+            }
+            if (!isValidIpAddress(ip)) {
+                binding.tilChildIp.error = getString(R.string.error_invalid_ip)
+                return@setOnClickListener
+            }
+            binding.tilChildIp.error = null
+            childHost = ip
+            prefs.saveLastChildHost(ip)
+            hideIpInputPanel()
+            // Dismiss keyboard
+            val imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.hideSoftInputFromWindow(binding.etChildIp.windowToken, 0)
+            connectToStream()
+        }
+
+        binding.etChildIp.setOnEditorActionListener { _, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                binding.btnConnectIp.performClick()
+                true
+            } else {
+                false
+            }
+        }
+    }
+
+    private fun isValidIpAddress(ip: String): Boolean {
+        val parts = ip.split(".")
+        if (parts.size != 4) return false
+        return parts.all { part ->
+            val num = part.toIntOrNull() ?: return false
+            num in 0..255
+        }
+    }
+
+    private fun showIpInputPanel() {
+        binding.layoutIpInput.visibility = View.VISIBLE
+        binding.progressStream.visibility = View.GONE
+        updateQualityUi(getString(R.string.camera_stream_quality_connecting), R.color.neon_magenta)
+        binding.tvCameraStatus.text = getString(R.string.camera_stream_waiting_child)
+    }
+
+    private fun hideIpInputPanel() {
+        binding.layoutIpInput.visibility = View.GONE
+    }
+
+    private fun connectToStream() {
+        if (childHost.isBlank()) {
+            showIpInputPanel()
+            return
+        }
         streamJob?.cancel()
         binding.progressStream.visibility = View.VISIBLE
         binding.ivCameraStream.setImageDrawable(null)
         updateQualityUi(getString(R.string.camera_stream_quality_connecting), R.color.neon_magenta)
-
-        if (connectionCode.isBlank()) {
-            binding.tvCameraStatus.text = getString(R.string.camera_stream_no_active_session)
-            binding.btnRefreshStream.isEnabled = false
-            binding.progressStream.visibility = View.GONE
-            return
-        }
-
-        // Cloud connection — no direct LAN host available.
-        // The WebRTC P2P channel (signaled via Firebase) carries the media.
-        if (childHost.isBlank()) {
-            binding.progressStream.visibility = View.GONE
-            updateQualityUi(getString(R.string.camera_stream_quality_cloud), R.color.neon_green)
-            binding.tvCameraStatus.text = getString(R.string.camera_stream_cloud_connected)
-            binding.btnRefreshStream.isEnabled = true
-            return
-        }
-
-        binding.btnRefreshStream.isEnabled = false
         binding.tvCameraStatus.text = getString(R.string.camera_stream_connecting_child)
+        binding.btnRefreshStream.isEnabled = false
 
-        lifecycleScope.launch {
-            val result = socketClient.requestChildCameraStatus(
-                host = childHost,
-                port = Constants.DEFAULT_SOCKET_PORT,
-                code = connectionCode
-            )
-            if (result.isSuccess) {
-                val info = result.getOrNull() ?: return@launch
-                binding.tvCameraStatus.text =
-                    getString(R.string.camera_stream_child_ready, info.childName)
-                startMjpegPlayback(info.streamUrl)
-            } else {
-                binding.progressStream.visibility = View.GONE
-                updateQualityUi(getString(R.string.camera_stream_quality_lost), R.color.neon_magenta)
-                binding.tvCameraStatus.text = getString(R.string.camera_stream_child_unavailable)
-                Toast.makeText(
-                    this@CameraStreamActivity,
-                    result.exceptionOrNull()?.message ?: getString(R.string.camera_stream_child_unavailable),
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
-            binding.btnRefreshStream.isEnabled = true
-        }
+        val url = "http://$childHost:${Constants.DEFAULT_MJPEG_PORT}${Constants.MJPEG_STREAM_PATH}"
+        startMjpegPlayback(url)
     }
 
     private fun startMjpegPlayback(url: String) {
@@ -116,10 +138,17 @@ class CameraStreamActivity : AppCompatActivity() {
                             R.string.camera_stream_reconnect_attempt,
                             reconnectAttempt
                         )
+                        if (reconnectAttempt > Constants.MAX_MJPEG_RECONNECT_ATTEMPTS) {
+                            // After several failed attempts, let the user change the IP
+                            showIpInputPanel()
+                            binding.btnRefreshStream.isEnabled = true
+                        }
                     }
+                    if (reconnectAttempt > Constants.MAX_MJPEG_RECONNECT_ATTEMPTS) break
                     delay(Constants.STREAM_RECONNECT_DELAY_MS)
                 } else {
                     reconnectAttempt = 0
+                    runOnUiThread { binding.btnRefreshStream.isEnabled = true }
                 }
             }
         }
@@ -127,8 +156,8 @@ class CameraStreamActivity : AppCompatActivity() {
 
     private suspend fun readMjpegStream(url: String): Boolean {
         val connection = (URL(url).openConnection() as HttpURLConnection).apply {
-            connectTimeout = Constants.SOCKET_CONNECT_TIMEOUT_MS
-            readTimeout = 12_000
+            connectTimeout = 5_000
+            readTimeout = 15_000
             doInput = true
         }
         return try {
@@ -137,6 +166,7 @@ class CameraStreamActivity : AppCompatActivity() {
                 updateQualityUi(getString(R.string.camera_stream_quality_good), R.color.neon_green)
                 binding.tvCameraStatus.text = getString(R.string.camera_stream_live)
                 binding.progressStream.visibility = View.GONE
+                binding.btnRefreshStream.isEnabled = true
             }
 
             val input = BufferedInputStream(connection.inputStream)

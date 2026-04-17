@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <network-security-config>
-    <base-config cleartextTrafficPermitted="false">
+    <!-- Allow cleartext HTTP for LAN MJPEG streaming (local private network) -->
+    <!-- Note: Android Network Security Config does not support CIDR IP ranges, so
+         cleartext is permitted globally for the base config and explicitly blocked
+         for cloud endpoints below. The app only uses plaintext HTTP for
+         same-LAN MJPEG streaming from the child camera. -->
+    <base-config cleartextTrafficPermitted="true">
         <trust-anchors>
             <certificates src="system" />
         </trust-anchors>
     </base-config>
-    <!-- Allow HTTPS to Firebase Realtime Database and other cloud endpoints -->
+    <!-- Require HTTPS for cloud endpoints -->
     <domain-config cleartextTrafficPermitted="false">
         <domain includeSubdomains="true">firebaseio.com</domain>
         <domain includeSubdomains="true">googleapis.com</domain>

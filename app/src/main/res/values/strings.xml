@@ -134,6 +134,11 @@
     <string name="camera_stream_quality_lost">Качество соединения: потеряно</string>
     <string name="camera_stream_quality_cloud">☁ Облачное соединение активно</string>
     <string name="camera_stream_cloud_connected">Устройство ребёнка найдено в облаке. Видеопоток активен через WebRTC.</string>
+    <string name="hint_child_ip">IP адрес ребёнка (напр. 192.168.1.5)</string>
+    <string name="error_invalid_ip">Введите корректный IP адрес (напр. 192.168.1.5)</string>
+    <string name="stream_url_loading">⏳ Получение адреса потока…</string>
+    <string name="stream_url_format">📡 Трансляция: http://%1$s:%2$d%3$s</string>
+    <string name="stream_url_hint">Введите этот адрес на устройстве родителя</string>
     <string name="camera_button_title">📷 Камера</string>
     <string name="microphone_button_title">🎤 Микрофон</string>
     <string name="logs_button_title">📜 Логи</string>

@@ -20,6 +20,8 @@ import com.parentalcontrol.app.service.ChildSocketServer
 import com.parentalcontrol.app.utils.Constants
 import com.parentalcontrol.app.utils.PermissionUtils
 import com.parentalcontrol.app.viewmodel.ChildViewModel
+import java.net.Inet4Address
+import java.net.NetworkInterface
 
 class ChildMainActivity : AppCompatActivity() {
 
@@ -48,12 +50,14 @@ class ChildMainActivity : AppCompatActivity() {
 
         observeViewModel()
         setupClickListeners()
+        updateStreamUrl()
         ensurePermissionsAndStartMonitoring()
     }
 
     private fun observeViewModel() {
         viewModel.code.observe(this) { code ->
             binding.tvConnectionCode.text = code
+            updateStreamUrl()
             // If monitoring was started but service code was not yet available, start it now.
             if (monitoringStarted && code.isNotBlank() && !childCameraServiceStartRequested) {
                 startChildCameraService(code)
@@ -69,6 +73,32 @@ class ChildMainActivity : AppCompatActivity() {
             } else {
                 binding.btnRegenerateCode.text = getString(R.string.generate_new_code)
             }
+        }
+    }
+
+    private fun updateStreamUrl() {
+        val ip = getLocalIpAddress()
+        if (ip == null) {
+            binding.tvStreamUrl.text = getString(R.string.stream_url_loading)
+        } else {
+            binding.tvStreamUrl.text = getString(
+                R.string.stream_url_format,
+                ip,
+                Constants.DEFAULT_MJPEG_PORT,
+                Constants.MJPEG_STREAM_PATH
+            )
+        }
+    }
+
+    private fun getLocalIpAddress(): String? {
+        return try {
+            NetworkInterface.getNetworkInterfaces()?.toList()
+                ?.flatMap { it.inetAddresses.toList() }
+                ?.filterIsInstance<Inet4Address>()
+                ?.filter { !it.isLoopbackAddress }
+                ?.firstOrNull()?.hostAddress
+        } catch (e: Exception) {
+            null
         }
     }
 
