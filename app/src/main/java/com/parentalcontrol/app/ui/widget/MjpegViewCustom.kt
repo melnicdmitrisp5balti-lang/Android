@@ -23,19 +23,7 @@ class MjpegViewCustom @JvmOverloads constructor(
     attrs: AttributeSet? = null
 ) : AppCompatImageView(context, attrs) {
 
-    interface StreamListener {
-        /** Called on the main thread when the HTTP connection is established. */
-        fun onConnected()
-        /** Called on the main thread after each frame is rendered. */
-        fun onFrameReceived()
-        /**
-         * Called on the main thread when the stream ends or an error occurs.
-         * @param error true if the disconnection was caused by a network error.
-         */
-        fun onDisconnected(error: Boolean)
-    }
-
-    var streamListener: StreamListener? = null
+    var streamListener: MjpegStreamListener? = null
 
     @Volatile private var active = false
     private var streamThread: Thread? = null
@@ -97,7 +85,13 @@ class MjpegViewCustom @JvmOverloads constructor(
             }
 
             val capturedError = errorOccurred
-            post { streamListener?.onDisconnected(error = capturedError) }
+            post {
+                if (capturedError) {
+                    streamListener?.onError("Stream error or EOF")
+                } else {
+                    streamListener?.onDisconnected()
+                }
+            }
 
             if (active) {
                 try {
