@@ -85,6 +85,9 @@ class ChildCameraService : Service() {
     }
 
     private fun startWebRtc() {
+        // Start the MJPEG HTTP server so LAN streaming is available via ChildSocketServer.
+        startService(Intent(this, CameraStreamService::class.java))
+
         webRtcManager = WebRtcManager(this).also { mgr ->
             mgr.listener = object : WebRtcManager.Listener {
                 override fun onConnectionStateChanged(state: String) {
@@ -123,6 +126,8 @@ class ChildCameraService : Service() {
         if (::webRtcManager.isInitialized) {
             webRtcManager.release()
         }
+        // Stop the MJPEG stream server that was started alongside this service.
+        stopService(Intent(this, CameraStreamService::class.java))
         super.onDestroy()
     }
 

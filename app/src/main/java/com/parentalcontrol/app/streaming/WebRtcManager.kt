@@ -51,11 +51,21 @@ class WebRtcManager(private val context: Context) {
 
     /**
      * Start as the child (media sender) side.
-     * Registers in Firebase and waits for the parent to connect.
+     * Posts a readiness offer to Firebase so the parent can discover this device,
+     * then waits for the parent to post an answer confirming the connection.
      */
     fun startAsChild(code: String) {
         listener?.onConnectionStateChanged("CONNECTING")
         signalingJob = scope.launch {
+            // Post an offer so the parent can discover this child via Firebase.
+            val offered = cloudSignaling.postOffer(code, buildChildOffer())
+            if (offered) {
+                Log.d(TAG, "Child offer posted to Firebase for code=$code")
+            } else {
+                Log.w(TAG, "Failed to post offer to Firebase for code=$code — parent will not be able to discover this device via cloud; LAN connection may still work")
+            }
+
+            // Wait for the parent to acknowledge with an answer.
             repeat(POLL_MAX_ATTEMPTS) { attempt ->
                 val answer = cloudSignaling.getAnswer(code)
                 if (answer != null) {
@@ -68,6 +78,15 @@ class WebRtcManager(private val context: Context) {
             listener?.onError("Тайм-аут ожидания подключения родителя")
         }
         Log.d(TAG, "Started as child for code=$code")
+    }
+
+    /** Builds a minimal SDP-like JSON offer advertising this child's readiness. */
+    private fun buildChildOffer(): String {
+        return org.json.JSONObject().apply {
+            put("type", "offer")
+            put("ready", true)
+            put("timestamp", System.currentTimeMillis())
+        }.toString()
     }
 
     /**

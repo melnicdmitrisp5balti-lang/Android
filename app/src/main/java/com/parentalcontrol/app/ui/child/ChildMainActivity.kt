@@ -15,9 +15,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.parentalcontrol.app.R
 import com.parentalcontrol.app.databinding.ActivityChildMainBinding
-import com.parentalcontrol.app.service.CameraStreamService
+import com.parentalcontrol.app.service.ChildCameraService
 import com.parentalcontrol.app.service.ChildSocketServer
-import com.parentalcontrol.app.service.MonitoringService
 import com.parentalcontrol.app.utils.Constants
 import com.parentalcontrol.app.utils.PermissionUtils
 import com.parentalcontrol.app.viewmodel.ChildViewModel
@@ -26,6 +25,8 @@ class ChildMainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityChildMainBinding
     private val viewModel: ChildViewModel by viewModels()
+    private var monitoringStarted = false
+    private var childCameraServiceStartRequested = false
 
     private val connectionStatusReceiver = ChildConnectionStatusReceiver { status, parentConnected ->
         viewModel.updateConnectionStatus(status, parentConnected)
@@ -53,6 +54,10 @@ class ChildMainActivity : AppCompatActivity() {
     private fun observeViewModel() {
         viewModel.code.observe(this) { code ->
             binding.tvConnectionCode.text = code
+            // If monitoring was started but service code was not yet available, start it now.
+            if (monitoringStarted && code.isNotBlank() && !childCameraServiceStartRequested) {
+                startChildCameraService(code)
+            }
         }
         viewModel.connectionStatus.observe(this) { status ->
             binding.tvConnectionStatus.text = status
@@ -83,18 +88,23 @@ class ChildMainActivity : AppCompatActivity() {
     }
 
     private fun startMonitoring() {
-        startForegroundService(Intent(this, CameraStreamService::class.java))
-        startForegroundService(
-            Intent(this, MonitoringService::class.java).apply {
-                action = MonitoringService.ACTION_START_CAMERA
-            }
-        )
-        startForegroundService(
-            Intent(this, MonitoringService::class.java).apply {
-                action = MonitoringService.ACTION_START_AUDIO
-            }
-        )
+        monitoringStarted = true
+        val code = viewModel.code.value.orEmpty()
+        if (code.isNotBlank()) {
+            startChildCameraService(code)
+        }
         startChildServer()
+    }
+
+    private fun startChildCameraService(code: String) {
+        if (childCameraServiceStartRequested) return
+        childCameraServiceStartRequested = true
+        startForegroundService(
+            Intent(this, ChildCameraService::class.java).apply {
+                action = ChildCameraService.ACTION_START
+                putExtra(ChildCameraService.EXTRA_CODE, code)
+            }
+        )
     }
 
     private fun ensurePermissionsAndStartMonitoring() {
